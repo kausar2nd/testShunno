@@ -6,36 +6,76 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-
 body {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(/static/assets/signup_background.jpg) no-repeat;
+    background: url(../static/assets/BlackWhite.png) no-repeat;
     background-size: cover;
     background-position: center;
+    color: whitesmoke;
 }
 
-.goto_home {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 20px;
-    color: #fff;
+a {
     text-decoration: none;
+    color: whitesmoke;
+}
+
+nav{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    font-size: 1.1em;
+}
+
+.logo{
+    font-family: "Rampart One", sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    margin: 0 auto;
+}
+
+nav ul li{
+    font-weight: 300;
+    padding: 0 10px;
+}
+nav ul li a{
     font-weight: 400;
-    padding: 5px 20px;
-    border: 1px solid darkgray;
-    border-radius: 25px;
+    margin: 10px;
+    border-bottom: 2px solid transparent;
     transition: 0.2s ease-in-out;
 }
 
-.goto_home:hover {
-    background: rgba(255, 255, 255, .1);
+nav ul li a:hover{
+    border-bottom: 2px solid whitesmoke;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aquamarine; */
 }
 
 .wrapper {
+    margin-top: 200px;   
+    /* margin-bottom: 200px;    */
     width: 420px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);

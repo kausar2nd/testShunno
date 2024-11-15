@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Search with Leaflet</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="Bin_style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="location-input" class="search-input" placeholder="Enter a location...">
+      <button id="search-btn" class="search-button">Search</button>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize Leaflet map
+    const map = L.map('map').setView([41.8781, -87.6298], 10); // Default center is Chicago
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let marker;
+
+    // Function to handle location search
+    async function searchLocation() {
+      const location = document.getElementById('location-input').value;
+      if (location) {
+        // Fetch geocoding data from Nominatim
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`);
+        const data = await response.json();
+
+        if (data.length) {
+          const { lat, lon } = data[0];
+          map.setView([lat, lon], 12);
+
+          // If a marker already exists, remove it
+          if (marker) {
+            map.removeLayer(marker);
+          }
+          // Add new marker at the searched location
+          marker = L.marker([lat, lon]).addTo(map);
+        } else {
+          alert('Location not found. Please try again.');
+        }
+      }
+    }
+
+    // Event listener for search button
+    document.getElementById('search-btn').addEventListener('click', searchLocation);
+  </script>
+</body>
+</html>
