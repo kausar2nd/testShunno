@@ -123,6 +123,9 @@ def company_login():
 def company_signup():
     return render_template("company_signup.html")
 
+@app.route("/find_bins")
+def find_bins():
+    return render_template("find_bins.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
