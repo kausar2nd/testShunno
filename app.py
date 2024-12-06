@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, request, url_for, redirect, flash
 import mysql.connector
-from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 

@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Selector</title>
+    <title>Find Your Nearest Bin</title>
     <link rel="stylesheet" href="../static/styles.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bin_style.css' ) }}">>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bin_style.css' ) }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <div class="container">
         <a href="/" class="back_home">Home</a>
-        <!-- <button class="home-btn" onclick="url_for('/')">Home</button> -->
         <div class="loc_container">
             <div class="locations">
                 <button class="location-btn" onclick="showDetails(this)" data-name="Mohammadpur"
