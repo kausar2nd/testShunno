@@ -17,28 +17,27 @@
         <a href="/" class="back_home">Home</a>
 
         <div class="wrapper">
-            <form action="">
+            <form method="POST" action="/company_login">
                 <h1>Company Login</h1>
 
                 <div class="input-box">
-                    <input type="text" placeholder="Company Name" required>
+                    <input type="email" name="email" placeholder="Company Email" required>
                     <i class='bx bxs-envelope'></i>
                 </div>
 
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
-                <div class="remember-forget">
+                <!-- <div class="remember-forget">
                     <label><input type="checkbox">Remember Me</label>
                     <a href="#">Forgot Password?</a>
-                </div>
+                </div> -->
 
                 <button type="submit" class="btn">Login</button>
 
                 <div class="Sign up-link">
                     <p>Have not account? <a href="/company_signup">Sign up</a></p>
-                    <!-- <p>Have not account? <a href="company_signup.html">Sign up</a></p> -->
                 </div>
 
             </form>

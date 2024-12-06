@@ -18,30 +18,30 @@
         <a href="/" class="back_home">Home</a>
 
         <div class="wrapper">
-            <form action="">
+            <form method="POST" action="/company_signup">
                 <h1>Company Signup</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Company Name" required>
+                    <input type="text" name="company_name" placeholder="Company Name" required>
                     <i class='bx bxs-user'></i>
                 </div>
 
                 <div class="input-box">
-                    <input type="text" placeholder="Location" required>
+                    <input type="text" name="location" placeholder="Location" required>
                     <i class='bx bx-current-location'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email" required>
                     <i class='bx bxs-envelope'></i>
                 </div>
 
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
-                <div class="remember-forget">
+                <!-- <div class="remember-forget">
                     <label><input type="checkbox">Remember Me</label>
                     <a href="#">Forgot Password?</a>
-                </div>
+                </div> -->
 
                 <button type="submit" class="btn">Sign Up</button>
 

@@ -114,18 +114,74 @@ def logout():
     return redirect(url_for("user_login"))
 
 
-@app.route("/company_login")
+@app.route("/company_signup", methods=["POST", "GET"])
+def company_signup():
+    if request.method == "POST":
+        company_name = request.form["company_name"]
+        location = request.form["location"]
+        email = request.form["email"]
+        password = request.form["password"]
+
+        print(company_name, location, email, password)
+
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM companies WHERE email = %s", (email,))
+            account = cursor.fetchone()
+
+            if account:
+                flash("Company account already exists!")
+            else:
+                cursor.execute(
+                    "INSERT INTO companies (company_name, location, email, password) VALUES (%s, %s, %s, %s)",
+                    (company_name, location, email, password),
+                )
+                print("Company account created successfully!")
+                conn.commit()
+        except Exception as e:
+            print(f"Error: {e}")
+        finally:
+            conn.close()
+
+        return redirect(url_for("company_login"))
+
+    return render_template("company_signup.html")
+
+
+@app.route("/company_login", methods=["POST", "GET"])
 def company_login():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM companies WHERE email = %s", (email,))
+            account = cursor.fetchone()
+
+            if account[4] == password:
+                print("Password matched!")
+                session["loggedin"] = True
+                session["company_id"] = account[0]
+                session["company_name"] = account[1]
+                print("Company logged in successfully!")
+                return redirect(url_for("company_dashboard"))
+            else:
+                print("Incorrect email/password!")
+        except Exception as e:
+            print(f"Error: {e}")
+        finally:
+            conn.close()
+
     return render_template("company_login.html")
 
-
-@app.route("/company_signup")
-def company_signup():
-    return render_template("company_signup.html")
 
 @app.route("/find_bins")
 def find_bins():
     return render_template("find_bins.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
