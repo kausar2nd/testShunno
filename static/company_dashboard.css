@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: url(./assets/BlackWhite.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: whitesmoke;
+  padding: 0 20px;
+  /* To prevent content from touching the edges */
+}
+
+/* General styling for all links */
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+/* Container layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Back home and logout links container */
+/* Back home and logout links container */
+.back_home_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  /* Ensure it stays visible */
+  top: 0;
+  /* Align at the top */
+  left: 0;
+  /* Align at the left */
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  /* Add a background for better visibility */
+  backdrop-filter: blur(10px);
+  /* Blur effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for Home and Logout links */
+.back_home,
+.logout-link {
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: whitesmoke;
+  text-align: center;
+  white-space: nowrap;
+  /* Prevent text from breaking */
+}
+
+.back_home:hover,
+.logout-link:hover {
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+
+/* Company Profile Section with backdrop blur */
+.company-profile {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 100px;
+}
+
+.company-profile .profile-picture img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.company-profile .edit-button {
+  background: #fff;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  margin-top: 15px;
+}
+
+/* History and Stock Sections */
+.history,
+.stock {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.history table,
+.stock table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.history th,
+.stock th,
+.history td,
+.stock td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.history td,
+.stock td {
+  color: #ddd;
+}
+
+button.order-button {
+  background: #fff;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+/* Modal for Order Form with blur */
+.order-form-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.order-form-content {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 15px;
+  color: #fff;
+  width: 80%;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+  /* Apply blur effect */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-form-content h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.order-form-content form {
+  width: 100%;
+}
+
+.order-form-content label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: whitesmoke;
+}
+
+.order-form-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.order-form-content input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.order-form-content button {
+  background: #fff;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.order-form-content button:hover {
+  background: #ccc;
+}
+
+/* Add table styling within the modal (if required) */
+.order-form-content table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.order-form-content th,
+.order-form-content td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.order-form-content th {
+  font-weight: 700;
+  color: whitesmoke;
+}
+
+.order-form-content td {
+  color: #ddd;
+}
+
+.order-form-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.order-form-content .close-btn:hover {
+  color: #ccc;
+}
+
+
+/* Success Message */
+.success-message {
+  background: #fff;
+  /* White background */
+  padding: 30px;
+  border-radius: 15px;
+  color: #333;
+  /* Dark text for contrast */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow */
+  z-index: 1000;
+  text-align: center;
+  display: none;
+  /* Hidden by default */
+}
+
+.success-message p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.success-message button {
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.success-message button:hover {
+  background: #555;
+}
