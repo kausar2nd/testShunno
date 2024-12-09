@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Dashboard for Recycling Management">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/app/static/admin_dash_style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dash_style.css' ) }}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="back_home_div">
+            <div><a href="/" class="nav-link">Home</a></div>
+        </div>
+
+        <div class="wrapper">
+            <div class="profile_card">
+                <div class="user-photo"></div>
+                <div class="user-info">
+                    <div class="info">
+                        <h1>Administrator Account</h1>
+                        <p>{{ email }}</p>
+                    </div>
+                    <div><a href="/logout" class="nav-link">Logout</a></div>
+                </div>
+            </div>
+
+            <div class="transactions-container">
+                <h2>Registered Users</h2>
+                <div class="table-div">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Location</th>
+                                <th>Date Joined</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if users %}
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user[0] }}</td>
+                                <td>{{ user[1] }}</td>
+                                <td>{{ user[2] }}</td>
+                                <td>{{ user[3] }}</td>
+                                <td><a href="#">✒️</a></td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="3">No submissions found.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr class="divider">
+
+                <h2>Registered Companies</h2>
+                <div class="table-div">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Email</th>
+                                <th>Location</th>
+                                <th>Date Joined</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if companies %}
+                            {% for company in companies %}
+                            <tr>
+                                <td>{{ company[0] }}</td>
+                                <td>{{ company[1] }}</td>
+                                <td>{{ company[2] }}</td>
+                                <td>{{ company[3] }}</td>
+                                <td><a href="#">✒️</a></td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="3">No submissions found.</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- <div class="bottom_section">
+                <div class="new-order">
+                    <h2>New Order</h2>
+                    <form action="/user_submit" method="POST">
+                        <div class="input-box">
+                            <label for="branch">Branch</label>
+                            <select id="branch" name="branch" required>
+                                <option value="" disabled selected>Select Branch</option>
+                                <option value="Mohammadpur">Mohammadpur</option>
+                                <option value="Dhanmondi">Dhanmondi</option>
+                                <option value="Mirpur - 10">Mirpur - 10</option>
+                                <option value="Uttara">Uttara</option>
+                                <option value="Farmgate">Farmgate</option>
+                                <option value="Hazaribagh">Hazaribagh</option>
+                            </select>
+                        </div>
+
+                        <div class="items-section">
+                            <div class="item-group">
+                                <p>Plastic Bottles</p>
+                                <label for="plastic-quantity">Quantity:
+                                    <input type="number" id="plastic-quantity" name="plastic-quantity" placeholder="0"
+                                        min="1" required>
+                                </label>
+                            </div>
+
+                            <div class="item-group">
+                                <p>Cardboard</p>
+                                <label for="cardboard-quantity">Quantity:
+                                    <input type="number" id="cardboard-quantity" name="cardboard-quantity"
+                                        placeholder="0" min="1" required>
+                                </label>
+                            </div>
+
+                            <div class="item-group">
+                                <p>Glass</p>
+                                <label for="glass-quantity">Quantity:
+                                    <input type="number" id="glass-quantity" name="glass-quantity" placeholder="0"
+                                        min="1" required>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Order</button>
+                    </form>
+                </div>
+                <div class="extra_board">
+                    <h2>Notice & Offers</h2>
+                    <p>Get 10% discount on your next order if you order within 7 days of your last order.</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
