@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -206,8 +207,6 @@ a {
     gap: 10px;
     width: 80%;
     min-width: 500px;
-    /* padding: 40px; */
-    /* background-color: azure; */
 }
 
 #branch {

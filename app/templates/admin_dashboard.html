@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="User Dashboard for Recycling Management">
     <title>Admin</title>
-    <link rel="stylesheet" href="/app/static/admin_dash_style.css">
+    <!-- <link rel="stylesheet" href="/app/static/admin_dash_style.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='admin_dash_style.css' ) }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -51,7 +51,9 @@
                                 <td>{{ user[1] }}</td>
                                 <td>{{ user[2] }}</td>
                                 <td>{{ user[3] }}</td>
-                                <td><a href="#">✒️</a></td>
+                                <!-- <td><button class="edit-btn">✒️</button></td> -->
+                                <td><a href="#sub_table" onclick="get_the_subs('{{ user[1] }}')">✒️</a></td>
+                                <!-- <td><a href="{{ url_for('admin.admin_edit', email=user[1]) }}">✒️</a></td> -->
                             </tr>
                             {% endfor %}
                             {% else %}
@@ -96,9 +98,132 @@
                         </tbody>
                     </table>
                 </div>
+
+                <hr class="divider">
+
+                <h2 id="sub_table"></h2>
+                <div class="table-div" id="user_history" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Branch</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td colspan="4">No submissions found.</td>
+                        </tr>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
+
+    <script>
+        function get_the_subs(email) {
+            const formContainer = document.getElementById('user_history');
+            formContainer.style.display = 'block';
+            formContainer.scrollIntoView({ behavior: 'smooth' });
+
+            fetch(`/admin_edit/${email}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // console.log('Fetched data:', data); // Debugging: Ensure data is correct
+                    const submissions = data.submissions;
+                    // console.log('Submissions:', submissions);
+
+                    // Get the <tbody> directly
+                    const tableBody = document.querySelector('#user_history table tbody');
+                    // console.log('Table Body:', tableBody);
+                    if (!tableBody) {
+                        console.error('Table body not found!');
+                        return;
+                    }
+
+                    tableBody.innerHTML = ''; // Clear existing rows
+
+                    const title = document.getElementById('sub_table');
+                    title.innerHTML = `Submission History for ${submissions[0].user_email}`;
+
+                    // Populate the table with submissions
+                    submissions.forEach(submission => {
+                        // console.log('Processing submission:', submission); // Debugging each submission
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${submission.sub_description}</td>
+                    <td>${submission.sub_branch}</td>
+                    <td>${submission.sub_date}</td>
+                    <td><a href="/admin_post/${submission.sub_id}">Edit</a></td>
+                `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+
+    </script>
+
 </body>
 
 </html>
+<!-- <hr class="divider">
+        
+                <h1>Edit User Submission</h1>
+                <div class="table-div">
+                    <div class="new-order">
+                        <h2>Edit submissions</h2>
+                        <form action="/admin_post/{{ submission_id }}" method="POST">
+                            <div class="input-box">
+                                <label for="branch">Branch</label>
+                                <select id="branch" name="branch" required>
+                                    <option value="" disabled selected>Select Branch</option>
+                                    <option value="Mohammadpur">Mohammadpur</option>
+                                    <option value="Dhanmondi">Dhanmondi</option>
+                                    <option value="Mirpur - 10">Mirpur - 10</option>
+                                    <option value="Uttara">Uttara</option>
+                                    <option value="Farmgate">Farmgate</option>
+                                    <option value="Hazaribagh">Hazaribagh</option>
+                                </select>
+                            </div>
+        
+                            <div class="items-section">
+                                <div class="item-group">
+                                    <p>Plastic Bottles</p>
+                                    <label for="plastic">Quantity:
+                                        <input type="number" id="plastic" name="plastic" value="{{ plastic }}" required>
+                                    </label>
+                                </div>
+        
+                                <div class="item-group">
+                                    <p>Cardboard</p>
+                                    <label for="cardboard">Quantity:
+                                        <input type="number" id="cardboard" name="cardboard" value="{{ cardboard }}"
+                                            required>
+                                    </label>
+                                </div>
+        
+                                <div class="item-group">
+                                    <p>Glass</p>
+                                    <label for="glass">Quantity:
+                                        <input type="number" id="glass" name="glass" value="{{ glass }}" required>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" name="action" value="edit">Save Changes</button>
+                            <button type="submit" name="action" value="delete">Delete Submission</button>
+                        </form>
+                    </div>
+                </div> -->

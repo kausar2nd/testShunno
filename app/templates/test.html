@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Dashboard for Recycling Management">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/app/static/admin_dash_style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dash_style.css' ) }}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        #edit-form-container {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Other content -->
+
+        <div id="edit-form-container">
+            <h1>Edit Submission</h1>
+            <form method="POST">
+                <label for="plastic">Plastic Bottles:</label>
+                <input type="number" id="plastic" name="plastic" value="" required><br>
+                <label for="cardboard">Cardboard:</label>
+                <input type="number" id="cardboard" name="cardboard" value="" required><br>
+                <label for="glass">Glass:</label>
+                <input type="number" id="glass" name="glass" value="" required><br>
+                <button type="submit" name="action" value="edit">Save Changes</button>
+                <button type="submit" name="action" value="delete">Delete Submission</button>
+            </form>
+        </div>
+
+        <div class="transactions-container">
+            <h2>Registered Users</h2>
+            <div class="table-div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Date Joined</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if users %}
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user[0] }}</td>
+                            <td>{{ user[1] }}</td>
+                            <td>{{ user[2] }}</td>
+                            <td>{{ user[3] }}</td>
+                            <td>
+                                <button class="edit-btn" data-plastic="10" data-cardboard="20" data-glass="15">✒️</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">No submissions found.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                // Reveal the form
+                const formContainer = document.getElementById('edit-form-container');
+                formContainer.style.display = 'block';
+
+                // Populate form values with data attributes
+                document.getElementById('plastic').value = this.dataset.plastic;
+                document.getElementById('cardboard').value = this.dataset.cardboard;
+                document.getElementById('glass').value = this.dataset.glass;
+
+                // Scroll to the form
+                formContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>

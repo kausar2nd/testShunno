@@ -8,7 +8,6 @@ company_bp = Blueprint("company", __name__)
 @company_bp.route("/company_submit", methods=["POST"])
 @login_required
 def company_submit():
-    """Handles the company's order submission."""
     if request.method == "POST":
         plastic_quantity = request.form.get("plasticBottles", 0, type=int)
         cardboard_quantity = request.form.get("cardboard", 0, type=int)
@@ -30,10 +29,7 @@ def company_submit():
             conn = get_db_connection()
             cursor = conn.cursor()
             cursor.execute(
-                """
-                INSERT INTO company_order_history (company_email, order_description)
-                VALUES (%s, %s)
-                """,
+                "INSERT INTO company_order_history (company_email, order_description) VALUES (%s, %s)",
                 (company_email, order_description),
             )
 
@@ -91,9 +87,7 @@ def company_signup():
             print(f"Error: {e}")
         finally:
             conn.close()
-
         return redirect(url_for("company.company_login"))
-
     return render_template("company_signup.html")
 
 
@@ -146,7 +140,6 @@ def company_dashboard():
             "Glass": stock_data[2],
         }
 
-        # Fetch company's order history from the company_order_history table
         cursor.execute(
             """
             SELECT order_date, order_description

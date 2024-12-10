@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Submissions</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Submission History for {{ email }}</h1>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Branch</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        {% for submission in submissions %}
+        <tr>
+            <td>{{ submission.sub_description }}</td>
+            <td>{{ submission.sub_branch }}</td>
+            <td>{{ submission.sub_date }}</td>
+            <td>
+                <a href="{{ url_for('admin.admin_post', submission_id=submission.sub_id) }}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
