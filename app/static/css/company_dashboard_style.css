@@ -12,21 +12,18 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background: url(./assets/BlackWhite.png) no-repeat;
+  background: url('/static/assets/BlackWhite.png') no-repeat;
   background-size: cover;
   background-position: center;
   color: whitesmoke;
   padding: 0 20px;
-  /* To prevent content from touching the edges */
 }
 
-/* General styling for all links */
 a {
   text-decoration: none;
   color: whitesmoke;
 }
 
-/* Container layout */
 .container {
   display: flex;
   flex-direction: column;
@@ -35,8 +32,6 @@ a {
   max-width: 1200px;
 }
 
-/* Back home and logout links container */
-/* Back home and logout links container */
 .back_home_div {
   display: flex;
   justify-content: space-between;
@@ -44,20 +39,14 @@ a {
   width: 100%;
   padding: 20px;
   position: fixed;
-  /* Ensure it stays visible */
   top: 0;
-  /* Align at the top */
   left: 0;
-  /* Align at the left */
   z-index: 1000;
   background: rgba(0, 0, 0, 0.5);
-  /* Add a background for better visibility */
   backdrop-filter: blur(10px);
-  /* Blur effect */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Styling for Home and Logout links */
 .back_home,
 .logout-link {
   font-size: 18px;
@@ -70,7 +59,6 @@ a {
   color: whitesmoke;
   text-align: center;
   white-space: nowrap;
-  /* Prevent text from breaking */
 }
 
 .back_home:hover,
@@ -80,7 +68,6 @@ a {
 }
 
 
-/* Company Profile Section with backdrop blur */
 .company-profile {
   background: rgba(0, 0, 0, 0.6);
   padding: 20px;
@@ -110,7 +97,6 @@ a {
   margin-top: 15px;
 }
 
-/* History and Stock Sections */
 .history,
 .stock {
   background: rgba(0, 0, 0, 0.6);
@@ -156,7 +142,6 @@ button.order-button {
   font-size: 16px;
 }
 
-/* Modal for Order Form with blur */
 .order-form-modal {
   display: none;
   position: fixed;
@@ -232,7 +217,6 @@ button.order-button {
   background: #ccc;
 }
 
-/* Add table styling within the modal (if required) */
 .order-form-content table {
   width: 100%;
   margin-top: 10px;
@@ -272,23 +256,18 @@ button.order-button {
 /* Success Message */
 .success-message {
   background: #fff;
-  /* White background */
   padding: 30px;
   border-radius: 15px;
   color: #333;
-  /* Dark text for contrast */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 500px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  /* Subtle shadow */
   z-index: 1000;
   text-align: center;
   display: none;
-  /* Hidden by default */
 }
 
 .success-message p {

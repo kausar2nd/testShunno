@@ -18,8 +18,7 @@ function user_submissions_func(email) {
                 console.error('Table body not found!');
                 return;
             }
-            tableBody.innerHTML =
-                `<tr><td colspan = "4" > No submissions found.</td></tr >`;
+            tableBody.innerHTML = '';
 
             const title = document.getElementById('usub_table');
             title.innerHTML = `Submission History for ${email}`;
@@ -58,8 +57,7 @@ function company_submissions_func(email) {
                 console.error('Table body not found!');
                 return;
             }
-            tableBody.innerHTML =
-                `<tr><td colspan = "3" > No submissions found.</td></tr >`;
+            tableBody.innerHTML = '';
 
             const title = document.getElementById('csub_table');
             title.innerHTML = `Submission History for ${email}`;

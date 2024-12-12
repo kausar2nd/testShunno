@@ -2,8 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 0;
-    /* background-color: #f9f9f9; */
-    background-image: url('../static/assets/BlackWhite.png');
+    background-image: url('/static/assets/BlackWhite.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -13,13 +12,9 @@ body {
     flex-direction: column;
     height: 93vh;
     padding: 1.5%;
-    /* border: 2px solid black; */
 }
 
 .back_home {
-    /* position: absolute; */
-    /* top: 20px;
-    left: 20px; */
     width: fit-content;
     font-size: 20px;
     border: 1px solid rgb(245, 245, 245, 0.2);
@@ -46,8 +41,6 @@ body {
     cursor: pointer;
     color: lightgray;
     background: transparent;
-    /* background-color: #f5f5f505; */
-    background-color: #14161980;
     border: 2px solid #a9a9a990;
     backdrop-filter: blur(5px);
     transition: 0.4s ease-in-out;
@@ -67,9 +60,7 @@ body {
     border-radius: 12px;
     padding: 2%;
     background-color: #f5f5f505;
-    /* background-color: #14161980; */
     box-shadow: 0px 0px 2px 0 #f5f5f570;
-    /* backdrop-filter: blur(5px); */
 }
 
 
@@ -92,7 +83,6 @@ body {
     cursor: pointer;
     color: lightgray;
     border: 0.1px solid #a9a9a990;
-    /* border: 1px solid darkgray; */
     background: transparent;
     backdrop-filter: blur(10px);
     transition: 0.35s ease-in-out;
@@ -101,10 +91,8 @@ body {
 .location-btn:hover {
     backdrop-filter: blur(50px);
     scale: 1.03;
-    /* font-size: 1.6rem; */
     border: 1px solid lightgray;
     box-shadow: 0px 0px 6px 0 #f5f5f570;
-    /* border: 1px solid rgba(255, 0, 0, 0.7); */
 }
 
 .details {
@@ -139,7 +127,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
-    /* Ensure it takes up the full height */
 }
 
 a {

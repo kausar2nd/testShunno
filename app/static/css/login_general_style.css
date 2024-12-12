@@ -1,5 +1,5 @@
 body {
-    background-image: url('../static/assets/BlackWhite.png');
+    background-image: url('/static/assets/BlackWhite.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
