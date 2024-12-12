@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    background-image: url('/static/assets/sincerely-media-4dSXcNTyXaI-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 93vh;
+    padding: 1.5%;
+}
+
+.back_home {
+    width: fit-content;
+    font-size: 20px;
+    border: 1px solid rgb(245, 245, 245, 0.4);
+    background: transparent;
+    padding: 8px 16px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: whitesmoke;
+    backdrop-filter: blur(15px);
+    transition: 0.3s ease-in-out;
+}
+
+.back_home:hover {
+    backdrop-filter: blur(30px);
+    border: 1px solid rgb(245, 245, 245, 0.9);
+    transform: scale(1.05);
+}
+
+.home-btn {
+    width: 8%;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: lightgray;
+    background: transparent;
+    border: 2px solid #a9a9a990;
+    backdrop-filter: blur(5px);
+    transition: 0.4s ease-in-out;
+}
+
+.home-btn:hover {
+    border: 2px solid lightgray;
+    backdrop-filter: blur(10px);
+
+}
+
+.loc_container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 2px solid #a9a9a980;
+    border-radius: 12px;
+    padding: 2%;
+    background-color: #f5f5f505;
+    box-shadow: 0px 0px 2px 0 #f5f5f570;
+}
+
+
+.locations {
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    height: 5vh;
+    margin-bottom: 5vh;
+    flex: 0 0 50%;
+
+}
+
+.location-btn {
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    color: lightgray;
+    border: 0.1px solid #e5e5e5;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    transition: 0.35s ease-in-out;
+}
+
+.location-btn:hover {
+    backdrop-filter: blur(50px);
+    scale: 1.03;
+    border: 1px solid whitesmoke;
+    box-shadow: 0px 0px 6px 0 #f5f5f570;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #a9a9a950;
+    padding: 15px;
+    border-radius: 7px;
+    height: 50%;
+    backdrop-filter: blur(2px);
+    color: whitesmoke;
+    transition: 0.4s ease-in-out;
+    background-color: #14161930;
+}
+
+.details:hover {
+    border: 1px solid lightgray;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 3px 0 #f5f5f570;
+}
+
+.details_text {
+    width: 55%;
+    padding: 0 10px;
+}
+
+.details_img {
+    width: 43%;
+    border-radius: 5px;
+    background: url(assets/au2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: solid;
+}

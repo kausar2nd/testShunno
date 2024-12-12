@@ -10,7 +10,7 @@ def index():
 
 
 @general_bp.route("/login")
-def all_login():
+def login_general():
     return render_template("login_general.html")
 
 

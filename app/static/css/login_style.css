@@ -12,7 +12,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/static/assets/BlackWhite.png') no-repeat;
+    background: url('/static/assets/bruh-dev-zv7yaA__Xvs-unsplash.jpg') no-repeat;
+    /* background: url('/static/assets/BlackWhite.png') no-repeat; */
     background-size: cover;
     background-position: center;
     color: whitesmoke;

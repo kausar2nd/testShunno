@@ -7,7 +7,8 @@
 }
 
 body {
-    background: url('/static/assets/BlackWhite.png') no-repeat center center;
+    background: url('/static/assets/allec-gomes--x7DTx0d6rI-unsplash.jpg') no-repeat center center;
+    /* background: url('/static/assets/BlackWhite.png') no-repeat center center; */
     background-size: cover;
     color: whitesmoke;
     background-color: #141619;
@@ -140,6 +141,8 @@ a {
     max-height: 300px;
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    scrollbar-width:thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1);
 }
 
 .divider {

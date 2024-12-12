@@ -6,7 +6,7 @@
 }
 
 body {
-    background: url('/static/assets/BlackWhite.png') no-repeat center center;
+    background: url('/static/assets/john-mathews-93qlsN0jtFE-unsplash.jpg') no-repeat center center;
     background-size: cover;
     color: whitesmoke;
 }
@@ -57,6 +57,7 @@ a {
     margin: 20px 0;
     height: fit-content;
     background: transparent;
+    background-color: #14161940;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -172,8 +173,9 @@ a {
     align-items: center;
     width: 50%;
     padding: 30px 50px;
-    background: #14161940;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* background: #14161940; */
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 5px;
 }
 
@@ -189,20 +191,19 @@ a {
     gap: 10px;
     width: 80%;
     min-width: 500px;
-    /* padding: 40px; */
-    /* background-color: azure; */
+    background: transparent;
 }
 
 #branch {
     background: transparent;
     color: whitesmoke;
     padding: 5px 15px;
-    width: 25%;
+    width: 35%;
 }
 
 #branch option {
-    background: #141619;
-    color: whitesmoke;
+    color: black;
+    background: #80808090;
 }
 
 .input-box {
@@ -213,11 +214,10 @@ a {
 
 .item-group {
     display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 5px;
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(10px);
     padding: 15px;
     margin: 5px 0;
 }
@@ -227,7 +227,7 @@ a {
     width: 150x;
     margin-right: 20px;
     font-size: 15px;
-
+    color: whitesmoke;
 }
 
 .input-box select,
@@ -240,11 +240,11 @@ a {
     max-width: 400px;
     min-width: 120px;
     background: transparent;
+    color: whitesmoke;
 }
 
 .item-group input[type="number"] {
     width: 100px;
-    color: whitesmoke;
     color: whitesmoke;
 }
 
@@ -258,7 +258,7 @@ a {
     padding: 10px 20px;
     text-decoration: none;
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     background: transparent;
     border-radius: 4px;
     font-size: 16px;

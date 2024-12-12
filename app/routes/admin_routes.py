@@ -57,13 +57,13 @@ def admin_dashboard():
             "SELECT company_name, email, location, joining_date FROM companies"
         )
         companies = cursor.fetchall()
+        conn.close()
 
     except Exception as e:
         print(f"Error: {e}")
         users = []
         companies = []
-    finally:
-        conn.close()
+    # finally:
 
     return render_template(
         "admin_dashboard.html",
