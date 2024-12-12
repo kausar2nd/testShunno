@@ -5,7 +5,6 @@ from flask import (
     redirect,
     url_for,
     session,
-    flash,
     jsonify,
 )
 from app.utils.db_utils import get_db_connection
@@ -34,11 +33,10 @@ def admin_login():
                 session["email"] = email
                 return redirect(url_for("admin.admin_dashboard"))
             else:
-                flash("Invalid email or password.")
+                print("Invalid email or password.")
 
         except Exception as e:
             print(f"Error: {e}")
-            flash("An error occurred during login.")
 
         finally:
             conn.close()
@@ -50,7 +48,6 @@ def admin_login():
 # @login_required
 def admin_dashboard():
     email = session.get("email", "admin@example.com")
-
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -65,7 +62,6 @@ def admin_dashboard():
         print(f"Error: {e}")
         users = []
         companies = []
-
     finally:
         conn.close()
 
@@ -128,90 +124,173 @@ def csub_admin(email):
         return jsonify({"company_submissions": company_submissions})
 
 
-@admin_bp.route("/uedit_admin/<int:submission_id>", methods=["POST", "GET"])
-def admin_post(submission_id):
-    if request.method == "POST":
-        print("Received submission_id:", submission_id)
-        #     action = request.form["action"]
-        #     plastic = int(request.form.get("plastic", 0))
-        #     cardboard = int(request.form.get("cardboard", 0))
-        #     glass = int(request.form.get("glass", 0))
+@admin_bp.route("/usub_edit/<int:submission_id>", methods=["POST", "GET"])
+def uedit_admin(submission_id):
+    try:
+        new_plastic = int(request.form.get("plastic"))
+        new_cardboard = int(request.form.get("cardboard"))
+        new_glass = int(request.form.get("glass"))
 
-        #     try:
-        #         conn = get_db_connection()
-        #         cursor = conn.cursor()
+        if new_plastic < 0 or new_cardboard < 0 or new_glass < 0:
+            return {
+                "message": "Quantities cannot be negative. Please enter valid values."
+            }, 400
 
-        #         if action == "delete":
-        #             cursor.execute(
-        #                 "DELETE FROM user_submission_history WHERE sub_id = %s",
-        #                 (submission_id,),
-        #             )
-        #             cursor.execute(
-        #                 """
-        #                 UPDATE storage
-        #                 SET plastic = plastic - %s,
-        #                     cardboard = cardboard - %s,
-        #                     glass = glass - %s
-        #                 """,
-        #                 (plastic, cardboard, glass),
-        #             )
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
+            (submission_id,),
+        )
+        current_submission = cursor.fetchone()
+        if not current_submission:
+            return {"message": "Submission not found."}, 404
 
-        #         elif action == "edit":
-        #             updated_description = f"Plastic Bottles: {plastic}, Cardboard: {cardboard}, Glass: {glass}"
-        #             cursor.execute(
-        #                 """
-        #                 UPDATE user_submission_history
-        #                 SET sub_description = %s
-        #                 WHERE sub_id = %s
-        #                 """,
-        #                 (updated_description, submission_id),
-        #             )
-        #             cursor.execute(
-        #                 """
-        #                 UPDATE storage
-        #                 SET plastic = plastic + %s,
-        #                     cardboard = cardboard + %s,
-        #                     glass = glass + %s
-        #                 """,
-        #                 (plastic, cardboard, glass),
-        #             )
+        current_description = current_submission["sub_description"]
 
-        #         conn.commit()
-        #     except Exception as e:
-        #         print(f"Error: {e}")
-        #     finally:
-        #         conn.close()
+        # Parse current values
+        parts = current_description.split(", ")
+        current_plastic = int(parts[0].split(": ")[1])
+        current_cardboard = int(parts[1].split(": ")[1])
+        current_glass = int(parts[2].split(": ")[1])
 
-        #     return redirect(url_for("admin.admin_dashboard"))
+        # Calculate the differences
+        diff_plastic = new_plastic - current_plastic
+        diff_cardboard = new_cardboard - current_cardboard
+        diff_glass = new_glass - current_glass
 
-        # else:
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor(dictionary=True)
+        # Constraints: Automatically delete if all materials are zero
+        if new_plastic == 0 and new_cardboard == 0 and new_glass == 0:
+            # Delete the submission
             cursor.execute(
-                "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
+                "DELETE FROM user_submission_history WHERE sub_id = %s",
                 (submission_id,),
             )
-            submission = cursor.fetchone()
 
-            description = submission["sub_description"]
-            parts = description.split(", ")
-            plastic = int(parts[0].split(": ")[1])
-            cardboard = int(parts[1].split(": ")[1])
-            glass = int(parts[2].split(": ")[1])
+            # Reduce storage by the current values
+            cursor.execute(
+                """
+                UPDATE storage
+                SET plastic = plastic - %s,
+                    cardboard = cardboard - %s,
+                    glass = glass - %s
+                """,
+                (current_plastic, current_cardboard, current_glass),
+            )
+            conn.commit()
+            return {
+                "message": "Submission deleted as all materials were set to zero."
+            }, 200
 
-        except Exception as e:
-            print(f"Error: {e}")
-            return "An error occurred."
-        finally:
-            conn.close()
+        # Update submission and storage
+        updated_description = f"Plastic Bottles: {new_plastic}, Cardboard: {new_cardboard}, Glass: {new_glass}"
+        cursor.execute(
+            """
+            UPDATE user_submission_history
+            SET sub_description = %s
+            WHERE sub_id = %s
+            """,
+            (updated_description, submission_id),
+        )
 
-        return jsonify({"plastic": plastic, "cardboard": cardboard, "glass": glass})
+        cursor.execute(
+            """
+            UPDATE storage
+            SET plastic = plastic + %s,
+                cardboard = cardboard + %s,
+                glass = glass + %s
+            """,
+            (diff_plastic, diff_cardboard, diff_glass),
+        )
+        conn.commit()
+        conn.close()
 
-        # return render_template(
-        #     "admin_post.html",
-        #     submission_id=submission_id,
-        #     plastic=plastic,
-        #     cardboard=cardboard,
-        #     glass=glass,
-        # )
+        return {"message": "Submission updated successfully!"}, 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        # conn.close()
+        return {"message": "An error occurred while updating the submission."}, 500
+
+    # finally:
+    #     conn.close()
+
+
+@admin_bp.route("/usub_delete/<int:submission_id>", methods=["POST"])
+def udelete_admin(submission_id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
+            (submission_id,),
+        )
+        current_submission = cursor.fetchone()
+        if not current_submission:
+            return {"message": "Submission not found."}, 404
+
+        current_description = current_submission["sub_description"]
+
+        # Parse current values
+        parts = current_description.split(", ")
+        current_plastic = int(parts[0].split(": ")[1])
+        current_cardboard = int(parts[1].split(": ")[1])
+        current_glass = int(parts[2].split(": ")[1])
+
+        # Delete the submission
+        cursor.execute(
+            "DELETE FROM user_submission_history WHERE sub_id = %s",
+            (submission_id,),
+        )
+
+        # Reduce storage by the current values
+        cursor.execute(
+            """
+            UPDATE storage
+            SET plastic = plastic - %s,
+                cardboard = cardboard - %s,
+                glass = glass - %s
+            """,
+            (current_plastic, current_cardboard, current_glass),
+        )
+        conn.commit()
+
+        return {"message": "Submission deleted successfully."}, 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "An error occurred while deleting the submission."}, 500
+
+    finally:
+        conn.close()
+
+
+@admin_bp.route("/cedit_admin/<int:order_id>", methods=["POST", "GET"])
+def cedit_admin(order_id):
+    pass
+
+
+@admin_bp.route("/fetch_usub_d/<int:submission_id>", methods=["GET", "POST"])
+def admin_post(submission_id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
+            (submission_id,),
+        )
+        submission = cursor.fetchone()
+
+        description = submission["sub_description"]
+        parts = description.split(", ")
+        plastic = int(parts[0].split(": ")[1])
+        cardboard = int(parts[1].split(": ")[1])
+        glass = int(parts[2].split(": ")[1])
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred."
+    finally:
+        conn.close()
+
+    return jsonify({"plastic": plastic, "cardboard": cardboard, "glass": glass})

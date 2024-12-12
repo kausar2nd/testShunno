@@ -7,7 +7,6 @@
     <title>Admin</title>
     <!-- <link rel="stylesheet" href="/app/static/admin_dash_style.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='admin_dash_style.css' ) }}">
-    <!-- <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -100,7 +99,7 @@
                     </table>
                 </div>
 
-                <hr class="divider">
+                <hr class="divider" id="uh-divider" style="display: none;">
 
                 <h2 id="usub_table"></h2>
                 <div class="table-div" id="user_history" style="display: none;">
@@ -123,7 +122,7 @@
                     </table>
                 </div>
 
-                <hr class="divider">
+                <hr class="divider" id="ch-divider" style="display: none;">
 
                 <h2 id="csub_table"></h2>
                 <div class="table-div" id="company_history" style="display: none;">
@@ -144,16 +143,14 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
 
         <div id="editSubmissionModal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal()">&times;</span>
-                <h2>Edit Submission</h2>
-                <!-- <div class=""></div> -->
-                <form method="POST">
+                <h2 id="modal-title"></h2>
+                <form method="post">
                     <div class="label-grp">
                         <label for="plastic">Plastic Bottles:</label>
                         <input type="number" id="plastic" name="plastic" value="{{ plastic }}" required>
@@ -167,120 +164,16 @@
                         <input type="number" id="glass" name="glass" value="{{ glass }}" required>
                     </div>
                     <div class="label-grp">
-                        <button type="submit" name="action" id="delete" value="delete">Delete Submission</button>
-                        <button type="submit" name="action" value="edit">Save Changes</button>
+                        <button name="" id="delete" value="delete">Delete Submission</button>
+                        <button name="" id="edit" value="edit">Save Changes</button>
                     </div>
                 </form>
             </div>
         </div>
 
     </div>
-    <!-- <td><a href="/admin_post/${user_submissions.sub_id}">Edit</a></td> -->
 
-    <script>
-        function user_submissions_func(email) {
-            const formContainer = document.getElementById('user_history');
-            formContainer.style.display = 'block';
-            formContainer.scrollIntoView({ behavior: 'smooth' });
-
-            fetch(`/usub_admin/${email}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const user_submissions = data.user_submissions;
-                    const tableBody = document.querySelector('#user_history table tbody');
-                    if (!tableBody) {
-                        console.error('Table body not found!');
-                        return;
-                    }
-                    tableBody.innerHTML = '';
-
-                    const title = document.getElementById('usub_table');
-                    console.log(user_submissions);
-                    console.log(user_submissions[0].user_email);
-                    title.innerHTML = `Submission History for ${user_submissions[0].user_email}`;
-
-                    user_submissions.forEach(user_submissions => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                    <td>${user_submissions.sub_description}</td>
-                    <td>${user_submissions.sub_branch}</td>
-                    <td>${user_submissions.sub_date}</td>
-                    <td><a href="#editSubmissionModal" onclick="openModal(${user_submissions.sub_id})"><u><i>edit</i></u></a></td>`
-                        tableBody.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error:', error));
-        }
-
-        function company_submissions_func(email) {
-            const formContainer = document.getElementById('company_history');
-            formContainer.style.display = 'block';
-            formContainer.scrollIntoView({ behavior: 'smooth' });
-
-            fetch(`/csub_admin/${email}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const company_submissions = data.company_submissions;
-                    const tableBody = document.querySelector('#company_history table tbody');
-                    if (!tableBody) {
-                        console.error('Table body not found!');
-                        return;
-                    }
-                    tableBody.innerHTML = '';
-
-                    const title = document.getElementById('csub_table');
-                    title.innerHTML = `Submission History for ${company_submissions[0].company_email}`;
-
-                    company_submissions.forEach(company_submissions => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                    <td>${company_submissions.order_description}</td>
-                    <td>${company_submissions.order_date}</td>
-                    <td><a href="/admin_post/${company_submissions.order_id}"><u><i>edit</i></u></a></td>
-                `;
-                        tableBody.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error:', error));
-        }
-
-        function openModal(sub_id) {
-            document.getElementById('editSubmissionModal').style.display = 'block';
-            fetch(`/uedit_admin/${sub_id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('plastic').value = data.plastic;
-                    document.getElementById('cardboard').value = data.cardboard;
-                    document.getElementById('glass').value = data.glass;
-                })
-        }
-
-        function closeModal() {
-            document.getElementById('editSubmissionModal').style.display = 'none';
-        }
-
-        window.onclick = function (event) {
-            const modal = document.getElementById('editSubmissionModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
-    </script>
+    <script src="{{ url_for('static', filename='admin_dash_script.js') }}"></script>
 
 </body>
 
