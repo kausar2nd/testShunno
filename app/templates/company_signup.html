@@ -3,12 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="this is a html project " />
     <title>Company Signup</title>
-    <link rel="stylesheet" href="../static/company_style.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='company_style.css' ) }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_style.css' ) }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -19,6 +16,7 @@
 
         <div class="wrapper">
             <form method="POST" action="/company_signup">
+
                 <h1>Company Signup</h1>
                 <div class="input-box">
                     <input type="text" name="company_name" placeholder="Company Name" required>
@@ -38,19 +36,33 @@
                     <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
-                <!-- <div class="remember-forget">
-                    <label><input type="checkbox">Remember Me</label>
-                    <a href="#">Forgot Password?</a>
-                </div> -->
+
+                <div class="input-box">
+                    <input type="password" name="password2" placeholder="Retype Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
 
                 <button type="submit" class="btn">Sign Up</button>
 
                 <div class="login-link">
                     <p>Have an account? <a href="/company_login">Login</a></p>
-                    <!-- <p>Have an account? <a href="company_login.html">Login</a></p> -->
                 </div>
 
             </form>
         </div>
     </div>
+
+    <script>
+        const password = document.querySelector('input[name="password"]');
+        const password2 = document.querySelector('input[name="password2"]');
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', (e) => {
+            if (password.value !== password2.value) {
+                e.preventDefault();
+                alert('Passwords do not match');
+            }
+        });
+    </script>
+
 </body>

@@ -3,15 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Company Dashboard</title>
-  <!-- <link rel="stylesheet" href="cc.css"> -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='company_dashboard.css' ) }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/company_dashboard_style.css' ) }}">
 </head>
 
 <body>
-
-  <!-- Main Content -->
   <div class="container">
     <div class="back_home_div">
       <div><a href="/" class="back_home">Home</a></div>
@@ -107,7 +104,6 @@
       </div>
     </div>
 
-    <!-- Success Message -->
     <div id="successMessage" class="success-message" style="display: none;">
       <p>Order submitted successfully!</p>
       <button onclick="closeSuccessMessage()">Close</button>
@@ -115,7 +111,7 @@
 
   </div>
 
-  <script src="/static/company.js"></script>
+  <script src="{{ url_for('static', filename='js/company_dashboard_script.js') }}"></script>
 </body>
 
 </html>

@@ -11,12 +11,12 @@ def index():
 
 @general_bp.route("/login")
 def all_login():
-    return render_template("all_login.html")
+    return render_template("login_general.html")
 
 
 @general_bp.route("/find_bins")
 def find_bins():
-    return render_template("find_bins.html")
+    return render_template("find_bin.html")
 
 
 @general_bp.route("/logout")
@@ -24,4 +24,4 @@ def find_bins():
 def logout():
     session.clear()
     print("You have been logged out.")
-    return redirect(url_for("general.all_login"))
+    return redirect(url_for("general.login_general"))
