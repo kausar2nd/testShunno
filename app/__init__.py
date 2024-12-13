@@ -4,8 +4,10 @@ from app.routes.company_routes import company_bp
 from app.routes.admin_routes import admin_bp
 from app.routes.general_routes import general_bp
 
+
 def create_app():
     app = Flask(__name__)
+    application = app
     app.secret_key = "your secret key"
 
     # Register Blueprints
