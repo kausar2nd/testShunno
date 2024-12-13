@@ -18,19 +18,19 @@ def company_submit():
             flash("Please log in to submit an order.")
             return redirect(url_for("company_login"))
 
-        order_description = (
+        company_history_description = (
             f"Plastic Bottles: {plastic_quantity}, "
             f"Cardboard: {cardboard_quantity}, "
             f"Glass: {glass_quantity}"
         )
-        print(order_description)
+        print(company_history_description)
 
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO company_order_history (company_email, order_description) VALUES (%s, %s)",
-                (company_email, order_description),
+                "INSERT INTO company_history (company_email, company_history_description) VALUES (%s, %s)",
+                (company_email, company_history_description),
             )
 
             cursor.execute(
@@ -44,11 +44,9 @@ def company_submit():
                 (plastic_quantity, cardboard_quantity, glass_quantity),
             )
             conn.commit()
-            flash("Order placed successfully!")
 
         except Exception as e:
             print(f"Error: {e}")
-            flash("An error occurred while placing the order.")
 
         finally:
             conn.close()
@@ -62,11 +60,9 @@ def company_submit():
 def company_signup():
     if request.method == "POST":
         company_name = request.form["company_name"]
-        location = request.form["location"]
+        company_location = request.form["company_location"]
         email = request.form["email"]
         password = request.form["password"]
-
-        print(company_name, location, email, password)
 
         try:
             conn = get_db_connection()
@@ -78,8 +74,8 @@ def company_signup():
                 flash("Company account already exists!")
             else:
                 cursor.execute(
-                    "INSERT INTO companies (company_name, location, email, password) VALUES (%s, %s, %s, %s)",
-                    (company_name, location, email, password),
+                    "INSERT INTO companies (company_name, company_location, email, password) VALUES (%s, %s, %s, %s)",
+                    (company_name, company_location, email, password),
                 )
                 print("Company account created successfully!")
                 conn.commit()
@@ -142,8 +138,8 @@ def company_dashboard():
 
         cursor.execute(
             """
-            SELECT order_date, order_description
-            FROM company_order_history
+            SELECT order_date, company_history_description
+            FROM company_history
             WHERE company_email = %s
             ORDER BY order_date DESC LIMIT 5
             """,
@@ -151,7 +147,8 @@ def company_dashboard():
         )
         history_data = cursor.fetchall()
         history_data = [
-            {"order_date": row[0], "order_description": row[1]} for row in history_data
+            {"order_date": row[0], "company_history_description": row[1]}
+            for row in history_data
         ]
 
     except Exception as e:

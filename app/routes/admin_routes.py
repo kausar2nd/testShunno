@@ -14,30 +14,27 @@ admin_bp = Blueprint("admin", __name__)
 
 
 @admin_bp.route("/superuser", methods=["POST", "GET"])
-def admin_login():
+def superuser():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
+
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
+            cursor.execute("SELECT * FROM admin WHERE email = %s", (email,))
+            account = cursor.fetchone()
 
-            cursor.execute(
-                "SELECT email FROM admin WHERE email = %s AND password = %s",
-                (email, password),
-            )
-
-            admin = cursor.fetchone()
-
-            if admin:
-                session["email"] = email
+            if account and account[2] == password:
+                session["admin_loggedin"] = True
+                session["admin_id"] = account[0]
+                session["admin_email"] = account[1]
+                print("Logged in successfully!")
                 return redirect(url_for("admin.admin_dashboard"))
             else:
                 print("Invalid email or password.")
-
         except Exception as e:
             print(f"Error: {e}")
-
         finally:
             conn.close()
 
@@ -45,16 +42,18 @@ def admin_login():
 
 
 @admin_bp.route("/admin_dashboard", methods=["POST", "GET"])
-# @login_required
+@login_required
 def admin_dashboard():
-    email = session.get("email", "admin@example.com")
+    email = session.get("admin_email", "admin@example.com")
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT name, email, location, joining_date FROM users")
+        cursor.execute(
+            "SELECT user_name, user_email, user_location, user_joining_date FROM user"
+        )
         users = cursor.fetchall()
         cursor.execute(
-            "SELECT company_name, email, location, joining_date FROM companies"
+            "SELECT company_name, company_email, company_location, company_joining_date FROM company"
         )
         companies = cursor.fetchall()
         conn.close()
@@ -63,7 +62,9 @@ def admin_dashboard():
         print(f"Error: {e}")
         users = []
         companies = []
-    # finally:
+
+    finally:
+        conn.close()
 
     return render_template(
         "admin_dashboard.html",
@@ -81,10 +82,10 @@ def usub_admin(email):
             cursor = conn.cursor(dictionary=True)
             cursor.execute(
                 """
-                SELECT sub_id, user_email, sub_description, sub_branch, sub_date 
-                FROM user_submission_history 
+                SELECT user_history_id, user_history_email, user_history_description, user_history_branch, user_history_date 
+                FROM user_history 
                 WHERE user_email = %s 
-                ORDER BY sub_date DESC
+                ORDER BY user_history_date DESC
                 """,
                 (email,),
             )
@@ -99,33 +100,34 @@ def usub_admin(email):
         return jsonify({"user_submissions": user_submissions})
 
 
-@admin_bp.route("/csub_admin/<email>", methods=["GET", "POST"])
-def csub_admin(email):
-    if request.method == "POST":
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor(dictionary=True)
-            cursor.execute(
-                """
-                SELECT order_id, company_email, order_description, order_date
-                FROM company_order_history 
-                WHERE company_email = %s 
-                ORDER BY order_date DESC
-                """,
-                (email,),
-            )
-            company_submissions = cursor.fetchall()
-        except Exception as e:
-            print(f"Error: {e}")
-            company_submissions = []
-        finally:
-            conn.close()
+@admin_bp.route("/fetch_usub_d/<int:id>", methods=["GET", "POST"])
+def admin_post(id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT user_history_description FROM user_history WHERE user_history_id = %s",
+            (id,),
+        )
+        submission = cursor.fetchone()
 
-        return jsonify({"company_submissions": company_submissions})
+        description = submission["user_history_description"]
+        parts = description.split(", ")
+        plastic = int(parts[0].split(": ")[1])
+        cardboard = int(parts[1].split(": ")[1])
+        glass = int(parts[2].split(": ")[1])
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred."
+    finally:
+        conn.close()
+
+    return jsonify({"plastic": plastic, "cardboard": cardboard, "glass": glass})
 
 
-@admin_bp.route("/usub_edit/<int:submission_id>", methods=["POST", "GET"])
-def uedit_admin(submission_id):
+@admin_bp.route("/usub_edit/<int:history_id>", methods=["POST", "GET"])
+def uedit_admin(history_id):
     try:
         new_plastic = int(request.form.get("plastic"))
         new_cardboard = int(request.form.get("cardboard"))
@@ -139,35 +141,29 @@ def uedit_admin(submission_id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
-            (submission_id,),
+            "SELECT user_history_description FROM user_history WHERE user_history_id = %s",
+            (history_id,),
         )
         current_submission = cursor.fetchone()
         if not current_submission:
             return {"message": "Submission not found."}, 404
 
-        current_description = current_submission["sub_description"]
-
-        # Parse current values
+        current_description = current_submission["user_history_description"]
         parts = current_description.split(", ")
         current_plastic = int(parts[0].split(": ")[1])
         current_cardboard = int(parts[1].split(": ")[1])
         current_glass = int(parts[2].split(": ")[1])
 
-        # Calculate the differences
         diff_plastic = new_plastic - current_plastic
         diff_cardboard = new_cardboard - current_cardboard
         diff_glass = new_glass - current_glass
 
-        # Constraints: Automatically delete if all materials are zero
         if new_plastic == 0 and new_cardboard == 0 and new_glass == 0:
-            # Delete the submission
             cursor.execute(
-                "DELETE FROM user_submission_history WHERE sub_id = %s",
-                (submission_id,),
+                "DELETE FROM user_history WHERE user_history_id = %s",
+                (history_id,),
             )
 
-            # Reduce storage by the current values
             cursor.execute(
                 """
                 UPDATE storage
@@ -182,15 +178,14 @@ def uedit_admin(submission_id):
                 "message": "Submission deleted as all materials were set to zero."
             }, 200
 
-        # Update submission and storage
         updated_description = f"Plastic Bottles: {new_plastic}, Cardboard: {new_cardboard}, Glass: {new_glass}"
         cursor.execute(
             """
-            UPDATE user_submission_history
-            SET sub_description = %s
-            WHERE sub_id = %s
+            UPDATE user_history
+            SET user_history_description = %s
+            WHERE user_history_id = %s
             """,
-            (updated_description, submission_id),
+            (updated_description, history_id),
         )
 
         cursor.execute(
@@ -203,47 +198,41 @@ def uedit_admin(submission_id):
             (diff_plastic, diff_cardboard, diff_glass),
         )
         conn.commit()
-        conn.close()
 
         return {"message": "Submission updated successfully!"}, 200
 
     except Exception as e:
         print(f"Error: {e}")
-        # conn.close()
         return {"message": "An error occurred while updating the submission."}, 500
 
-    # finally:
-    #     conn.close()
+    finally:
+        conn.close()
 
 
-@admin_bp.route("/usub_delete/<int:submission_id>", methods=["POST"])
-def udelete_admin(submission_id):
+@admin_bp.route("/usub_delete/<int:id>", methods=["POST"])
+def udelete_admin(id):
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
-            (submission_id,),
+            "SELECT user_history_description FROM user_history WHERE user_history_id = %s",
+            (id,),
         )
         current_submission = cursor.fetchone()
         if not current_submission:
             return {"message": "Submission not found."}, 404
 
-        current_description = current_submission["sub_description"]
-
-        # Parse current values
+        current_description = current_submission["user_history_description"]
         parts = current_description.split(", ")
         current_plastic = int(parts[0].split(": ")[1])
         current_cardboard = int(parts[1].split(": ")[1])
         current_glass = int(parts[2].split(": ")[1])
 
-        # Delete the submission
         cursor.execute(
-            "DELETE FROM user_submission_history WHERE sub_id = %s",
-            (submission_id,),
+            "DELETE FROM user_history WHERE user_history_id = %s",
+            (id,),
         )
 
-        # Reduce storage by the current values
         cursor.execute(
             """
             UPDATE storage
@@ -265,23 +254,43 @@ def udelete_admin(submission_id):
         conn.close()
 
 
-@admin_bp.route("/cedit_admin/<int:order_id>", methods=["POST", "GET"])
-def cedit_admin(order_id):
-    pass
+@admin_bp.route("/csub_admin/<email>", methods=["GET", "POST"])
+def csub_admin(email):
+    if request.method == "POST":
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(
+                """
+                SELECT company_history_id, company_history_email, company_history_description, company_history_date
+                FROM company_history 
+                WHERE company_history_email = %s 
+                ORDER BY company_history_date DESC
+                """,
+                (email,),
+            )
+            company_submissions = cursor.fetchall()
+        except Exception as e:
+            print(f"Error: {e}")
+            company_submissions = []
+        finally:
+            conn.close()
+
+        return jsonify({"company_submissions": company_submissions})
 
 
-@admin_bp.route("/fetch_usub_d/<int:submission_id>", methods=["GET", "POST"])
-def admin_post(submission_id):
+@admin_bp.route("/fetch_csub_d/<int:company_history_id>", methods=["GET", "POST"])
+def cadmin_post(company_history_id):
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT sub_description FROM user_submission_history WHERE sub_id = %s",
-            (submission_id,),
+            "SELECT company_history_description FROM company_history WHERE company_history_id = %s",
+            (company_history_id,),
         )
-        submission = cursor.fetchone()
+        order = cursor.fetchone()
 
-        description = submission["sub_description"]
+        description = order["company_history_description"]
         parts = description.split(", ")
         plastic = int(parts[0].split(": ")[1])
         cardboard = int(parts[1].split(": ")[1])
@@ -294,3 +303,130 @@ def admin_post(submission_id):
         conn.close()
 
     return jsonify({"plastic": plastic, "cardboard": cardboard, "glass": glass})
+
+
+@admin_bp.route("/csub_edit/<int:company_history_id>", methods=["POST", "GET"])
+def cedit_admin(company_history_id):
+    try:
+        new_plastic = int(request.form.get("plastic"))
+        new_cardboard = int(request.form.get("cardboard"))
+        new_glass = int(request.form.get("glass"))
+
+        if new_plastic < 0 or new_cardboard < 0 or new_glass < 0:
+            return {
+                "message": "Quantities cannot be negative. Please enter valid values."
+            }, 400
+
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT company_history_description FROM company_history WHERE company_history_id = %s",
+            (company_history_id,),
+        )
+        current_order = cursor.fetchone()
+        if not current_order:
+            return {"message": "Order not found."}, 404
+
+        current_description = current_order["company_history_description"]
+
+        parts = current_description.split(", ")
+        current_plastic = int(parts[0].split(": ")[1])
+        current_cardboard = int(parts[1].split(": ")[1])
+        current_glass = int(parts[2].split(": ")[1])
+
+        diff_plastic = new_plastic - current_plastic
+        diff_cardboard = new_cardboard - current_cardboard
+        diff_glass = new_glass - current_glass
+
+        if new_plastic == 0 and new_cardboard == 0 and new_glass == 0:
+            cursor.execute(
+                "DELETE FROM company_history WHERE company_history_id = %s",
+                (company_history_id,),
+            )
+
+            cursor.execute(
+                """
+                UPDATE storage
+                SET plastic = plastic - %s,
+                    cardboard = cardboard - %s,
+                    glass = glass - %s
+                """,
+                (current_plastic, current_cardboard, current_glass),
+            )
+            conn.commit()
+            return {"message": "Order deleted as all materials were set to zero."}, 200
+
+        updated_description = f"Plastic Bottles: {new_plastic}, Cardboard: {new_cardboard}, Glass: {new_glass}"
+        cursor.execute(
+            """
+            UPDATE company_history
+            SET company_history_description = %s
+            WHERE company_history_id = %s
+            """,
+            (updated_description, company_history_id),
+        )
+
+        cursor.execute(
+            """
+            UPDATE storage
+            SET plastic = plastic + %s,
+                cardboard = cardboard + %s,
+                glass = glass + %s
+            """,
+            (diff_plastic, diff_cardboard, diff_glass),
+        )
+        conn.commit()
+
+        return {"message": "Order updated successfully!"}, 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "An error occurred while updating the order."}, 500
+
+    finally:
+        conn.close()
+
+
+@admin_bp.route("/csub_delete/<int:company_history_id>", methods=["POST"])
+def cdelete_admin(company_history_id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT company_history_description FROM company_history WHERE company_history_id = %s",
+            (company_history_id,),
+        )
+        current_order = cursor.fetchone()
+        if not current_order:
+            return {"message": "Order not found."}, 404
+
+        current_description = current_order["company_history_description"]
+        parts = current_description.split(", ")
+        current_plastic = int(parts[0].split(": ")[1])
+        current_cardboard = int(parts[1].split(": ")[1])
+        current_glass = int(parts[2].split(": ")[1])
+
+        cursor.execute(
+            "DELETE FROM company_history WHERE company_history_id = %s",
+            (company_history_id,),
+        )
+
+        cursor.execute(
+            """
+            UPDATE storage
+            SET plastic = plastic - %s,
+                cardboard = cardboard - %s,
+                glass = glass - %s
+            """,
+            (current_plastic, current_cardboard, current_glass),
+        )
+        conn.commit()
+
+        return {"message": "Order deleted successfully."}, 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "An error occurred while deleting the order."}, 500
+
+    finally:
+        conn.close()
