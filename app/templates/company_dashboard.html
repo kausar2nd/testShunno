@@ -18,39 +18,41 @@
     <!-- Section 1: Company Profile -->
     <section class="company-profile">
       <div class="profile-picture">
-        <img src="images/panda.jpg" alt="Profile Picture">
-      </div>
-      <button class="edit-button">Edit Profile</button>
-      <div class="profile-details">
-        <h2>Company Name: {{ session['company_name'] }}</h2>
-        <p><strong>Biography:</strong> Eco Solutions is dedicated to sustainable waste management and recycling
-          solutions.</p>
+        <img src="../static/assets/company.png" alt="Profile Picture">
+        <div class="profile-details">
+          <h2>{{ session['company_name'] }}</h2>
+          <p>Eco Solutions is dedicated to sustainable waste management and recycling solutions.</p>
+          <button class="edit-button">Edit Profile</button>
+        </div>
       </div>
     </section>
 
     <!-- Section 2: History -->
     <section class="history">
       <h2>Accessed Recycle Bins</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Order Description</th>
-            <th>Order Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for history in history_data %}
-          <tr>
-            <td>{{ history.order_description }}</td>
-            <td>{{ history.order_date }}</td>
-          </tr>
-          {% else %}
-          <tr>
-            <td colspan="2">No history available.</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="history_table">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Order Description</th>
+              <th>Order Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for history in history_data %}
+            <tr>
+              <td>{{ history.company_history_description }}</td>
+              <td>{{ history.company_history_date }}</td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="2">No history available.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- Section 3: Stock -->

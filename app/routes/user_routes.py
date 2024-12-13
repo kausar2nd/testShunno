@@ -13,13 +13,13 @@ def user_submit():
         plastic_quantity = request.form.get("plastic-quantity", 0, type=int)
         cardboard_quantity = request.form.get("cardboard-quantity", 0, type=int)
         glass_quantity = request.form.get("glass-quantity", 0, type=int)
-        user_email = session.get("email")
+        user_history_email = session.get("email")
 
-        if not user_email:
+        if not user_history_email:
             flash("Please log in to submit an order.")
             return redirect(url_for("user_login"))
 
-        sub_description = (
+        user_history_description = (
             f"Plastic Bottles: {plastic_quantity}, "
             f"Cardboard: {cardboard_quantity}, "
             f"Glass: {glass_quantity}"
@@ -30,8 +30,8 @@ def user_submit():
             cursor = conn.cursor()
 
             cursor.execute(
-                "INSERT INTO user_submission_history (user_email, sub_description, sub_branch) VALUES (%s, %s, %s)",
-                (user_email, sub_description, branch),
+                "INSERT INTO user_history (user_history_email, user_history_description, user_history_branch) VALUES (%s, %s, %s)",
+                (user_history_email, user_history_description, branch),
             )
 
             cursor.execute(
@@ -70,14 +70,14 @@ def user_signup():
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+            cursor.execute("SELECT * FROM user WHERE user_email = %s", (email,))
             account = cursor.fetchone()
 
             if account:
                 flash("Account already exists!")
             else:
                 cursor.execute(
-                    "INSERT INTO users (name, email, password, location) VALUES (%s, %s, %s, %s)",
+                    "INSERT INTO user (user_name, user_email, user_password, user_location) VALUES (%s, %s, %s, %s)",
                     (name, email, password, location),
                 )
                 print("Account created successfully!")
@@ -101,7 +101,7 @@ def user_login():
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+            cursor.execute("SELECT * FROM user WHERE user_email = %s", (email,))
             account = cursor.fetchone()
 
             if account[3] == password:
@@ -131,11 +131,11 @@ def user_dashboard():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+        cursor.execute("SELECT * FROM user WHERE user_email = %s", (email,))
         joined = cursor.fetchone()
 
         cursor.execute(
-            "SELECT sub_date, sub_description, sub_branch FROM user_submission_history WHERE user_email = %s ORDER BY sub_date DESC LIMIT 5",
+            "SELECT user_history_date, user_history_description, user_history_branch FROM user_history WHERE user_history_email = %s ORDER BY user_history_date DESC",
             (email,),
         )
         submissions = cursor.fetchall()

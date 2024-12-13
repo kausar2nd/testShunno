@@ -125,11 +125,18 @@ a {
     backdrop-filter: blur(10px);
 }
 
-.transactions-container h2 {
+h2 {
     text-align: center;
     padding-bottom: 25px;
     padding-top: 15px;
     font-size: 1.7rem;
+}
+
+.transactions-container {
+    overflow: auto;
+    max-height: 350px;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff1a transparent;
 }
 
 .transactions-container table {
@@ -163,7 +170,7 @@ a {
     height: fit-content;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .new-order {
@@ -172,8 +179,7 @@ a {
     justify-content: center;
     align-items: center;
     width: 50%;
-    padding: 30px 50px;
-    /* background: #14161940; */
+    padding: 10px 40px;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 5px;
@@ -181,7 +187,7 @@ a {
 
 .new-order h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 22px;
 }
 
@@ -254,7 +260,7 @@ a {
 
 .submit-btn {
     float: right;
-    margin: 20px auto 0;
+    margin: 15px 0;
     padding: 10px 20px;
     text-decoration: none;
     color: white;

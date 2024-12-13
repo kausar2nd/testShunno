@@ -67,14 +67,14 @@ def company_signup():
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM companies WHERE email = %s", (email,))
+            cursor.execute("SELECT * FROM company WHERE company_email = %s", (email,))
             account = cursor.fetchone()
 
             if account:
-                flash("Company account already exists!")
+                print("Company account already exists!")
             else:
                 cursor.execute(
-                    "INSERT INTO companies (company_name, company_location, email, password) VALUES (%s, %s, %s, %s)",
+                    "INSERT INTO company (company_name, company_location, company_email, company_password) VALUES (%s, %s, %s, %s)",
                     (company_name, company_location, email, password),
                 )
                 print("Company account created successfully!")
@@ -96,10 +96,10 @@ def company_login():
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM companies WHERE email = %s", (email,))
+            cursor.execute("SELECT * FROM company WHERE company_email = %s", (email,))
             account = cursor.fetchone()
 
-            if account[4] == password:
+            if account[3] == password:
                 print("Password matched!")
                 session["loggedin"] = True
                 session["company_id"] = account[0]
@@ -126,8 +126,6 @@ def company_dashboard():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-
-        # Fetch current stock information from the storage table
         cursor.execute("SELECT Plastic, Cardboard, Glass FROM storage LIMIT 1")
         stock_data = cursor.fetchone()
         stock = {
@@ -138,16 +136,16 @@ def company_dashboard():
 
         cursor.execute(
             """
-            SELECT order_date, company_history_description
+            SELECT company_history_date, company_history_description
             FROM company_history
-            WHERE company_email = %s
-            ORDER BY order_date DESC LIMIT 5
+            WHERE company_history_email = %s
+            ORDER BY company_history_date DESC
             """,
             (company_email,),
         )
         history_data = cursor.fetchall()
         history_data = [
-            {"order_date": row[0], "company_history_description": row[1]}
+            {"company_history_date": row[0], "company_history_description": row[1]}
             for row in history_data
         ]
 

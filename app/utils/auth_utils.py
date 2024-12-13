@@ -6,7 +6,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "loggedin" not in session:
-            flash("Please log in to access this page.")
+            print("Please log in to access this page.")
             return redirect(url_for("general.login_general"))
         return f(*args, **kwargs)
 

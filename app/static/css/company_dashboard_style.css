@@ -42,49 +42,62 @@ a {
   top: 0;
   left: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: transparent;
 }
 
 .back_home,
 .logout-link {
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   background: transparent;
   cursor: pointer;
   transition: 0.3s ease;
   color: whitesmoke;
   text-align: center;
   white-space: nowrap;
+  backdrop-filter: blur(15px);
 }
 
 .back_home:hover,
 .logout-link:hover {
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
-
 
 .company-profile {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 70%;
   color: #fff;
-  margin-bottom: 40px;
-  width: 100%;
-  max-width: 600px;
+  padding: 30px;
   margin-top: 100px;
+  margin-bottom: 40px;
+  background: #14161910;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
 }
 
-.company-profile .profile-picture img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+.profile-picture {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.profile-details {
+  margin-left: 20px;
+  text-align: right;
+}
+
+.profile-picture img {
+  width: 300px;
+  height: 210px;
+  border-radius: 10px;
+}
+
+h2 {
+  color: whitesmoke;
+  font-size: 1.8rem;
 }
 
 .company-profile .edit-button {
@@ -97,17 +110,25 @@ a {
   margin-top: 15px;
 }
 
+.history_table {
+  overflow: auto;
+  max-height: 300px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
 .history,
 .stock {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  width: 100%;
-  max-width: 600px;
+  width: 70%;
+
+  background: #14161915;
+  padding: 40px;
   margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  color: #fff;
+
 }
 
 .history table,
@@ -121,25 +142,33 @@ a {
 .stock th,
 .history td,
 .stock td {
-  padding: 10px;
+  padding: 15px 10px;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .history td,
 .stock td {
-  color: #ddd;
+  color: #ffffff;
 }
 
 button.order-button {
-  background: #fff;
-  color: #333;
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
   border: none;
-  margin-top: 20px;
+  margin-top: 40px;
   font-size: 16px;
+  color: #141619;
+  background: #ffffff95;
+  border: 1px solid transparent;
+  transition: 0.5s ease-in-out;
+}
+
+button.order-button:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .order-form-modal {
@@ -163,7 +192,6 @@ button.order-button {
   width: 80%;
   max-width: 500px;
   backdrop-filter: blur(10px);
-  /* Apply blur effect */
   display: flex;
   flex-direction: column;
   align-items: center;

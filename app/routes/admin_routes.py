@@ -22,11 +22,11 @@ def superuser():
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM admin WHERE email = %s", (email,))
+            cursor.execute("SELECT * FROM admin WHERE admin_email = %s", (email,))
             account = cursor.fetchone()
 
             if account and account[2] == password:
-                session["admin_loggedin"] = True
+                session["loggedin"] = True
                 session["admin_id"] = account[0]
                 session["admin_email"] = account[1]
                 print("Logged in successfully!")
@@ -84,7 +84,7 @@ def usub_admin(email):
                 """
                 SELECT user_history_id, user_history_email, user_history_description, user_history_branch, user_history_date 
                 FROM user_history 
-                WHERE user_email = %s 
+                WHERE user_history_email = %s 
                 ORDER BY user_history_date DESC
                 """,
                 (email,),
