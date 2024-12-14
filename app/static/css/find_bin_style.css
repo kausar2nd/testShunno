@@ -76,8 +76,9 @@ a {
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
+    /* color: #141619; */
     color: whitesmoke;
-    background: #50C878;
+    background: #93a8ac;
     border: 2px solid #FFF4E4;
     box-shadow: 6px 7px #00000090;
     transition: 0.3s ease-in-out;
