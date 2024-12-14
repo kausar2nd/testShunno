@@ -1,4 +1,4 @@
-body {
+/* body {
     background-image: url('/static/assets/bruh-dev-zv7yaA__Xvs-unsplash.jpg');
     background-repeat: no-repeat;
     background-position: top;
@@ -7,6 +7,12 @@ body {
     margin: 0 auto;
     padding: 0;
     color: whitesmoke;
+} */
+body {
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-image: radial-gradient(#d1d1d1 0.4px, #373737 0.7px);
+    background-size: 20px 20px;
 }
 
 a {

@@ -12,11 +12,10 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background: url('/static/assets/carles-rabada-BwSv3v7lygM-unsplash.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
   color: whitesmoke;
   padding: 0 20px;
+  background-image: radial-gradient(#14161940 0.9px, #F8F7FF 0.7px);
+  background-size: 20px 20px;
 }
 
 a {
@@ -48,22 +47,35 @@ a {
 .back_home,
 .logout-link {
   font-size: 16px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: transparent;
   cursor: pointer;
-  transition: 0.3s ease;
   color: whitesmoke;
   text-align: center;
-  white-space: nowrap;
-  backdrop-filter: blur(15px);
+  padding: 6px 16px;
+  border-radius: 8px;
+  background-color: #87785F;
+  border: 2px solid #F8F7FF;
+  box-shadow: 4px 4px #00000090;
+  transition: 0.3s ease-in-out;
 }
 
 .back_home:hover,
 .logout-link:hover {
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 2px 2px #00000090;
+}
+
+.wrapper {
+  background-color: #141619;
+  animation: pop 0.7s cubic-bezier(0, 0, 0.21, 1);
+}
+
+@keyframes pop {
+  0% {
+    transform: translateX(-1000px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .company-profile {
@@ -72,7 +84,7 @@ a {
   padding: 30px;
   margin-top: 100px;
   margin-bottom: 40px;
-  background: #14161910;
+  background: #3587A4;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   backdrop-filter: blur(15px);
@@ -101,13 +113,19 @@ h2 {
 }
 
 .company-profile .edit-button {
-  background: #fff;
-  color: #333;
-  padding: 10px 20px;
-  border-radius: 10px;
+  color: white;
   cursor: pointer;
-  border: none;
   margin-top: 15px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  background-color: #87785F;
+  border: 2px solid #3587A4;
+  box-shadow: 4px 4px #00000090;
+  transition: 0.3s ease-in-out;
+}
+
+.company-profile .edit-button:hover {
+  box-shadow: 2px 2px #00000090;
 }
 
 .history_table {
@@ -120,15 +138,17 @@ h2 {
 .history,
 .stock {
   width: 70%;
-
-  background: #14161915;
+  background: #595959;
   padding: 40px;
   margin-bottom: 40px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   backdrop-filter: blur(15px);
   color: #fff;
+}
 
+.history {
+  background-color: #EE8434
 }
 
 .history table,
@@ -178,14 +198,14 @@ button.order-button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.4);
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
 
 .order-form-content {
-  background: rgba(0, 0, 0, 0.7);
+  background: #36454F;
   padding: 30px;
   border-radius: 15px;
   color: #fff;

@@ -6,9 +6,10 @@
 }
 
 body {
-    background: url('/static/assets/john-mathews-93qlsN0jtFE-unsplash.jpg') no-repeat center center;
-    background-size: cover;
-    color: whitesmoke;
+    background-color: #F2ECE4;
+    background-image: radial-gradient(#14161940 0.9px, #F8F0FB 0.7px);
+    background-size: 20px 20px;
+    color: #141619;
 }
 
 a {
@@ -37,19 +38,18 @@ a {
     top: 20px;
     left: 20px;
     font-size: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    padding: 8px 16px;
-    border-radius: 10px;
     cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: 0.3s ease-in-out;
     z-index: 10;
+    padding: 6px 16px;
+    border-radius: 8px;
+    background-color: #87785F;
+    border: 2px solid #C5D6BC;
+    box-shadow: 4px 4px #00000090;
+    transition: 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 2px 2px #00000090;
 }
 
 .wrapper {
@@ -57,20 +57,31 @@ a {
     margin: 20px 0;
     height: fit-content;
     background: transparent;
-    background-color: #14161940;
+    background-color: #36454F;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
     padding: 40px;
+    animation: pop 0.5s cubic-bezier(0, 0, 0.21, 1);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .profile_card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
+    background: #C5D6BC;
     border: 1px solid rgb(169, 169, 169, 0.5);
     border-radius: 5px;
     padding: 40px;
@@ -92,11 +103,12 @@ a {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: end;
-    color: white;
+    color: #141619;
     font-size: 16px;
 }
 
 .info {
+    color: #141619;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -110,7 +122,6 @@ a {
 
 .user-info p {
     margin-bottom: 5px;
-    color: #ddd;
     font-size: 14px;
 }
 
@@ -133,10 +144,11 @@ h2 {
 }
 
 .transactions-container {
+    background-color: #C5D6BC;
     overflow: auto;
     max-height: 350px;
     scrollbar-width: thin;
-    scrollbar-color: #ffffff1a transparent;
+    scrollbar-color: #585858 transparent;
 }
 
 .transactions-container table {
@@ -144,12 +156,12 @@ h2 {
     border-collapse: collapse;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
-    color: white;
+    color: black;
     font-size: 1rem;
 }
 
 .transactions-container th {
-    background-color: #f5f5f520;
+    background-color: #24242450;
     font-weight: bold;
     font-size: 1.1rem;
 }
@@ -162,7 +174,7 @@ h2 {
 }
 
 .transactions-container tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .bottom_section {
@@ -180,9 +192,10 @@ h2 {
     align-items: center;
     width: 50%;
     padding: 10px 40px;
-    background: transparent;
+    background: #E6E6FA;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 5px;
+    border-radius: 10px;
+    color: #141619;
 }
 
 .new-order h2 {
@@ -202,7 +215,7 @@ h2 {
 
 #branch {
     background: transparent;
-    color: whitesmoke;
+    color: #141619ee;
     padding: 5px 15px;
     width: 35%;
 }
@@ -220,7 +233,7 @@ h2 {
 
 .item-group {
     display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid #14161990;
     border-radius: 5px;
     align-items: center;
     justify-content: space-between;
@@ -233,7 +246,7 @@ h2 {
     width: 150x;
     margin-right: 20px;
     font-size: 15px;
-    color: whitesmoke;
+    color: #141619;
 }
 
 .input-box select,
@@ -241,17 +254,17 @@ h2 {
     padding: 6px;
     font-size: 14px;
     border-radius: 4px;
-    border: 1px solid rgba(200, 200, 200, 0.8);
+    border: 1px solid #14161990;
     width: 20%;
     max-width: 400px;
     min-width: 120px;
     background: transparent;
-    color: whitesmoke;
+    color: #141619;
 }
 
 .item-group input[type="number"] {
     width: 100px;
-    color: whitesmoke;
+    color: #141619;
 }
 
 .cardboard {
@@ -260,20 +273,22 @@ h2 {
 
 .submit-btn {
     float: right;
-    margin: 15px 0;
+    margin: 16px 0;
     padding: 10px 20px;
     text-decoration: none;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    background: transparent;
-    border-radius: 4px;
+    color: #141619;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s ease;
+    border-radius: 8px;
+    background-color: #87785F;
+    border: 2px solid #E6E6FA;
+    box-shadow: 4px 4px #00000090;
+    transition: 0.4s ease-in-out;
 }
 
 .submit-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 2px #000000bb;
 }
 
 .extra_board {

@@ -15,75 +15,76 @@
       <div><a href="/logout" class="logout-link">Logout</a></div>
     </div>
 
-    <!-- Section 1: Company Profile -->
-    <section class="company-profile">
-      <div class="profile-picture">
-        <img src="../static/assets/company.png" alt="Profile Picture">
-        <div class="profile-details">
-          <h2>{{ session['company_name'] }}</h2>
-          <p>Eco Solutions is dedicated to sustainable waste management and recycling solutions.</p>
-          <button class="edit-button">Edit Profile</button>
+    <div class="wrapper">
+
+      <section class="company-profile">
+        <div class="profile-picture">
+          <img src="../static/assets/company.png" alt="Profile Picture">
+          <div class="profile-details">
+            <h2>{{ session['company_name'] }}</h2>
+            <p>Eco Solutions is dedicated to sustainable waste management and recycling solutions.</p>
+            <button class="edit-button">Edit Profile</button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Section 2: History -->
-    <section class="history">
-      <h2>Accessed Recycle Bins</h2>
-      <div class="history_table">
+      <section class="history">
+        <h2>Accessed Recycle Bins</h2>
+        
+        <div class="history_table">
+          <table>
+            <thead>
+              <tr>
+                <th>Order Description</th>
+                <th>Order Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for history in history_data %}
+              <tr>
+                <td>{{ history.company_history_description }}</td>
+                <td>{{ history.company_history_date }}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="2">No history available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
+      <!-- Section 3: Stock -->
+      <section class="stock">
+        <h2>Available Stock</h2>
         <table>
           <thead>
             <tr>
-              <th>Order Description</th>
-              <th>Order Date</th>
+              <th>Material</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody>
-            {% for history in history_data %}
             <tr>
-              <td>{{ history.company_history_description }}</td>
-              <td>{{ history.company_history_date }}</td>
+              <td>Plastic</td>
+              <td>{{ stock_data['Plastic'] }}</td>
             </tr>
-            {% else %}
             <tr>
-              <td colspan="2">No history available.</td>
+              <td>Cardboard</td>
+              <td>{{ stock_data['Cardboard'] }}</td>
             </tr>
-            {% endfor %}
+            <tr>
+              <td>Glass</td>
+              <td>{{ stock_data['Glass'] }}</td>
+            </tr>
           </tbody>
         </table>
-      </div>
-    </section>
 
-    <!-- Section 3: Stock -->
-    <section class="stock">
-      <h2>Available Stock</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Material</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Plastic</td>
-            <td>{{ stock_data['Plastic'] }}</td>
-          </tr>
-          <tr>
-            <td>Cardboard</td>
-            <td>{{ stock_data['Cardboard'] }}</td>
-          </tr>
-          <tr>
-            <td>Glass</td>
-            <td>{{ stock_data['Glass'] }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Order Button -->
-      <button class="order-button" onclick="openOrderForm()">Order Materials</button>
-    </section>
+        <!-- Order Button -->
+        <button class="order-button" onclick="openOrderForm()">Order Materials</button>
+      </section>
+    </div>
 
     <!-- Pop-Up Modal for Order Form -->
     <div id="orderFormModal" class="order-form-modal">

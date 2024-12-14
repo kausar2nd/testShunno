@@ -1,9 +1,8 @@
 body {
-    background-image: url('/static/assets/john-mathews-93qlsN0jtFE-unsplash.jpg');
-    /* background-image: url('/static/assets/BlackWhite.png'); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: #F1FFFA;
+    opacity: 0.8;
+    background-image: radial-gradient(#14161940 0.9px, #e5e5f7 0.7px);
+    background-size: 20px 20px;
     font-family: "Nunito", sans-serif;
     margin: 0 auto;
     padding: 0;
@@ -16,22 +15,21 @@ a {
 }
 
 .back_home {
+    cursor: pointer;
     position: absolute;
     top: 20px;
     left: 20px;
     font-size: 20px;
-    border: 1px solid rgb(245, 245, 245, 0.2);
-    background: transparent;
-    padding: 8px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
+    padding: 6px 16px;
+    border-radius: 8px;
+    background-color: #87785F;
+    border: 2px solid #ececec;
+    box-shadow: 4px 4px #00000090;
     transition: 0.3s ease-in-out;
 }
 
 .back_home:hover {
-    backdrop-filter: blur(30px);
-    border: 1px solid rgb(245, 245, 245, 0.6);
+    box-shadow: 2px 2px #00000090;
 }
 
 .container {
@@ -43,8 +41,8 @@ a {
 }
 
 .card {
-    width: 500px;
-    height: 400px;
+    width: 450px;
+    height: 360px;
     margin-top: 4.5%;
     display: flex;
     align-items: center;
@@ -53,16 +51,30 @@ a {
     color: white;
     font-size: 24px;
     font-weight: bold;
-    border: 2px solid rgba(255, 255, 255, .2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    border: 2px solid #e5e5f7;
+    box-shadow: 5px 5px #00000090;
     border-radius: 40px;
-    backdrop-filter: blur(7px);
-    transition: 0.25s ease-in-out;
+    transition: 0.2s ease-in-out;
+    animation: pop 0.5s cubic-bezier(0, 0, 0.21, 1)
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.3);
+    }
+    
+    60% {
+        transform: scale(1.05);
+    }
+    
+    100% {
+        transform: scale(1);
+    }
 }
 
 .card:hover {
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(240, 248, 255, .7);
+    transform: scale(1.01);
+    box-shadow: 2px 2px #000000ba;
 }
 
 .label {
@@ -71,4 +83,12 @@ a {
     padding: 10px 20px;
     font-size: 3rem;
     border-radius: 5px;
+}
+
+#uc {
+    background-color: #29AB87;
+}
+
+#cc {
+    background-color: #FFD700;
 }
