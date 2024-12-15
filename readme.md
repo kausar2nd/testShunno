@@ -27,6 +27,16 @@ There are three types of users.
 - **Inventory Control**: Edit or delete submission and order records.
 
 
+## Technical Stack
+
+- **Backend**: Flask (Python)
+- **Frontend**: HTML, CSS, JavaScript
+- **Database**: MySQL
+- **Version Control**: Git & GitHub
+- **Hosting**:
+  - Fully functional site: Hosted on a subdomain: [AlterUSE](https://alteruse.jobair-hossain.info/).
+  - UI-only version: Hosted on Vercel: [AlterUSE](https://alteruse.vercel.app).
+
 ## Project Tree Overview
 
 ``` bash
@@ -72,18 +82,6 @@ AlterUSE
 ├─ requirements.txt
 └─ run.py
 ```
-
-
-## Technical Stack
-
-- **Backend**: Flask (Python)
-- **Frontend**: HTML, CSS, JavaScript
-- **Database**: MySQL
-- **Version Control**: Git & GitHub
-- **Hosting**:
-  - Fully functional site: Hosted on a subdomain: [AlterUSE](https://alteruse.jobair-hossain.info/).
-  - UI-only version: Hosted on Vercel: [AlterUSE](https://alteruse.vercel.app).
-
 
 ## Application Workflow
 
