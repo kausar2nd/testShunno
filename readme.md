@@ -34,8 +34,8 @@ There are three types of users.
 - **Database**: MySQL
 - **Version Control**: Git & GitHub
 - **Hosting**:
-  - Fully functional site: Hosted on a subdomain: [AlterUSE](https://alteruse.jobair-hossain.info/).
-  - UI-only version: Hosted on Vercel: [AlterUSE](https://alteruse.vercel.app).
+  - Fully functional site: Hosted on a subdomain: [AlterUSE](https://alteruse.jobair-hossain.info/ "Visit ALterUSE").
+  - UI-only version: Hosted on Vercel: [AlterUSE](https://alteruse.vercel.app "Visit ALterUSE").
 
 ## Project Tree Overview
 
