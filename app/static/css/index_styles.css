@@ -7,8 +7,7 @@ body {
     margin: 0 auto;
     padding: 0;
     background-color: #e5e5f7;
-    opacity: 0.8;
-    background-image: radial-gradient(#2b2b2b 0.8px, #f1faee 0.8px);
+    background-image: radial-gradient(#4a4a4a 0.8px, #f1faee 0.8px);
     background-size: 20px 20px;
     color: #141619;
 }
@@ -18,20 +17,21 @@ a {
     color: whitesmoke;
 }
 
+.logo {
+    font-family: "Rampart One", sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #141619bb;
+    margin-left: 20px;
+}
+
 nav {
     display: flex;
     align-items: center;
     padding: 10px 20px;
     text-align: center;
     font-size: 1.1em;
-}
-
-.logo {
-    font-family: "Rampart One", sans-serif;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: none;
-    color: #141619;
 }
 
 nav ul {
@@ -46,7 +46,7 @@ nav ul li {
 }
 
 nav ul li a {
-    font-weight: 400;
+    font-weight: 600;
     color: #141619;
     margin: 10px;
     padding: 2px;
@@ -68,7 +68,7 @@ nav ul li a:hover {
     padding: 8px 18px;
     box-shadow: 4px 4px 1px #141619ee;
     transition: 0.2s ease;
-    margin-right: 40px;
+    margin-right: 50px;
 }
 
 .login:hover {
@@ -103,7 +103,6 @@ nav ul li a:hover {
     margin-top: 60px;
 }
 
-/* Cover Section */
 .cover {
     height: 80vh;
     width: 100%;
@@ -111,10 +110,27 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4a5759;
+    background-color: #50C878;
     background-size: cover;
     text-align: center;
     position: relative;
+    box-shadow: 2px 2px 5px 1px #141619aa;
+    box-shadow: 3px 3px 1px #141619bb;
+    animation: pop 0.4s cubic-bezier(0, 0, 0.21, 1);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+    }
+
+    70% {
+        transform: scale(1.01);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .cover-content {
@@ -125,7 +141,7 @@ nav ul li a:hover {
 }
 
 .cover-content h1 {
-    color: #000000;
+    color: #141619dd;
     font-size: 3.5em;
     margin-bottom: 20px;
     font-family: "Rampart One", sans-serif;
@@ -140,18 +156,19 @@ nav ul li a:hover {
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
-    background-color: #50C878;
+    background-color: #3b4041;
+    box-shadow: 4px 4px 2px #141619;
     color: white;
     border-radius: 5px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: 0.3s ease-in-out;
 }
 
 .cta-button:hover {
-    background-color: #45a060;
+    background-color: #141619aa;
+    box-shadow: 0px 0px #4a5759;
 }
 
-/* Section Styles */
 .section-content {
     margin: 0 auto;
     text-align: center;
@@ -164,47 +181,57 @@ nav ul li a:hover {
 }
 
 .about-section {
-    width: 90%;
+    display: flex;
     border-radius: 30px;
     margin-top: 40px;
     margin-bottom: 20px;
-    background-color: #f5cb5c;
     display: flex;
-}
-
-#about {
-    display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    animation: pop 0.4s cubic-bezier(0, 0, 0.21, 1);
 }
 
 .about-img {
     background-color: blueviolet;
     height: 400px;
-    width: 40px;
+    width: 450px;
     background: url('../assets/au.jpg');
+    border: 5px solid #14161980;
     background-position: center;
     background-size: cover;
-    width: 40%;
     border-radius: 20px;
 }
 
 .about-text {
     display: flex;
     flex-direction: column;
-    /* height: 400px; */
+    justify-content: center;
+    font-size: 1.1rem;
     width: 70%;
-    padding-left: 40px;
+    height: 410px;
+    background-color: #CCB08F;
+    margin-left: 40px;
+    padding: 0 40px;
+    border-radius: 20px;
     text-align: justify;
-    justify-content: space-between;
+    box-shadow: 3px 3px 1px #141619bb;
+}
+
+.about-text h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #141619;
 }
 
 /* Blog Section */
 .blog-section {
-    width: 100%;
+    /* width: 100%; */
     border-radius: 30px;
     color: white;
+    margin-top: 20px;
+    padding: 0 30px 30px 30px;
+    background-color: #ccd5ae;
+    box-shadow: 3px 3px 1px #141619bb;
 }
 
 .blog-grid {
@@ -214,11 +241,11 @@ nav ul li a:hover {
 }
 
 .blog-card {
-    background-color: #577399;
+    background-color: #83c5be;
     padding: 25px;
-    border-radius: 10px;
-    border-bottom: 4px solid #141619;
-    border-right: 3px solid #141619;
+    border-radius: 20px;
+    border-bottom: 4px solid #141619cc;
+    border-right: 3px solid #141619cc;
     transition: transform 0.3s ease;
 }
 
@@ -247,6 +274,7 @@ nav ul li a:hover {
     align-items: center;
     color: white;
     margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .faq-grid {
@@ -259,7 +287,7 @@ nav ul li a:hover {
 
 .faq-item {
     background-color: #ef8354;
-    padding: 10px;
+    padding: 5px 20px;
     border-radius: 10px;
     box-shadow: 4px 4px 1px #141619;
 }
@@ -268,12 +296,16 @@ nav ul li a:hover {
     color: #141619;
     font-weight: bold;
     font-size: 1.3rem;
-    margin-bottom: 5px;
+}
+
+.faq-item p {
+    /* color: #141619; */
+    font-size: 1.1rem;
 }
 
 /* Footer */
 footer {
-    background-color: #202020;
+    background-color: #282828;
     color: whitesmoke;
     padding: 50px 0 20px;
     text-align: center;

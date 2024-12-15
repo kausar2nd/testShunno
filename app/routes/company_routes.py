@@ -15,21 +15,19 @@ def company_submit():
         company_email = session.get("company_email")
 
         if not company_email:
-            flash("Please log in to submit an order.")
-            return redirect(url_for("company_login"))
+            return redirect(url_for("company.company_login"))
 
         company_history_description = (
             f"Plastic Bottles: {plastic_quantity}, "
             f"Cardboard: {cardboard_quantity}, "
             f"Glass: {glass_quantity}"
         )
-        print(company_history_description)
 
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO company_history (company_email, company_history_description) VALUES (%s, %s)",
+                "INSERT INTO company_history (company_history_email, company_history_description) VALUES (%s, %s)",
                 (company_email, company_history_description),
             )
 
