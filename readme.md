@@ -1,5 +1,4 @@
 # AlterUSE: A Prototype Recycling Management System
-<br>
 
 ## Project Motivation
 
@@ -7,24 +6,22 @@
 
 Though this is currently a prototype, it demonstrates a viable model for an end-to-end recycling system, covering user submissions, material collection, and distribution.
 
-
 ## Key Features
 
 There are three types of users. 
 
-### 1. General Users:
+### *1. General Users:*
 
 - **Submission Requests**: Users can log into the site and create a submission request, receiving a unique code or QR code.
 - **Booth Locator**: Users can locate nearby collection booths on a map.
 - **Submission History**: View the history of previous submissions.
 - **Points Tracking** (Planned): Points earned for submissions can be redeemed for money or vouchers.
 
-### 2. Businesses:
-
+### *2. Businesses:*
 - **Material Orders**: Companies can order recycled materials directly from the platform.
 - **Order History**: View and manage previous orders.
 
-### 3. Admin:
+### *3. Admin:*
 
 - **Dashboard Management**: Admins can view registered users, companies, submissions, and orders.
 - **Inventory Control**: Edit or delete submission and order records.
@@ -90,7 +87,7 @@ AlterUSE
 
 ## Application Workflow
 
-### User Submissions
+### *User Submissions:*
 1. Users log in via their email and password.
 2. The submission form allows users to select a branch and input quantities for recyclable materials (plastic bottles, cardboard, glass).
 3. Upon submission, the following occurs:
@@ -101,7 +98,7 @@ AlterUSE
 **Key Code Reference:**
 - `user_routes.py`: `user_submit()` handles user submissions, inserts data into the database, and updates storage quantities dynamically.
 
-### Admin Management
+### *Admin Management:*
 1. The admin dashboard provides a detailed view of:
    - Registered users and companies.
    - Submission and order logs.
@@ -110,9 +107,9 @@ AlterUSE
    - Deleting removes entries from logs and updates `storage` accordingly.
 
 **Key Code Reference:**
-- `admin_routes.py`: `admin_dashboard()` fetches data for users and companies, while routes like `usub_edit` and `usub_delete` manage edits and deletions dynamically [34†source].
+- `admin_routes.py`: `admin_dashboard()` fetches data for users and companies, while routes like `usub_edit` and `usub_delete` manage edits and deletions dynamically.
 
-### Company Orders
+### *Company Orders:*
 1. Companies log in and place orders for recycled materials.
 2. Orders are logged in the `company_history` table, and quantities are deducted from `storage`.
 3. Companies can view their order history and edit or delete orders.
@@ -120,7 +117,7 @@ AlterUSE
 **Key Code Reference:**
 - `company_routes.py`: `company_submit()` Handles order placement and history management.
 
-### Authentication
+### *Authentication:*
 1. **Login/Signup**:
    - Users, companies, and admins have distinct login routes.
    - All th details are stored in the database.
@@ -131,7 +128,6 @@ AlterUSE
 **Key Code Reference:**
 - `auth_utils.py`: Implements `login_required` for session validation.
 
----
 
 ## Installation & Setup
 
@@ -165,13 +161,13 @@ The application is hosted on a subdomain using cPanel for both the web app and M
 
 ## Current Status & Future Work
 
-### Completed:
+### *Completed:*
 
 - User, company, and admin workflows.
 - Basic submission and order management.
 - Booth locator functionality.
 
-### Planned:
+### *Planned:*
 
 - Points system and coupon integration.
 - Booth hardware integration for QR/code verification.
