@@ -85,7 +85,7 @@ AlterUSE
 
 ## Application Workflow
 
-### User Submissions
+### *User Submissions:*
 1. Users log in via their email and password.
 2. The submission form allows users to select a branch and input quantities for recyclable materials (plastic bottles, cardboard, glass).
 3. Upon submission, the following occurs:
