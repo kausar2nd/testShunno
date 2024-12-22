@@ -1,5 +1,4 @@
 # AlterUSE: A Prototype Recycling Management System
-<br>
 
 ## Project Motivation
 
@@ -91,6 +90,7 @@ AlterUSE
 ## Application Workflow
 
 ### User Submissions
+---
 1. Users log in via their email and password.
 2. The submission form allows users to select a branch and input quantities for recyclable materials (plastic bottles, cardboard, glass).
 3. Upon submission, the following occurs:
@@ -110,7 +110,7 @@ AlterUSE
    - Deleting removes entries from logs and updates `storage` accordingly.
 
 **Key Code Reference:**
-- `admin_routes.py`: `admin_dashboard()` fetches data for users and companies, while routes like `usub_edit` and `usub_delete` manage edits and deletions dynamically [34†source].
+- `admin_routes.py`: `admin_dashboard()` fetches data for users and companies, while routes like `usub_edit` and `usub_delete` manage edits and deletions dynamically.
 
 ### Company Orders
 1. Companies log in and place orders for recycled materials.
@@ -131,7 +131,6 @@ AlterUSE
 **Key Code Reference:**
 - `auth_utils.py`: Implements `login_required` for session validation.
 
----
 
 ## Installation & Setup
 
@@ -194,3 +193,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 Contributions are welcome! Please fork the repository and create a pull request with your changes. Ensure that your code follows the existing style and conventions.
 
 © 2024 Kausar Ahmed
+
