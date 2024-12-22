@@ -127,6 +127,40 @@ AlterUSE
 - `auth_utils.py`: Implements `login_required` for session validation.
 
 
+## Database Design
+
+database schema tables:
+
+#### 1. **Admin Table**
+This table stores information about the system administrators.
+   - Primary Key: `admin_id` (int)
+   - Attributes: `admin_email` (varchar), `admin_password` (varchar)
+
+#### 2. **Company Table**
+This table holds details about the companies collaborating in the project.
+   - Primary Key: `company_id` (int)
+   - Attributes: `company_name` (varchar), `company_email` (varchar), `company_location` (varchar), `company_joining_date` (datetime)
+
+#### 3. **Company History Table**
+This table logs historical actions or events related to companies.
+   - Primary Key: `company_history_id` (int)
+   - Attributes: `company_history_email` (varchar), `company_history_description` (varchar), `company_history_date` (datetime)
+
+#### 4. **User Table**
+This table contains user-specific information.
+   - Primary Key: `user_id` (int)
+   - Attributes: `user_name` (varchar), `user_email` (varchar), `user_location` (varchar), `user_joining_date` (datetime)
+
+#### 5. **User History Table**
+This table records users' interactions and activities within the system.
+   - Primary Key: `user_history_id` (int)
+   - Attributes: `user_history_email` (varchar), `user_history_description` (varchar), `user_history_date` (datetime), `user_history_branch` (varchar)
+
+#### 6. **Storage Table**
+This table tracks quantities of different recyclable materials stored.
+   - Attributes: `plastic` (int), `cardboard` (int), `glass` (int)
+
+
 ## Installation & Setup
 
 ### Local Setup
