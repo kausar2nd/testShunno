@@ -81,7 +81,7 @@ a {
 }
 
 .company-profile {
-  width: 70%;
+  width: 80%;
   color: #fff;
   padding: 30px;
   margin-top: 100px;
@@ -111,7 +111,7 @@ a {
 
 h2 {
   color: whitesmoke;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 }
 
 .company-profile .edit-button {
@@ -139,7 +139,7 @@ h2 {
 
 .history,
 .stock {
-  width: 70%;
+  width: 80%;
   background: #595959;
   padding: 40px;
   margin-bottom: 40px;
@@ -339,4 +339,51 @@ button.order-button:hover {
 
 .success-message button:hover {
   background: #555;
+}
+
+.summary {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  width: 80%;
+  margin-bottom: 40px;
+}
+
+.summary h2 {
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: whitesmoke;
+}
+
+.summary table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.summary th,
+.summary td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+}
+
+.summary th {
+  font-weight: bold;
+  color: whitesmoke;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.summary td {
+  color: #ddd;
+}
+
+.summary tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+  /* Subtle alternate row color */
 }
