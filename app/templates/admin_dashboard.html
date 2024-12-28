@@ -170,10 +170,33 @@
                 </form>
             </div>
         </div>
+        <div id="editCompanyModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeCompanyModal()">&times;</span>
+                <h2 id="company-modal-title"></h2>
+                <form method="post">
+                    <div class="label-grp">
+                        <label for="company-plastic">Plastic Bottles:</label>
+                        <input type="number" id="company-plastic" name="company-plastic" value="{{ plastic }}" required>
+                    </div>
+                    <div class="label-grp">
+                        <label for="company-cardboard">Cardboard:</label>
+                        <input type="number" id="company-cardboard" name="company-cardboard" value="{{ cardboard }}"
+                            required>
+                    </div>
+                    <div class="label-grp">
+                        <label for="company-glass">Glass:</label>
+                        <input type="number" id="company-glass" name="company-glass" value="{{ glass }}" required>
+                    </div>
+                    <div class="label-grp">
+                        <button name="" id="company-delete" value="delete">Delete Submission</button>
+                        <button name="" id="company-edit" value="edit">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    </div>
-
-    <script src="{{ url_for('static', filename='js/admin_dash_script.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/admin_dash_script.js') }}"></script>
 
 </body>
 

@@ -67,7 +67,7 @@ function company_submissions_func(email) {
                 row.innerHTML = `
             <td>${company_submissions.company_history_description}</td>
             <td>${company_submissions.company_history_date}</td>
-            <td><a href="/admin_post/${company_submissions.company_history_id}"><u><i>edit</i></u></a></td>
+            <td><a href="#editCompanyModal" onclick="openCompanyModal(${company_submissions.company_history_id})"><u><i>edit</i></u></a></td>
         `;
                 tableBody.appendChild(row);
             });
@@ -135,5 +135,69 @@ window.onclick = function (event) {
     const modal = document.getElementById('editSubmissionModal');
     if (event.target === modal) {
         closeModal();
+    }
+};
+
+function openCompanyModal(company_history_id) {
+    document.getElementById('editCompanyModal').style.display = 'block';
+    fetch(`/fetch_csub_d/${company_history_id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('company-modal-title').innerHTML = `Edit Company Submission #${company_history_id}`;
+            document.getElementById('company-plastic').value = data.plastic;
+            document.getElementById('company-cardboard').value = data.cardboard;
+            document.getElementById('company-glass').value = data.glass;
+            document.getElementById('company-delete').setAttribute("onclick", `deleteCompanySub(${company_history_id})`);
+            document.getElementById('company-edit').setAttribute("onclick", `editCompanySub(${company_history_id})`);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function editCompanySub(company_history_id) {
+    const plastic = document.getElementById('company-plastic').value;
+    const cardboard = document.getElementById('company-cardboard').value;
+    const glass = document.getElementById('company-glass').value;
+
+    fetch(`/csub_edit/${company_history_id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `plastic=${plastic}&cardboard=${cardboard}&glass=${glass}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            closeCompanyModal();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function deleteCompanySub(company_history_id) {
+    fetch(`/csub_delete/${company_history_id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            closeCompanyModal();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function closeCompanyModal() {
+    document.getElementById('editCompanyModal').style.display = 'none';
+}
+
+window.onclick = function (event) {
+    const companyModal = document.getElementById('editCompanyModal');
+    if (event.target === companyModal) {
+        closeCompanyModal();
     }
 };

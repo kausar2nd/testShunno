@@ -141,7 +141,7 @@ a {
     max-height: 300px;
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    scrollbar-width:thin;
+    scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1);
 }
 
@@ -348,13 +348,15 @@ a {
     margin: 10px 0;
 }
 
-#delete {
+#delete,
+#company-delete {
     color: #ff0000;
     font-weight: 600;
     border: 1px solid #ff0000;
 }
 
-#delete:hover {
+#delete:hover,
+#company-delete:hover {
     background: #ff000050;
 }
 
