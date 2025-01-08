@@ -39,9 +39,8 @@ a {
     left: 20px;
     font-size: 20px;
     cursor: pointer;
-    z-index: 10;
     padding: 6px 16px;
-    border-radius: 8px;
+    border-radius: 7px;
     background-color: #87785F;
     border: 2px solid #C5D6BC;
     box-shadow: 4px 4px #00000090;
@@ -50,6 +49,10 @@ a {
 
 .nav-link:hover {
     box-shadow: 2px 2px #00000090;
+}
+
+#home {
+    border-color: #F2ECE4;
 }
 
 .wrapper {
@@ -302,4 +305,9 @@ h2 {
     margin-left: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
+}
+
+#reward {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: #36454F;
 }
