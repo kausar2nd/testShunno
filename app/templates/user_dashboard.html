@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>User Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app/static/css/user_dashboard_style.css">
+    <!-- <link rel="stylesheet" href="/app/static/css/user_dashboard_style.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard_style.css' ) }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -16,51 +16,68 @@
             <div><a href="/" class="nav-link" id="home">Home</a></div>
         </div>
 
+        <div id="edit-profile-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Edit Profile</h2>
+                <form id="edit-profile-form">
+                    <div class="edit-input-box">
+                        <label for="edit-name">Name</label>
+                        <input type="text" id="edit-name" name="name" value="{{ username }}" required>
+                    </div>
+                    <div class="edit-input-box">
+                        <label for="edit-location">Location</label>
+                        <input type="text" id="edit-location" name="location" value="{{ location }}" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
         <div class="wrapper">
             <div class="profile_card">
                 <div class="user-photo"></div>
                 <div class="user-info">
                     <div class="info">
                         <h1>Hi, {{ username }}!</h1>
-                        <p>{{ email }}</p>
+                        <p>Email: {{ email }}</p>
+                        <p>Location: <span id="user-location">{{ location }}</span></p>
                         <p>Account Created: {{ date }}</p>
                     </div>
-                    <div><a href="/logout" class="nav-link">Logout</a></div>
+                    <div class="profile_buttons">
+                        <button id="edit-profile-btn" class="nav-link">Edit Profile</button>
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </div>
                 </div>
             </div>
 
             <h2>Submission History</h2>
-<div class="transactions-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Plastic Bottles</th>
-                <th>Cardboard</th>
-                <th>Glass</th>
-                <th>Branch</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if submissions %}
-            {% for submission in submissions %}
-            <tr>
-                <td>{{ submission[0] }}</td>
-                <td>{{ submission[1] }}</td>  <!-- Plastic Bottles -->
-                <td>{{ submission[2] }}</td>  <!-- Cardboard -->
-                <td>{{ submission[3] }}</td>  <!-- Glass -->
-                <td>{{ submission[4] }}</td>  <!-- Branch -->
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr>
-                <td colspan="5">No submissions found.</td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
-</div>
-
+            <div class="transactions-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Submission Description</th>
+                            <th>Branch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if submissions %}
+                        {% for submission in submissions %}
+                        <tr>
+                            <td>{{ submission.user_history_date }}</td>
+                            <td>{{ submission.user_history_description }}</td>
+                            <td>{{ submission.user_history_branch }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">No submissions found.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
 
             <div class="bottom_section">
                 <div class="new-order">
@@ -111,15 +128,17 @@
                 <div class="extra_board">
                     <div class="withdraw">
                         <h2>Withdraw Points</h2>
-                        <p>Available Points: {{ points }}</p>
-                        <form action="/withdraw" method="POST">
+                        <p>Available Points: <span id="available-points">{{ points }}</span></p>
+                        <form id="withdraw-form" onsubmit="return handleWithdraw(event)">
                             <div class="input-box">
                                 <label for="amount">Amount</label>
-                                <input type="number" id="amount" name="amount" placeholder="0" min="1" required>
+                                <input type="number" id="amount" name="amount" title="Enter the amount of points"
+                                    placeholder="0" min="1" required>
                             </div>
                             <button type="submit" class="submit-btn">Withdraw</button>
                         </form>
                     </div>
+
 
                     <div class="offer">
                         <h2>Notice & Offers</h2>
@@ -131,3 +150,9 @@
         </div>
 
     </div>
+
+</body>
+
+<script src="{{ url_for('static', filename='js/user_dashboard_script.js') }}"></script>
+
+</html>
