@@ -48,7 +48,26 @@
                         <a href="/logout" class="nav-link">Logout</a>
                     </div>
                 </div>
-                <div class="user-summary"></div>
+                <div class="user-summary">
+                    <table>
+                        <tr>
+                            <th>Material</th>
+                            <th>Total Recycled</th>
+                        </tr>
+                        <tr>
+                            <td>Plastic Bottles</td>
+                            <td>{{ total_plastic }}</td>
+                        </tr>
+                        <tr>
+                            <td>Cardboards</td>
+                            <td>{{ total_cardboards }}</td>
+                        </tr>
+                        <tr>
+                            <td>Glasses</td>
+                            <td>{{ total_glasses }}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <h2>Submission History</h2>
@@ -82,8 +101,8 @@
                     </tbody>
                 </table>
             </div>
-            
-            
+
+
 
             <div class="bottom_section">
                 <div class="new-order">

@@ -93,9 +93,32 @@ a {
 .user-summary {
     width: 40%;
     height: 100%;
-    background-size: cover;
-    border-radius: 5px;
+    border-radius: 8px;
     background: #C5D6BC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-summary table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    color: #141619;
+    align-items: center;
+}
+
+.user-summary th,
+td {
+    border-bottom: 1px solid black;
+    text-align: left;
+}
+
+.user-summary th {
+    font-size: 1.2rem;
 }
 
 .user-info {

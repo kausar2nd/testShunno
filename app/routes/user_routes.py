@@ -124,6 +124,22 @@ def user_submit():
                 """,
                 (plastic_quantity, cardboard_quantity, glass_quantity),
             )
+
+            # Calculate points based on material type
+            plastic_points = plastic_quantity * 2  # 2 points per bottle
+            cardboard_points = cardboard_quantity * 1  # 1 point per cardboard
+            glass_points = glass_quantity * 3  # 3 points per glass
+            total_points = plastic_points + cardboard_points + glass_points
+
+            # Update user points in the database
+            cursor.execute(
+                "UPDATE user SET user_points = user_points + %s WHERE user_id = %s",
+                (total_points, user_id),
+            )
+
+            # Update session with new points total
+            session["points"] = session.get("points", 0) + total_points
+
             conn.commit()
             print("Submission successful!")
 
@@ -168,6 +184,24 @@ def user_dashboard():
         )
         submissions = cursor.fetchall()
 
+        cursor.execute(
+            """
+                SELECT 
+                    SUM(plastic_bottles), 
+                    SUM(cardboards), 
+                    SUM(glasses) 
+                FROM user_history
+                WHERE user_id = %s
+            """,
+            (user_id,),
+        )
+        summary = cursor.fetchone()
+        print(summary)  # Fetch the single row result
+        conn.close()
+
+        # Assign values to variables
+        total_plastic, total_cardboards, total_glasses = summary.values()
+
     except Exception as e:
         print(f"Error: {e}")
         submissions = []
@@ -187,7 +221,11 @@ def user_dashboard():
         points=points,
         location=location,
         submissions=submissions,
+        total_plastic=total_plastic,
+        total_cardboards=total_cardboards,
+        total_glasses=total_glasses,
     )
+
 
 @user_bp.route("/update_profile", methods=["POST"])
 @login_required
