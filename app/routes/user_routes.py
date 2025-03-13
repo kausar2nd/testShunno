@@ -100,21 +100,20 @@ def user_submit():
             print("Please log in to submit an order.")
             return redirect(url_for("user_login"))
 
-        user_history_description = (
-            f"Plastic Bottles: {plastic_quantity}, "
-            f"Cardboard: {cardboard_quantity}, "
-            f"Glass: {glass_quantity}"
-        )
-
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
 
+            # Insert submission with separate values
             cursor.execute(
-                "INSERT INTO user_history (user_id, user_history_description, user_history_branch) VALUES (%s, %s, %s)",
-                (user_id, user_history_description, branch),
+                """
+                INSERT INTO user_history (user_id, plastic_bottles, cardboards, glasses, user_history_date, user_history_branch) 
+                VALUES (%s, %s, %s, %s, NOW(), %s)
+                """,
+                (user_id, plastic_quantity, cardboard_quantity, glass_quantity, branch),
             )
 
+            # Update the storage
             cursor.execute(
                 """
                 UPDATE storage
@@ -151,13 +150,20 @@ def user_dashboard():
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
+
         # Get user location
         cursor.execute("SELECT user_location FROM user WHERE user_id = %s", (user_id,))
         user_data = cursor.fetchone()
-        location = user_data.get("user_location", "")
+        location = user_data.get("user_location", "") if user_data else ""
 
+        # Fetch submission history with separate columns
         cursor.execute(
-            "SELECT user_history_date, user_history_description, user_history_branch FROM user_history WHERE user_id = %s ORDER BY user_history_date DESC",
+            """
+            SELECT user_history_date, plastic_bottles, cardboards, glasses, user_history_branch 
+            FROM user_history 
+            WHERE user_id = %s 
+            ORDER BY user_history_date DESC
+            """,
             (user_id,),
         )
         submissions = cursor.fetchall()
@@ -171,8 +177,6 @@ def user_dashboard():
         conn.close()
 
     date_obj = datetime.strptime(date, "%a, %d %b %Y %H:%M:%S GMT")
-
-    # Format the date as YYYY-MM-DD
     formatted_date = date_obj.strftime("%B %d, %Y")
 
     return render_template(
@@ -184,7 +188,6 @@ def user_dashboard():
         location=location,
         submissions=submissions,
     )
-
 
 @user_bp.route("/update_profile", methods=["POST"])
 @login_required
