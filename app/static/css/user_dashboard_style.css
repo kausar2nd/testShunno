@@ -253,7 +253,8 @@ h2 {
 }
 
 .input-box select,
-.item-group input[type="number"] {
+.item-group input[type="number"],
+.withdraw input[type="number"] {
     padding: 6px;
     font-size: 14px;
     border-radius: 4px;
@@ -305,6 +306,20 @@ h2 {
     margin-left: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
+}
+
+.withdraw {
+    width: 100%;
+    background: #E6E6FA;
+    color: #141619;
+    border-radius: 3px;
+    padding: 2% 5%;
+    text-align: center;
+}
+
+.withdraw form {
+    margin-top: 15px;
+    font-size: 22px;
 }
 
 #reward {

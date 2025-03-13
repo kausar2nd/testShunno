@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>User Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/app/static/css/user_dashboard_style.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard_style.css' ) }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -22,7 +23,7 @@
                     <div class="info">
                         <h1>Hi, {{ username }}!</h1>
                         <p>{{ email }}</p>
-                        <p>Account Created: {{ joined[5] }}</p>
+                        <p>Account Created: {{ date }}</p>
                     </div>
                     <div><a href="/logout" class="nav-link">Logout</a></div>
                 </div>
@@ -103,9 +104,23 @@
                     </form>
                 </div>
                 <div class="extra_board">
-                    <h2>Notice & Offers</h2>
-                    <p>Get 10% discount on your next order if you order within 7 days of your last order.</p>
-                    <button class="submit-btn" id="reward">Claim Reward</button>
+                    <div class="withdraw">
+                        <h2>Withdraw Points</h2>
+                        <p>Available Points: {{ points }}</p>
+                        <form action="/withdraw" method="POST">
+                            <div class="input-box">
+                                <label for="amount">Amount</label>
+                                <input type="number" id="amount" name="amount" placeholder="0" min="1" required>
+                            </div>
+                            <button type="submit" class="submit-btn">Withdraw</button>
+                        </form>
+                    </div>
+
+                    <div class="offer">
+                        <h2>Notice & Offers</h2>
+                        <p>Get 10% discount on your next order if you order within 7 days of your last order.</p>
+                        <button class="submit-btn" id="reward">Claim Reward</button>
+                    </div>
                 </div>
             </div>
         </div>
