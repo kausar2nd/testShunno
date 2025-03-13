@@ -4,16 +4,14 @@ from app.utils.auth_utils import login_required
 
 user_bp = Blueprint("user", __name__)
 
-
 @user_bp.route("/user_signup", methods=["POST", "GET"])
 def user_signup():
-
     if request.method == "POST":
         name = request.form["name"]
         location = request.form["location"]
         email = request.form["email"]
         password = request.form["password"]
-
+        
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
@@ -29,17 +27,12 @@ def user_signup():
                 )
                 print("Account created successfully!")
                 conn.commit()
-
         except Exception as e:
             print(f"Error: {e}")
-
         finally:
             conn.close()
-
         return redirect(url_for("user.user_login"))
-
     return render_template("user_signup.html")
-
 
 @user_bp.route("/user_login", methods=["POST", "GET"])
 def user_login():
@@ -64,14 +57,11 @@ def user_login():
                 return redirect(url_for("user.user_dashboard"))
             else:
                 print("Incorrect username/password!")
-
         except Exception as e:
             print(f"Error: {e}")
         finally:
             conn.close()
-
     return render_template("user_login.html")
-
 
 @user_bp.route("/user_submit", methods=["POST", "GET"])
 @login_required
@@ -82,27 +72,20 @@ def user_submit():
         cardboard_quantity = request.form.get("cardboard-quantity", 0, type=int)
         glass_quantity = request.form.get("glass-quantity", 0, type=int)
         user_id = session.get("id")
-        email = session.get("email")
 
         if not user_id:
             print("Please log in to submit an order.")
-            return redirect(url_for("user_login"))
-
-        user_history_description = (
-            f"Plastic Bottles: {plastic_quantity}, "
-            f"Cardboard: {cardboard_quantity}, "
-            f"Glass: {glass_quantity}"
-        )
-
+            return redirect(url_for("user.user_login"))
+        
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-
+            
             cursor.execute(
-                "INSERT INTO user_history (user_id, user_history_description, user_history_branch) VALUES (%s, %s, %s)",
-                (user_id, user_history_description, branch),
+                "INSERT INTO user_history (user_id, plastic_bottles, cardboards, glasses, user_history_branch) VALUES (%s, %s, %s, %s, %s)",
+                (user_id, plastic_quantity, cardboard_quantity, glass_quantity, branch),
             )
-
+            
             cursor.execute(
                 """
                 UPDATE storage
@@ -115,18 +98,12 @@ def user_submit():
             )
             conn.commit()
             print("Submission successful!")
-
         except Exception as e:
             print(f"Error: {e}")
-            print("An error occurred during submission.")
-
         finally:
             conn.close()
-
         return redirect(url_for("user.user_dashboard"))
-
     return render_template("user_dashboard.html")
-
 
 @user_bp.route("/user_dashboard")
 @login_required
@@ -141,18 +118,16 @@ def user_dashboard():
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT user_history_date, user_history_description, user_history_branch FROM user_history WHERE user_id = %s ORDER BY user_history_date DESC",
+            "SELECT user_history_date, plastic_bottles, cardboards, glasses, user_history_branch FROM user_history WHERE user_id = %s ORDER BY user_history_date DESC",
             (user_id,),
         )
         submissions = cursor.fetchall()
-
     except Exception as e:
         print(f"Error: {e}")
         submissions = []
-
     finally:
         conn.close()
-
+    
     return render_template(
         "user_dashboard.html",
         username=username,

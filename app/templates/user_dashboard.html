@@ -30,32 +30,37 @@
             </div>
 
             <h2>Submission History</h2>
-            <div class="transactions-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Submission Description</th>
-                            <th>Branch</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if submissions %}
-                        {% for submission in submissions %}
-                        <tr>
-                            <td>{{ submission[0] }}</td>
-                            <td>{{ submission[1] }}</td>
-                            <td>{{ submission[2] }}</td>
-                        </tr>
-                        {% endfor %}
-                        {% else %}
-                        <tr>
-                            <td colspan="3">No submissions found.</td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
+<div class="transactions-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Plastic Bottles</th>
+                <th>Cardboard</th>
+                <th>Glass</th>
+                <th>Branch</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if submissions %}
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission[0] }}</td>
+                <td>{{ submission[1] }}</td>  <!-- Plastic Bottles -->
+                <td>{{ submission[2] }}</td>  <!-- Cardboard -->
+                <td>{{ submission[3] }}</td>  <!-- Glass -->
+                <td>{{ submission[4] }}</td>  <!-- Branch -->
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="5">No submissions found.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
 
             <div class="bottom_section">
                 <div class="new-order">
