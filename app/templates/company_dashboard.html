@@ -69,7 +69,11 @@
             <tbody>
               {% for history in history_data %}
               <tr>
-                <td>{{ history.company_history_description }}</td>
+                <td>
+                  Plastic: {{ history.plastic_bottles or 0 }} kg,  
+                  Cardboard: {{ history.cardboards or 0 }} kg,  
+                  Glass: {{ history.glasses or 0 }} kg
+                </td>
                 <td>{{ history.company_history_date }}</td>
               </tr>
               {% else %}
@@ -78,6 +82,7 @@
               </tr>
               {% endfor %}
             </tbody>
+            
           </table>
         </div>
       </section>

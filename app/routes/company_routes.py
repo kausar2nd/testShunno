@@ -12,23 +12,21 @@ def company_submit():
         plastic_quantity = request.form.get("plasticBottles", 0, type=int)
         cardboard_quantity = request.form.get("cardboard", 0, type=int)
         glass_quantity = request.form.get("glass", 0, type=int)
-        company_email = session.get("company_email")
+        company_id = session.get("company_id")
 
-        if not company_email:
+        if not company_id:
             return redirect(url_for("company.company_login"))
-
-        company_history_description = (
-            f"Plastic Bottles: {plastic_quantity}, "
-            f"Cardboard: {cardboard_quantity}, "
-            f"Glass: {glass_quantity}"
-        )
 
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO company_history (company_history_email, company_history_description) VALUES (%s, %s)",
-                (company_email, company_history_description),
+                """
+                INSERT INTO company_history 
+                (company_id, plastic_bottles, cardboards, glasses) 
+                VALUES (%s, %s, %s, %s)
+                """,
+                (company_id, plastic_quantity, cardboard_quantity, glass_quantity),
             )
 
             cursor.execute(
@@ -119,12 +117,14 @@ def company_login():
 @login_required
 def company_dashboard():
     company_name = session.get("company_name", "Company")
-    company_email = session.get("company_email", "Email")
+    company_id = session.get("company_id", "ID")
 
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT Plastic, Cardboard, Glass FROM storage LIMIT 1")
+        
+        # Fetch stock data from storage
+        cursor.execute("SELECT plastic, cardboard, glass FROM storage LIMIT 1")
         stock_data = cursor.fetchone()
         stock = {
             "Plastic": stock_data[0],
@@ -132,18 +132,24 @@ def company_dashboard():
             "Glass": stock_data[2],
         }
 
+        # Fetch company history with separate columns for materials
         cursor.execute(
             """
-            SELECT company_history_date, company_history_description
+            SELECT company_history_date, plastic_bottles, cardboards, glasses
             FROM company_history
-            WHERE company_history_email = %s
+            WHERE company_id = %s
             ORDER BY company_history_date DESC
             """,
-            (company_email,),
+            (company_id,),
         )
         history_data = cursor.fetchall()
         history_data = [
-            {"company_history_date": row[0], "company_history_description": row[1]}
+            {
+                "company_history_date": row[0],
+                "plastic_bottles": row[1],
+                "cardboards": row[2],
+                "glasses": row[3],
+            }
             for row in history_data
         ]
 
