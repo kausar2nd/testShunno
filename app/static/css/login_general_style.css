@@ -92,3 +92,14 @@ a {
 #cc {
     background-color: #FFD700;
 }
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .card {
+        width: 80%;
+        height: auto;
+        margin: 10px 0;
+        padding: 20px;
+    }
+}
