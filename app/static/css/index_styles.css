@@ -60,55 +60,6 @@ nav ul li a:hover {
     border-bottom: 3px solid #dd1c1a;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
-    }
-    nav ul {
-        flex-direction: column;
-        padding: 0;
-    }
-    nav ul li {
-        padding: 5px 0;
-    }
-    .logo {
-        font-size: 1.2em;
-        margin: 10px 0;
-    }
-    .wrapper {
-        padding: 15px;
-        margin-top: 30px;
-    }
-    .blog-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .cover-content h1 {
-        font-size: 2em;
-    }
-    .about-section {
-        flex-direction: column;
-        text-align: center;
-    }
-    .about-img {
-        width: 90%;
-        height: 250px;
-        margin: 0 auto;
-    }
-    .about-text {
-        width: 90%;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    .faq-grid {
-        flex-direction: column;
-    }
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-}
 .login {
     border: 1px solid #141619;
     border-radius: 8px;
@@ -129,6 +80,7 @@ nav ul li a:hover {
     top: 0;
     left: 0;
     width: 100%;
+    height: fit-content;
     z-index: 1000;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -218,17 +170,6 @@ nav ul li a:hover {
     box-shadow: 0px 0px #4a5759;
 }
 
-.section-content {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.section-content h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #141619;
-}
-
 .about-section {
     display: flex;
     border-radius: 30px;
@@ -273,6 +214,18 @@ nav ul li a:hover {
 }
 
 /* Blog Section */
+
+.section-content {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #141619;
+}
+
 .blog-section {
     border-radius: 30px;
     color: white;
@@ -389,27 +342,137 @@ footer {
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 @media screen and (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
-    }
-    nav ul {
-        flex-direction: column;
-        padding: 0;
-    }
-    nav ul li {
-        padding: 5px 0;
-    }
     .logo {
-        font-size: 1.2em;
-        margin: 10px 0;
+        margin-left: 0px;
+        font-size: 1em;
+
     }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+        height: fit-content;
+    }
+
+    nav ul {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        padding: 0;
+        margin: 10px 0px;
+        font-size: 0.9rem;
+    }
+
+    nav ul li a {
+        margin: 0px;
+    }
+
+    .login {
+        font-size: 0.8rem;
+        padding: 6px 14px;
+
+    }
+
     .wrapper {
         padding: 15px;
-        margin-top: 30px;
+        margin-top: 150px;
     }
+
+    .cover {
+        height: fit-content;
+        padding-bottom: 30px;
+    }
+
+    .cover-content h1 {
+        font-size: 2rem;
+    }
+
+    .cover-content p {
+        font-size: 1.1em;
+    }
+
+    .about-section {
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+        width: 90%;
+        margin: auto;
+    }
+
+    .about-img {
+        width: 100%;
+        height: 300px;
+        margin: 20px 0;
+    }
+
+    .about-text {
+        height: fit-content;
+        width: 100%;
+        font-size: 0.95rem;
+        margin-left: 0;
+        padding: 0 20px;
+    }
+
+    .about-text h2 {
+        font-size: 1.5em;
+        margin-bottom: 0px;
+    }
+
     .blog-grid {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .section-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .section-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .section-content p {
+        font-size: 0.9rem;
+    }
+
+    .blog-card {
+        padding: 10px;
+    }
+
+    .blog-card a {
+        margin-top: 0px;
+    }
+
+    .faq-grid {
+        flex-direction: column;
+    }
+
+    .faq-item {
+        padding: 20px;
+    }
+
+    footer {
+        padding: 10px 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        font-size: 1rem;
+    }
+
+    .footer-links ul li {
+        font-size: 0.9rem;
+        margin: 5px 0;
+    }
+
+    .footer-bottom {
+        padding-top: 5px;
+    }
+
+    .footer-bottom p {
+        font-size: 0.8rem;
     }
 }
