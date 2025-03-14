@@ -155,3 +155,15 @@ a {
 .link p a:hover {
     text-decoration: underline;
 }
+@media screen and (max-width: 768px) {
+    .wrapper {
+        width: 90%;
+        padding: 20px;
+    }
+    .input-box input {
+        width: 100%;
+    }
+    .btn {
+        width: 100%;
+    }
+}
