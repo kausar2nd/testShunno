@@ -62,11 +62,11 @@ a {
     0% {
         transform: scale(0.3);
     }
-    
+
     60% {
         transform: scale(1.05);
     }
-    
+
     100% {
         transform: scale(1);
     }
@@ -92,13 +92,15 @@ a {
 #cc {
     background-color: #FFD700;
 }
+
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
     }
+
     .card {
-        width: 80%;
-        height: auto;
+        width: 80vw;
+        height: 50vw;
         margin: 10px 0;
         padding: 20px;
     }
