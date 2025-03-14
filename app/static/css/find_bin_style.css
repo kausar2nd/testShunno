@@ -126,3 +126,17 @@ a {
 #google-maps-link:hover {
     text-decoration: underline;
 }
+@media screen and (max-width: 768px) {
+    .locations {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+    .details {
+        flex-direction: column;
+        text-align: center;
+    }
+    .details_img {
+        width: 100%;
+        height: 200px;
+    }
+}
