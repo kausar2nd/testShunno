@@ -204,6 +204,17 @@ button.order-button:hover {
   justify-content: center;
   align-items: center;
   z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .order-form-content {
@@ -217,6 +228,19 @@ button.order-button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .order-form-content h3 {
