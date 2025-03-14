@@ -122,7 +122,7 @@ def company_dashboard():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        
+
         # Fetch stock data from storage
         cursor.execute("SELECT plastic, cardboard, glass FROM storage LIMIT 1")
         stock_data = cursor.fetchone()
@@ -153,6 +153,20 @@ def company_dashboard():
             for row in history_data
         ]
 
+        cursor.execute(
+            """
+                SELECT 
+                    SUM(plastic_bottles), 
+                    SUM(cardboards), 
+                    SUM(glasses) 
+                FROM company_history
+                WHERE company_id = %s
+            """,
+            (company_id,),
+        )
+        summary = cursor.fetchone()
+        total_plastic, total_cardboards, total_glasses = summary
+
     except Exception as e:
         print(f"Error: {e}")
         stock = {"Plastic": 0, "Cardboard": 0, "Glass": 0}
@@ -165,4 +179,7 @@ def company_dashboard():
         company_name=company_name,
         stock_data=stock,
         history_data=history_data,
+        total_plastic=total_plastic,
+        total_cardboards=total_cardboards,
+        total_glasses=total_glasses,
     )

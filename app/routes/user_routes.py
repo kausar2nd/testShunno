@@ -196,8 +196,6 @@ def user_dashboard():
             (user_id,),
         )
         summary = cursor.fetchone()
-        print(summary)  # Fetch the single row result
-        conn.close()
 
         # Assign values to variables
         total_plastic, total_cardboards, total_glasses = summary.values()

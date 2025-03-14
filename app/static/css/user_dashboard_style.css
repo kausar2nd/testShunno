@@ -132,6 +132,7 @@ td {
     align-items: center;
     color: #141619;
     padding: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .info {
@@ -180,6 +181,7 @@ h2 {
     max-height: 350px;
     scrollbar-width: thin;
     scrollbar-color: #585858 transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .transactions-container table {
@@ -227,6 +229,7 @@ h2 {
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     color: #141619;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .new-order h2 {
@@ -343,6 +346,7 @@ h2 {
     border-radius: 3px;
     padding: 2% 5%;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .withdraw form {

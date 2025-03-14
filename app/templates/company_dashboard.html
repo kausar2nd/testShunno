@@ -41,15 +41,15 @@
           <tbody>
             <tr>
               <td>Plastic Bottles</td>
-              <td>7</td>
+              <td>{{ total_plastic }}</td>
+            </tr>
+            <tr>
+              <td>Cardboards</td>
+              <td>{{ total_cardboards }}</td>
             </tr>
             <tr>
               <td>Glass Bottles</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>Aluminum Cans</td>
-              <td>10</td>
+              <td>{{ total_glasses }}</td>
             </tr>
           </tbody>
         </table>
@@ -62,27 +62,27 @@
           <table>
             <thead>
               <tr>
-                <th>Order Description</th>
-                <th>Order Date</th>
+                <th>Date</th>
+                <th>Plastic Bottles</th>
+                <th>Cardboards</th>
+                <th>Glass</th>
               </tr>
             </thead>
             <tbody>
               {% for history in history_data %}
               <tr>
-                <td>
-                  Plastic: {{ history.plastic_bottles or 0 }} kg,  
-                  Cardboard: {{ history.cardboards or 0 }} kg,  
-                  Glass: {{ history.glasses or 0 }} kg
-                </td>
                 <td>{{ history.company_history_date }}</td>
+                <td>{{ history.plastic_bottles or 0 }} kg</td>
+                <td>{{ history.cardboards or 0 }} kg</td>
+                <td>{{ history.glasses or 0 }} kg</td>
               </tr>
               {% else %}
               <tr>
-                <td colspan="2">No history available.</td>
+                <td colspan="4">No history available.</td>
               </tr>
               {% endfor %}
             </tbody>
-            
+
           </table>
         </div>
       </section>
