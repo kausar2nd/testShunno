@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, session
+from flask import Blueprint, render_template, redirect, url_for, session, jsonify
 from app.utils.auth_utils import login_required
 
 general_bp = Blueprint("general", __name__)
@@ -20,8 +20,14 @@ def find_bins():
 
 
 @general_bp.route("/logout")
-@login_required
 def logout():
     session.clear()
     print("You have been logged out.")
     return redirect(url_for("general.login_general"))
+
+
+@general_bp.route("/logout_inactivity", methods=["POST"])
+def logout_inactivity():
+    session.clear()
+    print("User logged out due to inactivity.")
+    return jsonify({"success": True})

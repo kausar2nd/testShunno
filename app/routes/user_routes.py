@@ -67,6 +67,7 @@ def user_login():
                     {
                         "loggedin": True,
                         "id": account["user_id"],
+                        "role": "user",
                         "username": account["user_name"],
                         "email": account["user_email"],
                         "points": account["user_points"],
@@ -156,7 +157,7 @@ def user_submit():
 
 
 @user_bp.route("/user_dashboard")
-@login_required
+@login_required("user")
 def user_dashboard():
     username = session.get("username")
     user_id = session.get("id")
@@ -226,7 +227,7 @@ def user_dashboard():
 
 
 @user_bp.route("/update_profile", methods=["POST"])
-@login_required
+@login_required("user")
 def update_profile():
     data = request.get_json()
     name = data.get("name")
@@ -258,7 +259,7 @@ def update_profile():
 
 
 @user_bp.route("/withdraw", methods=["POST"])
-@login_required
+@login_required('user')
 def withdraw():
     data = request.get_json()
     withdrawal_amount = data.get("amount", 0)

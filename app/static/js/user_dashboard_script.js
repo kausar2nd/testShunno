@@ -90,3 +90,25 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+
+let inactivityTimer;
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        fetch('/logout_inactivity', { method: 'POST' })
+            .then(() => {
+                alert('You have been logged out due to inactivity.');
+                window.location.href = '/login';
+            })
+            .catch(error => console.error('Error logging out:', error));
+    }, 5 * 60 * 1000); // 5 minutes inactivity threshold
+}
+
+document.addEventListener('mousemove', resetInactivityTimer);
+document.addEventListener('keydown', resetInactivityTimer);
+document.addEventListener('click', resetInactivityTimer);
+document.addEventListener('scroll', resetInactivityTimer);
+
+resetInactivityTimer();

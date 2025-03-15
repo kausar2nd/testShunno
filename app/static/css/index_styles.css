@@ -115,7 +115,6 @@ nav ul li a:hover {
     background-size: cover;
     text-align: center;
     position: relative;
-    box-shadow: 2px 2px 5px 1px #141619aa;
     box-shadow: 3px 3px 1px #141619bb;
     animation: pop 0.4s cubic-bezier(0, 0, 0.21, 1);
 }
@@ -175,7 +174,6 @@ nav ul li a:hover {
     border-radius: 30px;
     margin-top: 40px;
     margin-bottom: 20px;
-    display: flex;
     justify-content: space-between;
     align-items: center;
     animation: pop 0.4s cubic-bezier(0, 0, 0.21, 1);
@@ -280,7 +278,6 @@ nav ul li a:hover {
 
 .faq-grid {
     display: flex;
-    /* grid-template-columns: repeat(2, 1fr); */
     flex-direction: column;
     width: 100%;
     gap: 50px;
@@ -300,7 +297,6 @@ nav ul li a:hover {
 }
 
 .faq-item p {
-    /* color: #141619; */
     font-size: 1.1rem;
 }
 
@@ -347,7 +343,6 @@ footer {
     .logo {
         margin-left: 0px;
         font-size: 1em;
-
     }
 
     .navbar {
@@ -374,7 +369,6 @@ footer {
     .login {
         font-size: 0.8rem;
         padding: 6px 14px;
-
     }
 
     .wrapper {

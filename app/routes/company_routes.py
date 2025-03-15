@@ -6,7 +6,7 @@ company_bp = Blueprint("company", __name__)
 
 
 @company_bp.route("/company_submit", methods=["POST"])
-@login_required
+@login_required("company")
 def company_submit():
     if request.method == "POST":
         plastic_quantity = request.form.get("plasticBottles", 0, type=int)
@@ -99,6 +99,7 @@ def company_login():
                 print("Password matched!")
                 session["loggedin"] = True
                 session["company_id"] = account[0]
+                session["role"] = "company"
                 session["company_name"] = account[1]
                 session["company_email"] = email
                 print("Company logged in successfully!")
@@ -114,7 +115,7 @@ def company_login():
 
 
 @company_bp.route("/company_dashboard")
-@login_required
+@login_required("company")
 def company_dashboard():
     company_name = session.get("company_name", "Company")
     company_id = session.get("company_id", "ID")

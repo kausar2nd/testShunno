@@ -28,6 +28,7 @@ def superuser():
             if account and account[2] == password:
                 session["loggedin"] = True
                 session["admin_id"] = account[0]
+                session["role"] = "admin"
                 session["admin_email"] = account[1]
                 print("Logged in successfully!")
                 return redirect(url_for("admin.admin_dashboard"))
@@ -42,7 +43,7 @@ def superuser():
 
 
 @admin_bp.route("/admin_dashboard", methods=["POST", "GET"])
-@login_required
+@login_required("admin")
 def admin_dashboard():
     email = session.get("admin_email", "admin@example.com")
     try:
@@ -75,6 +76,7 @@ def admin_dashboard():
 
 
 @admin_bp.route("/usub_admin/<email>", methods=["GET", "POST"])
+@login_required("admin")
 def usub_admin(email):
     if request.method == "POST":
         try:
@@ -101,6 +103,7 @@ def usub_admin(email):
 
 
 @admin_bp.route("/fetch_usub_d/<int:id>", methods=["GET", "POST"])
+@login_required("admin")
 def admin_post(id):
     try:
         conn = get_db_connection()
@@ -127,6 +130,7 @@ def admin_post(id):
 
 
 @admin_bp.route("/usub_edit/<int:history_id>", methods=["POST", "GET"])
+@login_required("admin")
 def uedit_admin(history_id):
     try:
         new_plastic = int(request.form.get("plastic"))
@@ -210,6 +214,7 @@ def uedit_admin(history_id):
 
 
 @admin_bp.route("/usub_delete/<int:id>", methods=["POST"])
+@login_required("admin")
 def udelete_admin(id):
     try:
         conn = get_db_connection()
@@ -255,6 +260,7 @@ def udelete_admin(id):
 
 
 @admin_bp.route("/csub_admin/<email>", methods=["GET", "POST"])
+@login_required("admin")
 def csub_admin(email):
     if request.method == "POST":
         try:
@@ -280,6 +286,7 @@ def csub_admin(email):
 
 
 @admin_bp.route("/fetch_csub_d/<int:company_history_id>", methods=["GET", "POST"])
+@login_required("admin")
 def cadmin_post(company_history_id):
     try:
         conn = get_db_connection()
@@ -306,6 +313,7 @@ def cadmin_post(company_history_id):
 
 
 @admin_bp.route("/csub_edit/<int:company_history_id>", methods=["POST", "GET"])
+@login_required("admin")
 def cedit_admin(company_history_id):
     try:
         new_plastic = int(request.form.get("plastic"))
@@ -388,6 +396,7 @@ def cedit_admin(company_history_id):
 
 
 @admin_bp.route("/csub_delete/<int:company_history_id>", methods=["POST"])
+@login_required("admin")
 def cdelete_admin(company_history_id):
     try:
         conn = get_db_connection()
