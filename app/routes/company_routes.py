@@ -1,8 +1,18 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session,
+    flash,
+    jsonify,
+)
 from app.utils.db_utils import get_db_connection
 from app.utils.auth_utils import login_required
 
 company_bp = Blueprint("company", __name__)
+
 
 @company_bp.route("/company_submit", methods=["POST"])
 @login_required("company")
@@ -50,6 +60,7 @@ def company_submit():
 
     return render_template("company_dashboard.html")
 
+
 @company_bp.route("/company_signup", methods=["POST", "GET"])
 def company_signup():
     if request.method == "POST":
@@ -80,6 +91,7 @@ def company_signup():
         return redirect(url_for("company.company_login"))
     return render_template("company_signup.html")
 
+
 @company_bp.route("/company_login", methods=["POST", "GET"])
 def company_login():
     if request.method == "POST":
@@ -99,6 +111,7 @@ def company_login():
                 session["company_name"] = account[1]
                 session["company_email"] = email
                 session["company_location"] = account[4]
+                session["role"] = "company"  # Add this line to set the role
                 print("Company logged in successfully!")
                 return redirect(url_for("company.company_dashboard"))
             else:
@@ -109,6 +122,7 @@ def company_login():
             conn.close()
 
     return render_template("company_login.html")
+
 
 @company_bp.route("/company_dashboard")
 @login_required("company")
@@ -174,7 +188,7 @@ def company_dashboard():
     return render_template(
         "company_dashboard.html",
         company_name=company_name,
-        company_location = session["company_location"],
+        company_location=session["company_location"],
         stock_data=stock,
         history_data=history_data,
         total_plastic=total_plastic,
@@ -182,17 +196,18 @@ def company_dashboard():
         total_glasses=total_glasses,
     )
 
-#profile
+
+# profile
+
 
 @company_bp.route("/cupdate_profile", methods=["POST"])
 @login_required("company")
 def update_profile():
-    
+
     data = request.get_json()
     name = data.get("name")
     location = data.get("location")
     company_id = session.get("company_id")
-    
 
     if not name or not location:
         return jsonify({"success": False, "message": "Name and location are required"})
@@ -200,17 +215,16 @@ def update_profile():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        
+
         cursor.execute(
             "UPDATE company SET company_name = %s, company_location = %s WHERE company_id = %s",
             (name, location, company_id),
         )
         conn.commit()
-        
 
         # Update session data
         session["company_name"] = name
-        print("Hello")
+        session["company_location"] = location
 
         return jsonify({"success": True})
 
@@ -219,5 +233,3 @@ def update_profile():
         return jsonify({"success": False, "message": "Database error occurred"})
     finally:
         conn.close()
-
-

@@ -15,15 +15,34 @@
       <div><a href="/logout" class="logout-link">Logout</a></div>
     </div>
 
-    <div class="wrapper">
+    <div id="edit-profile-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edit Profile</h2>
+        <form id="edit-profile-form">
+          <div class="edit-input-box">
+            <label for="edit-name">Name</label>
+            <input type="text" id="edit-name" name="name" value="{{ company_name }}" required>
+          </div>
 
+          <div class="edit-input-box">
+            <label for="edit-location">Location</label>
+            <input type="text" id="edit-location" name="location" value="{{ company_location }}" required>
+          </div>
+          <button type="submit" class="submit-btn">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="wrapper">
       <section class="company-profile">
         <div class="profile-picture">
           <img src="../static/assets/company.png" alt="Profile Picture">
           <div class="profile-details">
-            <h2>{{ session['company_name'] }}</h2>
+            <h2 id="company_name">{{ company_name }}</h2>
+            <h4 id="company_location">{{ company_location }}</h4>
             <p>Eco Solutions is dedicated to sustainable waste management and recycling solutions.</p>
-            <button class="edit-button">Edit Profile</button>
+            <button id="edit-profile-btn" class="nav-link">Edit Profile</button>
           </div>
         </div>
       </section>
