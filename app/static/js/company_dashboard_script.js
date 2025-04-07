@@ -1,88 +1,88 @@
 function openOrderForm() {
-    document.getElementById("orderFormModal").style.display = "flex";
+  document.getElementById("orderFormModal").style.display = "flex";
+}
+
+function closeOrderForm() {
+  document.getElementById("orderFormModal").style.display = "none";
+}
+
+function submitOrder() {
+  // implement form validation here if needed
+  const form = document.getElementById("orderForm");
+
+  // Reset fields
+  form.reset();
+
+  // Hide 
+  document.getElementById("orderFormModal").style.display = "none";
+
+  // Show  message
+  document.getElementById("successMessage").style.display = "flex";
+}
+
+function closeSuccessMessage() {
+  document.getElementById("successMessage").style.display = "none";
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('edit-profile-modal');
+  const btn = document.getElementById('edit-profile-btn');
+  const closeBtn = document.getElementsByClassName('close')[0];
+  const editForm = document.getElementById('edit-profile-form');
+
+  // Open modal
+  btn.onclick = function () {
+    modal.style.display = 'block';
   }
-  
-  function closeOrderForm() {
-    document.getElementById("orderFormModal").style.display = "none";
+
+  // Close modal
+  closeBtn.onclick = function () {
+    modal.style.display = 'none';
   }
-  
-  function submitOrder() {
-    // implement form validation here if needed
-    const form = document.getElementById("orderForm");
-    
-    // Reset fields
-    form.reset();
-  
-    // Hide 
-    document.getElementById("orderFormModal").style.display = "none";
-    
-    // Show  message
-    document.getElementById("successMessage").style.display = "flex";
-  }
-  
-  function closeSuccessMessage() {
-    document.getElementById("successMessage").style.display = "none";
-  }
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('edit-profile-modal');
-    const btn = document.getElementById('edit-profile-btn');
-    const closeBtn = document.getElementsByClassName('close')[0];
-    const editForm = document.getElementById('edit-profile-form');
-  
-    // Open modal
-    btn.onclick = function () {
-        modal.style.display = 'block';
+
+  // Close when clicking outside
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
     }
-  
-    // Close modal
-    closeBtn.onclick = function () {
-        modal.style.display = 'none';
-    }
-  
-    // Close when clicking outside
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+  }
+
+  // Handle form submission
+  editForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('edit-name').value;
+    const location = document.getElementById('edit-location').value;
+
+    console.log(name, location)
+
+    fetch('/cupdate_profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, location })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Update the UI
+          document.getElementById('company_name').innerText = name;
+          document.getElementById('company_location').innerText = location;
+          modal.style.display = 'none';
+          alert('Profile updated successfully!');
+        } else {
+          alert('Error: ' + data.message);
         }
-    }
-  
-    // Handle form submission
-    editForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-  
-        const name = document.getElementById('edit-name').value;
-        const location = document.getElementById('edit-location').value;
-  
-        console.log(name, location)
-  
-        fetch('/cupdate_profile', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, location })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the UI
-                    document.getElementById('company_name').innerText = name;
-                    document.getElementById('company_location').innerText = location;
-                    modal.style.display = 'none';
-                    alert('Profile updated successfully!');
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while updating your profile.');
-            });
-    });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating your profile.');
+      });
   });
-  
-  
+});
+
+
 
 let inactivityTimer;
 
