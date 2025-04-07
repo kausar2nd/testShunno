@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlterUSE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index_styles.css' ) }}">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +16,7 @@
 
 <body>
     <nav class="navbar">
-        <a href="/" class="logo">AlterUSE</a>
+        <a href="/" class="logo">ShunnoWaste</a>
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -41,7 +40,7 @@
         <section id="about" class="about-section">
             <div class="about-img"> </div>
             <div class="about-text">
-                <h2>About AlterUSE</h2>
+                <h2>About ShunnoWaste</h2>
                 <p>This recycling system will be a web-based application designed to encourage individuals and
                     communities to participate in recycling efforts. The system will provide a platform where users
                     can report their collections of recyclable items, such as plastic bottles, aluminum cans, and
@@ -59,35 +58,26 @@
             <div class="section-content">
                 <h2>Latest Insights</h2>
                 <div class="blog-grid">
-                    <div class="blog-card">
+                    <div class="blog-card" onclick="toggleBlog(this)">
                         <h3>Recycling 101: What Can Be Recycled?</h3>
                         <p>Discover the most common recyclable materials and how to sort them correctly.</p>
-                        <a href="#">Read More</a>
+                        <div class="blog-details" style="display:none;">
+                            <p><strong>Details:</strong> Plastics (types 1-7), aluminum, glass, cardboard, and paper can be recycled in most areas.</p>
+                        </div>
                     </div>
-                    <div class="blog-card">
+                    <div class="blog-card" onclick="toggleBlog(this)">
                         <h3>Community Impact Report</h3>
                         <p>See how our users are making a difference in sustainable waste management.</p>
-                        <a href="#">Read More</a>
+                        <div class="blog-details" style="display:none;">
+                            <p><strong>Details:</strong> Users collectively recycled over 10 tons of material last quarter, reducing landfill waste by 18%.</p>
+                        </div>
                     </div>
-                    <div class="blog-card">
+                    <div class="blog-card" onclick="toggleBlog(this)">
                         <h3>Rewards Program Update</h3>
                         <p>Learn about our new exciting rewards for eco-conscious recyclers!</p>
-                        <a href="#">Read More</a>
-                    </div>
-                    <div class="blog-card">
-                        <h3>Recycling 101: What Can Be Recycled?</h3>
-                        <p>Discover the most common recyclable materials and how to sort them correctly.</p>
-                        <a href="#">Read More</a>
-                    </div>
-                    <div class="blog-card">
-                        <h3>Community Impact Report</h3>
-                        <p>See how our users are making a difference in sustainable waste management.</p>
-                        <a href="#">Read More</a>
-                    </div>
-                    <div class="blog-card">
-                        <h3>Rewards Program Update</h3>
-                        <p>Learn about our new exciting rewards for eco-conscious recyclers!</p>
-                        <a href="#">Read More</a>
+                        <div class="blog-details" style="display:none;">
+                            <p><strong>Details:</strong> New reward tiers include gift vouchers, eco-products, and donation options for NGOs.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,31 +87,23 @@
             <div class="section-content">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-grid">
-                    <div class="faq-item">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
                         <h3>How do I start recycling?</h3>
-                        <p>Simply create an account, locate a bin near you, and start collecting recyclables!</p>
+                        <div class="faq-answer" style="display:none;">
+                            <p>Simply create an account, locate a bin near you, and start collecting recyclables!</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
                         <h3>What materials can I recycle?</h3>
-                        <p>We accept plastic bottles, glass, aluminum cans, e-waste, cardboard, and paper.</p>
+                        <div class="faq-answer" style="display:none;">
+                            <p>We accept plastic bottles, glass, aluminum cans, e-waste, cardboard, and paper.</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
                         <h3>How do rewards work?</h3>
-                        <p>Earn points for each recyclable item you properly dispose of and redeem them for exciting
-                            rewards.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>How do I start recycling?</h3>
-                        <p>Simply create an account, locate a bin near you, and start collecting recyclables!</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>What materials can I recycle?</h3>
-                        <p>We accept plastic bottles, glass, aluminum cans, e-waste, cardboard, and paper.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>How do rewards work?</h3>
-                        <p>Earn points for each recyclable item you properly dispose of and redeem them for exciting
-                            rewards.</p>
+                        <div class="faq-answer" style="display:none;">
+                            <p>Earn points for each recyclable item you dispose of and redeem them for rewards.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,7 +143,6 @@
         const navbar = document.querySelector(".navbar");
 
         if (window.scrollY > 50) {
-            // If we scroll down 50px or more, apply the "solid" class
             navbar.classList.add("solid");
             navbar.classList.remove("transparent");
         } else {
@@ -174,6 +155,16 @@
         const navbar = document.querySelector(".navbar");
         navbar.classList.add("transparent");
     });
+
+    function toggleBlog(card) {
+        const detail = card.querySelector('.blog-details');
+        detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleFAQ(item) {
+        const answer = item.querySelector('.faq-answer');
+        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+    }
 </script>
 
 </html>
