@@ -88,7 +88,7 @@ def user_login():
 
 
 @user_bp.route("/user_submit", methods=["POST", "GET"])
-@login_required
+@login_required('user')
 def user_submit():
     if request.method == "POST":
         branch = request.form["branch"]
