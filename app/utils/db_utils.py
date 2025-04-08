@@ -6,7 +6,7 @@ def get_db_connection():
         host="localhost",
         user="root",
         passwd="",
-        database="shunnowaste_db",
+        database="db_shunnowaste",
     )
     # host="localhost", user="jobairhossain_alteruse", passwd="alterUSE@123", database="jobairhossain_alteruse_db"
 

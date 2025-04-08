@@ -84,9 +84,9 @@ def usub_admin(email):
             cursor = conn.cursor(dictionary=True)
             cursor.execute(
                 """
-                SELECT user_history_id, user_history_email, user_history_description, user_history_branch, user_history_date 
+                SELECT user_history_id, user_id, user_history_branch, plastic_bottles, cardboards, glasses, user_history_date 
                 FROM user_history 
-                WHERE user_history_email = %s 
+                WHERE user_id = (SELECT user_id FROM user WHERE user_email = %s) 
                 ORDER BY user_history_date DESC
                 """,
                 (email,),
@@ -109,16 +109,18 @@ def admin_post(id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT user_history_description FROM user_history WHERE user_history_id = %s",
+            """
+            SELECT plastic_bottles, cardboards, glasses 
+            FROM user_history 
+            WHERE user_history_id = %s
+            """,
             (id,),
         )
         submission = cursor.fetchone()
 
-        description = submission["user_history_description"]
-        parts = description.split(", ")
-        plastic = int(parts[0].split(": ")[1])
-        cardboard = int(parts[1].split(": ")[1])
-        glass = int(parts[2].split(": ")[1])
+        plastic = submission["plastic_bottles"]
+        cardboard = submission["cardboards"]
+        glass = submission["glasses"]
 
     except Exception as e:
         print(f"Error: {e}")
@@ -268,9 +270,9 @@ def csub_admin(email):
             cursor = conn.cursor(dictionary=True)
             cursor.execute(
                 """
-                SELECT company_history_id, company_history_email, company_history_description, company_history_date
+                SELECT company_history_id, company_id, plastic_bottles, cardboards, glasses, company_history_date 
                 FROM company_history 
-                WHERE company_history_email = %s 
+                WHERE company_id = (SELECT company_id FROM company WHERE company_email = %s) 
                 ORDER BY company_history_date DESC
                 """,
                 (email,),
@@ -292,16 +294,18 @@ def cadmin_post(company_history_id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT company_history_description FROM company_history WHERE company_history_id = %s",
+            """
+            SELECT plastic_bottles, cardboards, glasses 
+            FROM company_history 
+            WHERE company_history_id = %s
+            """,
             (company_history_id,),
         )
         order = cursor.fetchone()
 
-        description = order["company_history_description"]
-        parts = description.split(", ")
-        plastic = int(parts[0].split(": ")[1])
-        cardboard = int(parts[1].split(": ")[1])
-        glass = int(parts[2].split(": ")[1])
+        plastic = order["plastic_bottles"]
+        cardboard = order["cardboards"]
+        glass = order["glasses"]
 
     except Exception as e:
         print(f"Error: {e}")
