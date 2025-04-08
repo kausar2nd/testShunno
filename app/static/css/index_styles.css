@@ -183,7 +183,7 @@ nav ul li a:hover {
     background-color: blueviolet;
     height: 400px;
     width: 450px;
-    background: url('../assets/au.jpg');
+    background: url('../assets/ShunnoWaste.jpg');
     border: 5px solid #14161980;
     background-position: center;
     background-size: cover;
@@ -469,4 +469,6 @@ footer {
     .footer-bottom p {
         font-size: 0.8rem;
     }
-}
+}  
+
+
