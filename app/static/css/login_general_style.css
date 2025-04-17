@@ -1,7 +1,7 @@
 body {
     background-color: #F1FFFA;
     opacity: 0.8;
-    background-image: radial-gradient(#14161940 0.9px, #e5e5f7 0.7px);
+    background-image: radial-gradient(#14161940 0.9px, #E1EEBC 0.7px);
     background-size: 20px 20px;
     font-family: "Nunito", sans-serif;
     margin: 0 auto;
@@ -86,11 +86,12 @@ a {
 }
 
 #uc {
-    background-color: #29AB87;
+    background-color: #67AE6E
+    ;
 }
 
 #cc {
-    background-color: #FFD700;
+    background-color: #90C67C;
 }
 
 @media screen and (max-width: 768px) {

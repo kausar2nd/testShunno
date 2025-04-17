@@ -7,8 +7,9 @@
 }
 
 body {
-    background: url('/static/assets/allec-gomes--x7DTx0d6rI-unsplash.jpg') no-repeat center center;
+    /*background: url('/static/assets/allec-gomes--x7DTx0d6rI-unsplash.jpg') no-repeat center center;
     /* background: url('/static/assets/BlackWhite.png') no-repeat center center; */
+    background-image: radial-gradient(#14161940 0.9px, #E1EEBC 0.7px);
     background-size: cover;
     color: whitesmoke;
     background-color: #141619;
