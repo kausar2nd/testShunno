@@ -139,7 +139,7 @@ h2 {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: #ACE1AF;
   animation: fadeIn 0.3s ease;
 }
 
@@ -218,7 +218,9 @@ h2 {
 }
 
 .history {
-  background-color: #EE8434
+  background-color: #328E6E
+
+
 }
 
 .history table,
