@@ -82,7 +82,7 @@ a {
 .user-photo {
     width: 250px;
     height: 250px;
-    background: url('/static/assets/au.jpg') no-repeat center center;
+    background: url('../assets/ShunnoWaste.jpg') no-repeat center center;
     background-size: cover;
     border-radius: 5px;
     margin-right: 15px;
@@ -403,13 +403,16 @@ a {
         flex-direction: column;
         align-items: center;
     }
+
     .user-photo {
         width: 100%;
         height: auto;
     }
+
     .user-info {
         text-align: center;
     }
+
     .transactions-container {
         overflow-x: auto;
     }

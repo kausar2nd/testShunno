@@ -105,7 +105,6 @@ def user_submit():
             conn = get_db_connection()
             cursor = conn.cursor()
 
-            # Insert submission with separate values
             cursor.execute(
                 """
                 INSERT INTO user_history (user_id, plastic_bottles, cardboards, glasses, user_history_date, user_history_branch) 
@@ -114,7 +113,6 @@ def user_submit():
                 (user_id, plastic_quantity, cardboard_quantity, glass_quantity, branch),
             )
 
-            # Update the storage
             cursor.execute(
                 """
                 UPDATE storage
@@ -126,7 +124,6 @@ def user_submit():
                 (plastic_quantity, cardboard_quantity, glass_quantity),
             )
 
-            # Calculate points based on material type
             plastic_points = plastic_quantity * 2  # 2 points per bottle
             cardboard_points = cardboard_quantity * 1  # 1 point per cardboard
             glass_points = glass_quantity * 3  # 3 points per glass
@@ -138,7 +135,6 @@ def user_submit():
                 (total_points, user_id),
             )
 
-            # Update session with new points total
             session["points"] = session.get("points", 0) + total_points
 
             conn.commit()
@@ -168,7 +164,6 @@ def user_dashboard():
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
 
-        # Get user location
         cursor.execute("SELECT user_location FROM user WHERE user_id = %s", (user_id,))
         user_data = cursor.fetchone()
         location = user_data.get("user_location", "") if user_data else ""

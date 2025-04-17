@@ -25,11 +25,14 @@ function user_submissions_func(email) {
 
             user_submissions.forEach(user_submissions => {
                 const row = document.createElement('tr');
+
                 row.innerHTML = `
-            <td>${user_submissions.user_history_description}</td>
-            <td>${user_submissions.user_history_branch}</td>
-            <td>${user_submissions.user_history_date}</td>
-            <td><a href="#editSubmissionModal" onclick="openModal(${user_submissions.user_history_id})"><u><i>edit</i></u></a></td>`
+                <td>${user_submissions.user_history_date}</td>
+                <td>${user_submissions.user_history_branch}</td>
+                <td>${user_submissions.plastic_bottles}</td>
+                <td>${user_submissions.cardboards}</td>
+                <td>${user_submissions.glasses}</td>
+                <td><a href="#editSubmissionModal" onclick="openModal(${user_submissions.user_history_id})"><u><i>edit</i></u></a></td>`
                 tableBody.appendChild(row);
             });
         })
@@ -65,8 +68,10 @@ function company_submissions_func(email) {
             company_submissions.forEach(company_submissions => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-            <td>${company_submissions.company_history_description}</td>
-            <td>${company_submissions.company_history_date}</td>
+                <td>${company_submissions.company_history_date}</td>
+                <td>${company_submissions.plastic_bottles}</td>
+                <td>${company_submissions.cardboards}</td>
+                <td>${company_submissions.glasses}</td>
             <td><a href="#editCompanyModal" onclick="openCompanyModal(${company_submissions.company_history_id})"><u><i>edit</i></u></a></td>
         `;
                 tableBody.appendChild(row);

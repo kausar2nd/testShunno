@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Update the UI
                     document.querySelector('.user-info h1').innerText = `Hi, ${name}!`;
                     document.getElementById('user-location').innerText = location;
                     modal.style.display = 'none';

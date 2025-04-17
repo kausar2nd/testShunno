@@ -106,18 +106,30 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Description</th>
-                                <th>Branch</th>
                                 <th>Date</th>
+                                <th>Branch</th>
+                                <th>Plastic Bottles</th>
+                                <th>Cardboards</th>
+                                <th>Glass</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td colspan="4">No submissions found.</td>
-                        </tr>
-
                         <tbody>
-
+                            {% if submissions %}
+                            {% for submission in submissions %}
+                            <tr>
+                                <td>{{ submission.user_history_date }}</td>
+                                <td>{{ submission.user_history_branch }}</td>
+                                <td>{{ submission.plastic_bottles }}</td>
+                                <td>{{ submission.cardboards }}</td>
+                                <td>{{ submission.glasses }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="5">No submissions found.</td>
+                            </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -129,17 +141,28 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Description</th>
                                 <th>Date</th>
+                                <th>Plastic Bottles</th>
+                                <th>Cardboards</th>
+                                <th>Glass</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td colspan="4">No submissions found.</td>
-                        </tr>
-
                         <tbody>
-
+                            {% if submissions %}
+                            {% for submission in submissions %}
+                            <tr>
+                                <td>{{ submission.company_history_date }}</td>
+                                <td>{{ submission.plastic_bottles }}</td>
+                                <td>{{ submission.cardboards }}</td>
+                                <td>{{ submission.glasses }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="4">No submissions found.</td>
+                            </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>

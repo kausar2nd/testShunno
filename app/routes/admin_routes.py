@@ -82,23 +82,30 @@ def usub_admin(email):
         try:
             conn = get_db_connection()
             cursor = conn.cursor(dictionary=True)
+            # Fetch user_id from user table
+            cursor.execute("SELECT user_id FROM user WHERE user_email = %s", (email,))
+            user_data = cursor.fetchone()
+            if not user_data:
+                return jsonify({"user_submissions": []})
+
+            user_id = user_data["user_id"]
             cursor.execute(
                 """
-                SELECT user_history_id, user_id, user_history_branch, plastic_bottles, cardboards, glasses, user_history_date 
-                FROM user_history 
-                WHERE user_id = (SELECT user_id FROM user WHERE user_email = %s) 
+                SELECT
+                    user_history_id, plastic_bottles, cardboards, glasses,
+                    user_history_branch, user_history_date
+                FROM user_history
+                WHERE user_id = %s
                 ORDER BY user_history_date DESC
                 """,
-                (email,),
+                (user_id,),
             )
             user_submissions = cursor.fetchall()
-
         except Exception as e:
             print(f"Error: {e}")
             user_submissions = []
         finally:
             conn.close()
-
         return jsonify({"user_submissions": user_submissions})
 
 
@@ -109,11 +116,7 @@ def admin_post(id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            """
-            SELECT plastic_bottles, cardboards, glasses 
-            FROM user_history 
-            WHERE user_history_id = %s
-            """,
+            "SELECT plastic_bottles, cardboards, glasses FROM user_history WHERE user_history_id = %s",
             (id,),
         )
         submission = cursor.fetchone()
@@ -147,18 +150,16 @@ def uedit_admin(history_id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT user_history_description FROM user_history WHERE user_history_id = %s",
+            "SELECT plastic_bottles, cardboards, glasses FROM user_history WHERE user_history_id = %s",
             (history_id,),
         )
         current_submission = cursor.fetchone()
         if not current_submission:
             return {"message": "Submission not found."}, 404
 
-        current_description = current_submission["user_history_description"]
-        parts = current_description.split(", ")
-        current_plastic = int(parts[0].split(": ")[1])
-        current_cardboard = int(parts[1].split(": ")[1])
-        current_glass = int(parts[2].split(": ")[1])
+        current_plastic = current_submission["plastic_bottles"]
+        current_cardboard = current_submission["cardboards"]
+        current_glass = current_submission["glasses"]
 
         diff_plastic = new_plastic - current_plastic
         diff_cardboard = new_cardboard - current_cardboard
@@ -184,14 +185,15 @@ def uedit_admin(history_id):
                 "message": "Submission deleted as all materials were set to zero."
             }, 200
 
-        updated_description = f"Plastic Bottles: {new_plastic}, Cardboard: {new_cardboard}, Glass: {new_glass}"
         cursor.execute(
             """
             UPDATE user_history
-            SET user_history_description = %s
+            SET plastic_bottles = %s,
+                cardboards = %s,
+                glasses = %s
             WHERE user_history_id = %s
             """,
-            (updated_description, history_id),
+            (new_plastic, new_cardboard, new_glass, history_id),
         )
 
         cursor.execute(
@@ -222,18 +224,16 @@ def udelete_admin(id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT user_history_description FROM user_history WHERE user_history_id = %s",
+            "SELECT plastic_bottles, cardboards, glasses FROM user_history WHERE user_history_id = %s",
             (id,),
         )
         current_submission = cursor.fetchone()
         if not current_submission:
             return {"message": "Submission not found."}, 404
 
-        current_description = current_submission["user_history_description"]
-        parts = current_description.split(", ")
-        current_plastic = int(parts[0].split(": ")[1])
-        current_cardboard = int(parts[1].split(": ")[1])
-        current_glass = int(parts[2].split(": ")[1])
+        current_plastic = current_submission["plastic_bottles"]
+        current_cardboard = current_submission["cardboards"]
+        current_glass = current_submission["glasses"]
 
         cursor.execute(
             "DELETE FROM user_history WHERE user_history_id = %s",
@@ -268,14 +268,25 @@ def csub_admin(email):
         try:
             conn = get_db_connection()
             cursor = conn.cursor(dictionary=True)
+            # Fetch company_id from company table
+            cursor.execute(
+                "SELECT company_id FROM company WHERE company_email = %s", (email,)
+            )
+            company_data = cursor.fetchone()
+            if not company_data:
+                return jsonify({"company_submissions": []})
+
+            company_id = company_data["company_id"]
             cursor.execute(
                 """
-                SELECT company_history_id, company_id, plastic_bottles, cardboards, glasses, company_history_date 
-                FROM company_history 
-                WHERE company_id = (SELECT company_id FROM company WHERE company_email = %s) 
+                SELECT
+                    company_history_id, plastic_bottles, cardboards, glasses,
+                    company_history_date
+                FROM company_history
+                WHERE company_id = %s
                 ORDER BY company_history_date DESC
                 """,
-                (email,),
+                (company_id,),
             )
             company_submissions = cursor.fetchall()
         except Exception as e:
@@ -283,7 +294,6 @@ def csub_admin(email):
             company_submissions = []
         finally:
             conn.close()
-
         return jsonify({"company_submissions": company_submissions})
 
 
@@ -294,11 +304,7 @@ def cadmin_post(company_history_id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            """
-            SELECT plastic_bottles, cardboards, glasses 
-            FROM company_history 
-            WHERE company_history_id = %s
-            """,
+            "SELECT plastic_bottles, cardboards, glasses FROM company_history WHERE company_history_id = %s",
             (company_history_id,),
         )
         order = cursor.fetchone()
@@ -332,19 +338,16 @@ def cedit_admin(company_history_id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT company_history_description FROM company_history WHERE company_history_id = %s",
+            "SELECT plastic_bottles, cardboards, glasses FROM company_history WHERE company_history_id = %s",
             (company_history_id,),
         )
         current_order = cursor.fetchone()
         if not current_order:
             return {"message": "Order not found."}, 404
 
-        current_description = current_order["company_history_description"]
-
-        parts = current_description.split(", ")
-        current_plastic = int(parts[0].split(": ")[1])
-        current_cardboard = int(parts[1].split(": ")[1])
-        current_glass = int(parts[2].split(": ")[1])
+        current_plastic = current_order["plastic_bottles"]
+        current_cardboard = current_order["cardboards"]
+        current_glass = current_order["glasses"]
 
         diff_plastic = new_plastic - current_plastic
         diff_cardboard = new_cardboard - current_cardboard
@@ -368,14 +371,15 @@ def cedit_admin(company_history_id):
             conn.commit()
             return {"message": "Order deleted as all materials were set to zero."}, 200
 
-        updated_description = f"Plastic Bottles: {new_plastic}, Cardboard: {new_cardboard}, Glass: {new_glass}"
         cursor.execute(
             """
             UPDATE company_history
-            SET company_history_description = %s
+            SET plastic_bottles = %s,
+                cardboards = %s,
+                glasses = %s
             WHERE company_history_id = %s
             """,
-            (updated_description, company_history_id),
+            (new_plastic, new_cardboard, new_glass, company_history_id),
         )
 
         cursor.execute(
@@ -406,18 +410,16 @@ def cdelete_admin(company_history_id):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
-            "SELECT company_history_description FROM company_history WHERE company_history_id = %s",
+            "SELECT plastic_bottles, cardboards, glasses FROM company_history WHERE company_history_id = %s",
             (company_history_id,),
         )
         current_order = cursor.fetchone()
         if not current_order:
             return {"message": "Order not found."}, 404
 
-        current_description = current_order["company_history_description"]
-        parts = current_description.split(", ")
-        current_plastic = int(parts[0].split(": ")[1])
-        current_cardboard = int(parts[1].split(": ")[1])
-        current_glass = int(parts[2].split(": ")[1])
+        current_plastic = current_order["plastic_bottles"]
+        current_cardboard = current_order["cardboards"]
+        current_glass = current_order["glasses"]
 
         cursor.execute(
             "DELETE FROM company_history WHERE company_history_id = %s",
