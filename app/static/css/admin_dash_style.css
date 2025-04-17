@@ -7,9 +7,11 @@
 }
 
 body {
-    /*background: url('/static/assets/allec-gomes--x7DTx0d6rI-unsplash.jpg') no-repeat center center;
+    /* background: url('/static/assets/allec-gomes--x7DTx0d6rI-unsplash.jpg') no-repeat center center; */
+    /* background: url('/static/assets/allec-gomes--x7DTx0d6rI-unsplash.jpg') no-repeat center center; */
     /* background: url('/static/assets/BlackWhite.png') no-repeat center center; */
     background-image: radial-gradient(#14161940 0.9px, #E1EEBC 0.7px);
+    background-size: 20px 20px;
     background-size: cover;
     color: whitesmoke;
     background-color: #141619;
@@ -41,29 +43,31 @@ a {
     top: 20px;
     left: 20px;
     font-size: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .6);
+    /* background: #90C67C; */
+    background: #62825D;
     padding: 8px 16px;
     border-radius: 10px;
     cursor: pointer;
-    backdrop-filter: blur(10px);
     transition: 0.3s ease-in-out;
     z-index: 10;
 }
 
 .nav-link:hover {
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+    /* border: 1px solid rgba(255, 255, 255, 0.6); */
 }
 
 .wrapper {
     width: 90%;
     margin: 20px 0;
     height: fit-content;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    /* background: #62825D; */
+    background: #90C67C;
+    /* border: 2px solid rgba(255, 255, 255, .2); */
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
     padding: 40px;
@@ -73,7 +77,9 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
+    /* background: #328E6E; */
+    background: #67AE6E;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
     border: 1px solid rgb(169, 169, 169, 0.5);
     border-radius: 5px;
     padding: 40px;
@@ -119,7 +125,8 @@ a {
 
 .transactions {
     padding: 30px;
-    background: transparent;
+    background: #67AE6E;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     margin: 40px auto;
@@ -136,11 +143,14 @@ a {
 }
 
 .table-div {
+    /* background-color: #829083; */
+    background-color: #62825D;
     overflow: auto;
     width: 100%;
     height: fit-content;
-    max-height: 300px;
+    max-height: 400px;
     border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1);
