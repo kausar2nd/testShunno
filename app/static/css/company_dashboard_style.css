@@ -86,7 +86,7 @@ a {
   padding: 30px;
   margin-top: 100px;
   margin-bottom: 40px;
-  background: #17B978;
+  background: #67AE6E;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   backdrop-filter: blur(15px);
@@ -153,7 +153,7 @@ h2 {
   max-width: 500px;
   overflow: auto;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  color: #141619;
+  color: #90C67C;
   animation: slideIn 0.4s ease;
 }
 
@@ -208,7 +208,7 @@ h2 {
 .history,
 .stock {
   width: 80%;
-  background: #595959;
+  background: #90C67C;
   padding: 40px;
   margin-bottom: 40px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -218,8 +218,7 @@ h2 {
 }
 
 .history {
-  background-color: #328E6E
-
+  background-color: #67AE6E
 
 }
 
@@ -492,7 +491,7 @@ button.order-button:hover {
 }
 
 .summary {
-  background: rgba(0, 0, 0, 0.6);
+  background: #90C67C;
   padding: 30px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
