@@ -9,7 +9,7 @@ body {
     /* min-height: 100vh; */
     background-color: #F2ECE4;
     opacity: 0.8;
-    background-image: radial-gradient(#14161940 0.9px, #F2ECE4 0.7px);
+    background-image: radial-gradient(#14161940 0.9px, #D6EFD8 0.7px);
     background-size: 20px 20px;
 }
 
@@ -48,7 +48,7 @@ a {
 
 .wrapper {
     width: 450px;
-    background-color: #788475;
+    background-color: #80AF81 ;
     border: 2px solid transparent;
     box-shadow: 4px 4px 1px #14161990;
     border: 2px solid #F8F0FB;

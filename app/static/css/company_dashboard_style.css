@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   color: whitesmoke;
   padding: 0 20px;
-  background-image: radial-gradient(#14161940 0.9px, #F8F7FF 0.7px);
+  background-image: radial-gradient(#14161940 0.9px, #8EDF91 0.7px);
   background-size: 20px 20px;
 }
 
@@ -86,7 +86,7 @@ a {
   padding: 30px;
   margin-top: 100px;
   margin-bottom: 40px;
-  background: #3587A4;
+  background: #17B978;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   backdrop-filter: blur(15px);

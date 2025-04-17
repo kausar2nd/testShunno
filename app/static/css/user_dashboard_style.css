@@ -7,7 +7,7 @@
 
 body {
     background-color: #F2ECE4;
-    background-image: radial-gradient(#14161940 0.9px, #F8F0FB 0.7px);
+    background-image: radial-gradient(#14161940 0.9px, #9EDF91 0.7px);
     background-size: 20px 20px;
     color: #141619;
 }
@@ -61,7 +61,7 @@ a {
     margin: 20px 0;
     height: fit-content;
     background: transparent;
-    background-color: #36454F;
+    background-color: #6A9C89;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
