@@ -145,13 +145,13 @@
         <form id="orderForm" method="POST" action="/company_submit">
           <!-- Display materials dynamically -->
           <label for="plasticBottles">Plastic Bottles:</label>
-          <input type="number" id="plasticBottles" name="plasticBottles" placeholder="Enter quantity in kg">
+          <input type="number" id="plasticBottles" name="plasticBottles" placeholder="Enter quantity in kg" min="0" required>
 
           <label for="cardboard">Cardboard:</label>
-          <input type="number" id="cardboard" name="cardboard" placeholder="Enter quantity in kg">
+          <input type="number" id="cardboard" name="cardboard" placeholder="Enter quantity in kg" min="0" required>
 
           <label for="glass">Glass:</label>
-          <input type="number" id="glass" name="glass" placeholder="Enter quantity in kg">
+          <input type="number" id="glass" name="glass" placeholder="Enter quantity in kg" min="0" required>
 
           <button type="submit">Submit Order</button>
         </form>

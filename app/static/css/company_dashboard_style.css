@@ -120,7 +120,7 @@ h2 {
   margin-top: 15px;
   padding: 6px 16px;
   border-radius: 8px;
-  background-color: #87785F;
+  background-color: #E1EEBC;
   border: 2px solid #3587A4;
   box-shadow: 4px 4px #00000090;
   transition: 0.3s ease-in-out;
@@ -442,7 +442,7 @@ button.order-button:hover {
   padding: 5px 12px;
   margin-top: 15px;
   border-radius: 7px;
-  background-color: #87785F;
+  background-color: #90C67C;
   border: 2px solid #C5D6BC;
   box-shadow: 4px 4px #00000090;
   transition: 0.3s ease-in-out;
