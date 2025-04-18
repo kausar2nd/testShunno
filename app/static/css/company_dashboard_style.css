@@ -52,7 +52,7 @@ a {
   text-align: center;
   padding: 6px 16px;
   border-radius: 8px;
-  background-color: #87785F;
+  background-color: #67AE6E;
   border: 2px solid #F8F7FF;
   box-shadow: 4px 4px #00000090;
   transition: 0.3s ease-in-out;
@@ -86,7 +86,7 @@ a {
   padding: 30px;
   margin-top: 100px;
   margin-bottom: 40px;
-  background: #17B978;
+  background: #67AE6E;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   backdrop-filter: blur(15px);
@@ -120,7 +120,7 @@ h2 {
   margin-top: 15px;
   padding: 6px 16px;
   border-radius: 8px;
-  background-color: #87785F;
+  background-color: #E1EEBC;
   border: 2px solid #3587A4;
   box-shadow: 4px 4px #00000090;
   transition: 0.3s ease-in-out;
@@ -153,7 +153,7 @@ h2 {
   max-width: 500px;
   overflow: auto;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  color: #141619;
+  color: #90C67C;
   animation: slideIn 0.4s ease;
 }
 
@@ -208,7 +208,7 @@ h2 {
 .history,
 .stock {
   width: 80%;
-  background: #595959;
+  background: #90C67C;
   padding: 40px;
   margin-bottom: 40px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -218,7 +218,8 @@ h2 {
 }
 
 .history {
-  background-color: #EE8434
+  background-color: #67AE6E
+
 }
 
 .history table,
@@ -268,7 +269,7 @@ button.order-button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: #254336BB;
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -286,10 +287,10 @@ button.order-button:hover {
 }
 
 .order-form-content {
-  background: #36454F;
+  background: #E6E6FA;
   padding: 30px;
   border-radius: 15px;
-  color: #fff;
+  color: black;
   width: 80%;
   max-width: 500px;
   backdrop-filter: blur(10px);
@@ -315,6 +316,7 @@ button.order-button:hover {
   margin-bottom: 20px;
   font-size: 20px;
   text-align: center;
+  color: black;
 }
 
 .order-form-content form {
@@ -325,7 +327,7 @@ button.order-button:hover {
   display: block;
   margin-bottom: 5px;
   font-weight: 600;
-  color: whitesmoke;
+  color: black;
 }
 
 .order-form-content input {
@@ -333,14 +335,14 @@ button.order-button:hover {
   padding: 10px;
   margin-bottom: 15px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(14, 9, 9, 0.2);
   border-radius: 10px;
-  color: #fff;
+  color: black;
   font-size: 14px;
 }
 
 .order-form-content input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: black;
 }
 
 .order-form-content button {
@@ -424,7 +426,7 @@ button.order-button:hover {
   cursor: pointer;
   transition: 0.3s ease;
   border-radius: 8px;
-  background-color: #87785F;
+  background-color: #254336BB;
   border: 2px solid #E6E6FA;
   box-shadow: 4px 4px #00000090;
   transition: 0.4s ease-in-out;
@@ -441,7 +443,7 @@ button.order-button:hover {
   padding: 5px 12px;
   margin-top: 15px;
   border-radius: 7px;
-  background-color: #87785F;
+  background-color: #90C67C;
   border: 2px solid #C5D6BC;
   box-shadow: 4px 4px #00000090;
   transition: 0.3s ease-in-out;
@@ -490,7 +492,7 @@ button.order-button:hover {
 }
 
 .summary {
-  background: rgba(0, 0, 0, 0.6);
+  background: #90C67C;
   padding: 30px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
@@ -528,7 +530,7 @@ button.order-button:hover {
 }
 
 .summary td {
-  color: #ddd;
+  color: #F5F5F5;
 }
 
 .summary tr:nth-child(even) {

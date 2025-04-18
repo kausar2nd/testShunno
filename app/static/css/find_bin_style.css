@@ -3,7 +3,7 @@ body {
     margin: 0 auto;
     padding: 0;
     background-color: #F2ECE4;
-    background-image: radial-gradient(#14161940 0.9px, #FFF4E4 0.7px);
+    background-image: radial-gradient(#14161940 0.9px, #328E6E 0.7px);
     background-size: 20px 20px;
 }
 
@@ -27,7 +27,7 @@ a {
     color: whitesmoke;
     padding: 6px 16px;
     border-radius: 8px;
-    background-color: #87785F;
+    background-color: #90C67C;
     border: 2px solid #FFF4E4;
     box-shadow: 4px 4px #00000090;
     transition: 0.3s ease-in-out;
@@ -77,7 +77,7 @@ a {
     border-radius: 5px;
     cursor: pointer;
     color: whitesmoke;
-    background: #8d99ae;
+    background: #67AE6E;
     /* background: #93a8ac; */
     border: 2px solid #FFF4E4;
     box-shadow: 5px 5px #00000090;
@@ -99,7 +99,7 @@ a {
     backdrop-filter: blur(2px);
     color: whitesmoke;
     transition: 0.4s ease-in-out;
-    background-color: #7D6D61;
+    background-color: #50C878;
     box-shadow: 5px 5px 5px 1px #000000bb;
 }
 
@@ -111,7 +111,7 @@ a {
 .details_img {
     width: 43%;
     border-radius: 5px;
-    background: url(../assets/au2.jpg);
+    background: url(../assets/ShunnoWaste.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
