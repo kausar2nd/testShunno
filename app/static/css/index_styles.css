@@ -7,7 +7,7 @@ body {
     margin: 0 auto;
     padding: 0;
     background-color: #67AE6E;
-    background-image: radial-gradient(#4a4a4a 0.8px, #f1faee 0.8px);
+    background-image: radial-gradient(#4a4a4a 0.8px, #67AE6E 0.8px);
     background-size: 20px 20px;
     color: #141619;
 }
@@ -197,7 +197,7 @@ nav ul li a:hover {
     font-size: 1.1rem;
     width: 70%;
     height: 410px;
-    background-color: #CCB08F;
+    background-color: #00A86B;
     margin-left: 40px;
     padding: 0 40px;
     border-radius: 20px;
@@ -208,7 +208,11 @@ nav ul li a:hover {
 .about-text h2 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #141619;
+    color: #FFFADA;
+}
+
+.about-text p{
+    color: black
 }
 
 /* Blog Section */
@@ -229,7 +233,7 @@ nav ul li a:hover {
     color: white;
     margin-top: 20px;
     padding: 0 30px 30px 30px;
-    background-color: #ccd5ae;
+    background-color: #328E6E;
     box-shadow: 3px 3px 1px #141619bb;
 }
 
@@ -240,7 +244,7 @@ nav ul li a:hover {
 }
 
 .blog-card {
-    background-color: #83c5be;
+    background-color: #67AE6E;
     padding: 25px;
     border-radius: 20px;
     border-bottom: 4px solid #141619cc;
@@ -284,7 +288,7 @@ nav ul li a:hover {
 }
 
 .faq-item {
-    background-color: #ef8354;
+    background-color: #3F7D58;
     padding: 5px 20px;
     border-radius: 10px;
     box-shadow: 4px 4px 1px #141619;
