@@ -52,7 +52,7 @@ a {
   text-align: center;
   padding: 6px 16px;
   border-radius: 8px;
-  background-color: #87785F;
+  background-color: #67AE6E;
   border: 2px solid #F8F7FF;
   box-shadow: 4px 4px #00000090;
   transition: 0.3s ease-in-out;
@@ -529,7 +529,7 @@ button.order-button:hover {
 }
 
 .summary td {
-  color: #ddd;
+  color: #F5F5F5;
 }
 
 .summary tr:nth-child(even) {
