@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>Company Dashboard</title>
@@ -10,44 +9,27 @@
 
 <body>
   <div class="container">
+    <!-- Navigation Section -->
     <div class="back_home_div">
       <div><a href="/" class="back_home">Home</a></div>
       <div><a href="/logout" class="logout-link">Logout</a></div>
     </div>
 
-    <div id="edit-profile-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Edit Profile</h2>
-        <form id="edit-profile-form">
-          <div class="edit-input-box">
-            <label for="edit-name">Name</label>
-            <input type="text" id="edit-name" name="name" value="{{ company_name }}" required>
-          </div>
-
-          <div class="edit-input-box">
-            <label for="edit-location">Location</label>
-            <input type="text" id="edit-location" name="location" value="{{ company_location }}" required>
-          </div>
-          <button type="submit" class="submit-btn">Save Changes</button>
-        </form>
-      </div>
-    </div>
-
     <div class="wrapper">
+      <!-- Company Profile Section -->
       <section class="company-profile">
         <div class="profile-picture">
-          <img src="../static/assets/company.png" alt="Profile Picture">
+          <img src="../static/assets/company.png" alt="Company Logo">
           <div class="profile-details">
             <h2 id="company_name">{{ company_name }}</h2>
             <h4 id="company_location">{{ company_location }}</h4>
             <p>Eco Solutions is dedicated to sustainable waste management and recycling solutions.</p>
-            <button id="edit-profile-btn" class="nav-link">Edit Profile</button>
+            <button id="edit-profile-btn">Edit Profile</button>
           </div>
         </div>
       </section>
 
-      <!-- Section 1: Recycling Summary -->
+      <!-- Data Display Sections -->
       <section class="summary">
         <h2>Recycling Summary</h2>
         <table>
@@ -58,25 +40,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Plastic Bottles</td>
-              <td>{{ total_plastic }}</td>
-            </tr>
-            <tr>
-              <td>Cardboards</td>
-              <td>{{ total_cardboards }}</td>
-            </tr>
-            <tr>
-              <td>Glass Bottles</td>
-              <td>{{ total_glasses }}</td>
-            </tr>
+            <tr><td>Plastic Bottles</td><td>{{ total_plastic }}</td></tr>
+            <tr><td>Cardboards</td><td>{{ total_cardboards }}</td></tr>
+            <tr><td>Glass Bottles</td><td>{{ total_glasses }}</td></tr>
           </tbody>
         </table>
       </section>
 
       <section class="history">
         <h2>Accessed Recycle Bins</h2>
-
         <div class="history_table">
           <table>
             <thead>
@@ -101,12 +73,10 @@
               </tr>
               {% endfor %}
             </tbody>
-
           </table>
         </div>
       </section>
 
-      <!-- Section 3: Stock -->
       <section class="stock">
         <h2>Available Stock</h2>
         <table>
@@ -117,33 +87,39 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Plastic</td>
-              <td>{{ stock_data['Plastic'] }}</td>
-            </tr>
-            <tr>
-              <td>Cardboard</td>
-              <td>{{ stock_data['Cardboard'] }}</td>
-            </tr>
-            <tr>
-              <td>Glass</td>
-              <td>{{ stock_data['Glass'] }}</td>
-            </tr>
+            <tr><td>Plastic</td><td>{{ stock_data['Plastic'] }}</td></tr>
+            <tr><td>Cardboard</td><td>{{ stock_data['Cardboard'] }}</td></tr>
+            <tr><td>Glass</td><td>{{ stock_data['Glass'] }}</td></tr>
           </tbody>
         </table>
-
-        <!-- Order Button -->
         <button class="order-button" onclick="openOrderForm()">Order Materials</button>
       </section>
     </div>
 
-    <!-- Pop-Up Modal for Order Form -->
+    <!-- Modal Components -->
+    <div id="edit-profile-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edit Profile</h2>
+        <form id="edit-profile-form">
+          <div class="edit-input-box">
+            <label for="edit-name">Name</label>
+            <input type="text" id="edit-name" name="name" value="{{ company_name }}" required>
+          </div>
+          <div class="edit-input-box">
+            <label for="edit-location">Location</label>
+            <input type="text" id="edit-location" name="location" value="{{ company_location }}" required>
+          </div>
+          <button type="submit" class="submit-btn">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
     <div id="orderFormModal" class="order-form-modal">
       <div class="order-form-content">
         <span class="close-btn" onclick="closeOrderForm()">&times;</span>
         <h3>Order Materials</h3>
         <form id="orderForm" method="POST" action="/company_submit">
-          <!-- Display materials dynamically -->
           <label for="plasticBottles">Plastic Bottles:</label>
           <input type="number" id="plasticBottles" name="plasticBottles" placeholder="Enter quantity in kg" min="0" required>
 
@@ -158,14 +134,12 @@
       </div>
     </div>
 
-    <div id="successMessage" class="success-message" style="display: none;">
+    <div id="successMessage" class="success-message">
       <p>Order submitted successfully!</p>
       <button onclick="closeSuccessMessage()">Close</button>
     </div>
-
   </div>
 
   <script src="{{ url_for('static', filename='js/company_dashboard_script.js') }}"></script>
 </body>
-
 </html>
