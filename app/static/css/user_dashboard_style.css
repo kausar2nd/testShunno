@@ -42,9 +42,9 @@ a {
     cursor: pointer;
     padding: 6px 16px;
     border-radius: 7px;
-    background-color: #87785F;
-    border: 2px solid #C5D6BC;
-    box-shadow: 3px 3px #00000090;
+    background-color: #254336BB;
+    border: 2px solid #E0FBE2DD;
+    box-shadow: 3px 4px #00000090;
     transition: 0.3s ease-in-out;
 }
 
@@ -53,19 +53,18 @@ a {
 }
 
 #home {
-    border-color: #F2ECE4;
+    border-color: transparent;
 }
 
 .wrapper {
     width: 90%;
     margin: 20px 0;
     height: fit-content;
-    background: transparent;
     /*background-color: #B0EBB4; */
-    background-color: #90C67C; 
-    border: 2px solid rgba(255, 255, 255, .2);
+    /* background-color: #90C67C;  */
+    background-color: #43685090; 
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .9);
     color: #fff;
     border-radius: 10px;
     padding: 40px;
@@ -95,13 +94,13 @@ a {
     width: 40%;
     height: 100%;
     border-radius: 8px;
-    background: #E0FBE2;
+    background: #E0FBE2DD;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 3%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .9);
 }
 
 .user-summary table {
@@ -123,7 +122,8 @@ td {
 }
 
 .user-info {
-    background: #E0FBE2;
+    /* background: #E0FBE2;     */
+    background: #E0FBE2DD;
     display: flex;
     height: 100%;
     border-radius: 5px;
@@ -133,6 +133,7 @@ td {
     align-items: center;
     color: #141619;
     padding: 2%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
 }
 
 .info {
@@ -165,7 +166,6 @@ td {
     margin: 40px auto;
     width: 100%;
     color: #BFF6C3;
-    backdrop-filter: blur(10px);
 }
 
 h2 {
@@ -181,6 +181,7 @@ h2 {
     max-height: 350px;
     scrollbar-width: thin;
     scrollbar-color: #585858 transparent;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
 }
 
 .transactions-container table {
@@ -224,7 +225,7 @@ h2 {
     align-items: center;
     width: 50%;
     padding: 10px 40px;
-    background: #E0FBE2;
+    background: #E0FBE2DD;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     color: #141619;
@@ -314,9 +315,9 @@ h2 {
     cursor: pointer;
     transition: 0.3s ease;
     border-radius: 8px;
-    background-color: #87785F;
+    background-color: #254336BB ;
     border: 2px solid #E6E6FA;
-    box-shadow: 4px 4px #00000090;
+    box-shadow: 3px 4px #00000090;
     transition: 0.4s ease-in-out;
 }
 
@@ -339,7 +340,7 @@ h2 {
 
 .withdraw {
     width: 100%;
-    background: #E0FBE2;
+    background: #E0FBE2DD;
     color: #141619;
     border-radius: 3px;
     padding: 2% 5%;
