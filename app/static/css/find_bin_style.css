@@ -18,7 +18,7 @@ a {
     text-decoration: solid;
 }
 
-.back_home {
+/* .back_home {
     width: fit-content;
     font-size: 20px;
     margin-bottom: 15px;
@@ -35,7 +35,28 @@ a {
 
 .back_home:hover {
     box-shadow: 2px 2px #00000090;
+} */
+
+.back_home {
+    cursor: pointer;
+    width: fit-content;
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-left: 12px;
+    border-radius: 8px;
+    padding: 8px 18px;
+    color: #141619;
+    border: 1px solid #141619;
+    background-color: #90C67C;
+    box-shadow: 4px 4px 1px #141619ee;
+    transition: 0.2s ease;
+    margin-right: 50px;
 }
+
+.back_home:hover {
+    box-shadow: 2px 2px 1px #141619;
+}
+
 
 .loc_container {
     display: flex;
@@ -78,15 +99,14 @@ a {
     cursor: pointer;
     color: whitesmoke;
     background: #67AE6E;
-    /* background: #93a8ac; */
-    border: 2px solid #FFF4E4;
-    box-shadow: 5px 5px #00000090;
-    transition: 0.3s ease-in-out;
+    border: 1px solid #141619;
+    box-shadow: 5px 5px #141619ee;
+    transition: 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .location-btn:hover {
-    scale: 1.02;
-    box-shadow: 4px 4px #000000aa;
+    scale: 1.04;
+    box-shadow: 3px 3px #141619;
 }
 
 .details {
@@ -111,8 +131,8 @@ a {
 .details_img {
     width: 43%;
     border-radius: 5px;
-    background: url(../assets/ShunnoWaste.jpg);
-    background-size: cover;
+    background: url(../assets/ShunnoWaste.png);
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;

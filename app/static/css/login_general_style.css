@@ -1,6 +1,6 @@
 body {
     background-color: #F1FFFA;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     background-image: radial-gradient(#14161940 0.9px, #E1EEBC 0.7px);
     background-size: 20px 20px;
     font-family: "Nunito", sans-serif;
@@ -20,11 +20,13 @@ a {
     top: 20px;
     left: 20px;
     font-size: 20px;
-    padding: 6px 16px;
+    font-weight: 600;
+    padding: 7px 18px;
     border-radius: 8px;
-    background-color: #67AE6E;
-    border: 2px solid #ececec;
-    box-shadow: 4px 4px #00000090;
+    color: #141619;
+    border: 1px solid #141619;
+    background-color: #90C67C;
+    box-shadow: 4px 4px 1px #141619ee;
     transition: 0.3s ease-in-out;
 }
 

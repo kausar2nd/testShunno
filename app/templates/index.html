@@ -54,6 +54,50 @@
             </div>
         </section>
 
+        <section id="faq" class="faq-section">
+            <div class="section-content">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>How do I start recycling? <i class='bx bx-chevron-down faq-icon'></i></h3>
+                        <div class="faq-answer" style="display:none;">
+                            <p>Simply create an account, locate a bin near you, and start collecting recyclables!</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>What materials can I recycle? <i class='bx bx-chevron-down faq-icon'></i></h3>
+                        <div class="faq-answer" style="display:none;">
+                            <p>We accept plastic bottles, glass, aluminum cans, e-waste, cardboard, and paper.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>How do rewards work? <i class='bx bx-chevron-down faq-icon'></i></h3>
+                        <div class="faq-answer" style="display:none;">
+                            <p>Earn points for each recyclable item you dispose of and redeem them for rewards.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>Is there a mobile app available? <i class='bx bx-chevron-down faq-icon'></i></h3>
+                        <div class="faq-answer" style="display:none;">
+                            <p>NO! Our service in currenlty accessible via this website only.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>How do I find recycling bins near me? <i class='bx bx-chevron-down faq-icon'></i></h3>
+                        <div class="faq-answer" style="display:none;">
+                            <p>Use our "Find Bin" section to locate the nearest recycling bins. You can filter by the types of materials accepted and view real-time bin capacity.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>Can businesses participate in the program? <i class='bx bx-chevron-down faq-icon'></i></h3>
+                        <div class="faq-answer" style="display:none;">
+                            <p>Absolutely! We have special business accounts for companies looking to improve their sustainability efforts. Businesses can track employee recycling activities, host recycling drives, and earn corporate rewards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div id="blog" class="blog-section">
             <div class="section-content">
                 <h2>Latest Insights</h2>
@@ -82,32 +126,6 @@
                 </div>
             </div>
         </div>
-
-        <section id="faq" class="faq-section">
-            <div class="section-content">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-grid">
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <h3>How do I start recycling?</h3>
-                        <div class="faq-answer" style="display:none;">
-                            <p>Simply create an account, locate a bin near you, and start collecting recyclables!</p>
-                        </div>
-                    </div>
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <h3>What materials can I recycle?</h3>
-                        <div class="faq-answer" style="display:none;">
-                            <p>We accept plastic bottles, glass, aluminum cans, e-waste, cardboard, and paper.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <h3>How do rewards work?</h3>
-                        <div class="faq-answer" style="display:none;">
-                            <p>Earn points for each recyclable item you dispose of and redeem them for rewards.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 
     <footer>
@@ -157,13 +175,31 @@
     });
 
     function toggleBlog(card) {
+        // Toggle the clicked card
         const detail = card.querySelector('.blog-details');
-        detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+        if (detail.style.display === 'none') {
+            detail.style.display = 'block';
+            card.classList.add('active');
+        } else {
+            detail.style.display = 'none';
+            card.classList.remove('active');
+        }
     }
 
     function toggleFAQ(item) {
+        // Toggle the clicked FAQ's answer without changing other FAQ elements' shape
         const answer = item.querySelector('.faq-answer');
-        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+        const icon = item.querySelector('.faq-icon');
+        
+        if (answer.style.display === 'none') {
+            answer.style.display = 'block';
+            item.classList.add('active');
+            icon.classList.add('rotate');
+        } else {
+            answer.style.display = 'none';
+            item.classList.remove('active');
+            icon.classList.remove('rotate');
+        }
     }
 </script>
 
