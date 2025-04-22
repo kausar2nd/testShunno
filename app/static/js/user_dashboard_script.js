@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         const name = document.getElementById('edit-name').value;
+        const password = document.getElementById('edit-password').value;
         const location = document.getElementById('edit-location').value;
 
         fetch('/update_profile', {
@@ -70,13 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, location })
+            body: JSON.stringify({ name, password, location })
         })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     document.querySelector('.user-info h1').innerText = `Hi, ${name}!`;
                     document.getElementById('user-location').innerText = location;
+                    // document.getElementById('user-password').innerText = password;
                     modal.style.display = 'none';
                     alert('Profile updated successfully!');
                 } else {

@@ -69,6 +69,7 @@ def user_login():
                         "id": account["user_id"],
                         "role": "user",
                         "username": account["user_name"],
+                        "password": account["user_password"],
                         "email": account["user_email"],
                         "points": account["user_points"],
                         "date": account["user_joining_date"],
@@ -88,7 +89,7 @@ def user_login():
 
 
 @user_bp.route("/user_submit", methods=["POST", "GET"])
-@login_required('user')
+@login_required("user")
 def user_submit():
     if request.method == "POST":
         branch = request.form["branch"]
@@ -159,6 +160,7 @@ def user_dashboard():
     user_id = session.get("id")
     points = session.get("points")
     date = session.get("date")
+    password = session.get("password")
 
     try:
         conn = get_db_connection()
@@ -210,6 +212,7 @@ def user_dashboard():
     return render_template(
         "user_dashboard.html",
         username=username,
+        password=password,
         email=session.get("email"),
         date=formatted_date,
         points=points,
@@ -226,6 +229,7 @@ def user_dashboard():
 def update_profile():
     data = request.get_json()
     name = data.get("name")
+    password = data.get("password")
     location = data.get("location")
     user_id = session.get("id")
 
@@ -236,8 +240,8 @@ def update_profile():
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "UPDATE user SET user_name = %s, user_location = %s WHERE user_id = %s",
-            (name, location, user_id),
+            "UPDATE user SET user_name = %s, user_password = %s, user_location = %s WHERE user_id = %s",
+            (name, password, location, user_id),
         )
         conn.commit()
 
@@ -252,9 +256,29 @@ def update_profile():
     finally:
         conn.close()
 
+    # try:
+    #     conn = get_db_connection()
+    #     cursor = conn.cursor()
+    #     cursor.execute(
+    #         "UPDATE user SET user_name = %s, user_location = %s WHERE user_id = %s",
+    #         (name, location, user_id),
+    #     )
+    #     conn.commit()
+
+    #     # Update session data
+    #     session["username"] = name
+
+    #     return jsonify({"success": True})
+
+    # except Exception as e:
+    #     print(f"Error updating profile: {e}")
+    #     return jsonify({"success": False, "message": "Database error occurred"})
+    # finally:
+    #     conn.close()
+
 
 @user_bp.route("/withdraw", methods=["POST"])
-@login_required('user')
+@login_required("user")
 def withdraw():
     data = request.get_json()
     withdrawal_amount = data.get("amount", 0)
