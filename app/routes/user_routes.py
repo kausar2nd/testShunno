@@ -22,6 +22,7 @@ def user_signup():
         location = request.form["location"]
         email = request.form["email"]
         password = request.form["password"]
+        points = 0
 
         try:
             conn = get_db_connection()
@@ -33,8 +34,8 @@ def user_signup():
                 print("Account already exists!")
             else:
                 cursor.execute(
-                    "INSERT INTO user (user_name, user_email, user_password, user_location) VALUES (%s, %s, %s, %s)",
-                    (name, email, password, location),
+                    "INSERT INTO user (user_name, user_email, user_password, user_location, user_points) VALUES (%s, %s, %s, %s, %s)",
+                    (name, email, password, location, points),
                 )
                 print("Account created successfully!")
                 conn.commit()
