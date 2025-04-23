@@ -8,6 +8,5 @@ def get_db_connection():
         passwd="",
         database="shunnowaste_db",
     )
-    # host="localhost", user="jobairhossain_alteruse", passwd="alterUSE@123", database="jobairhossain_alteruse_db"
-
+    # host="localhost", user="xrangqsu_shunnowaste", passwd="shunnowaste@", database="xrangqsu_shunnowaste_db"
     return connection

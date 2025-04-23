@@ -123,7 +123,8 @@ td {
     /* background: #E0FBE2;     */
     background: #E0FBE2DD;
     display: flex;
-    height: 100%;
+    min-height: 100%;
+    height: fit-content;
     border-radius: 5px;
     width: 55%;
     flex-direction: column;
@@ -447,6 +448,12 @@ h2 {
         align-items: center;
         text-align: center;
         gap: 30px; 
+    }
+
+    .user-info {
+        width: 90%;
+        padding: 10% 5%;
+        font-size: 14px;
     }
 
     .user-summary {
