@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShunnoWaste</title>
     <link rel="icon" href="{{ url_for('static', filename='assets/favicon.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index_styles.css' ) }}">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,6 +122,27 @@
                         <p>Learn about our new exciting rewards for eco-conscious recyclers!</p>
                         <div class="blog-details" style="display:none;">
                             <p><strong>Details:</strong> New reward tiers include gift vouchers, eco-products, and donation options for NGOs.</p>
+                        </div>
+                    </div>
+                    <div class="blog-card" onclick="toggleBlog(this)">
+                        <h3>Upcycling Projects for Beginners</h3>
+                        <p>Creative ways to repurpose household items instead of discarding them.</p>
+                        <div class="blog-details" style="display:none;">
+                            <p><strong>Details:</strong> Learn how to transform plastic bottles into planters, glass jars into storage solutions, and cardboard into home decor.</p>
+                        </div>
+                    </div>
+                    <div class="blog-card" onclick="toggleBlog(this)">
+                        <h3>The Environmental Impact of E-Waste</h3>
+                        <p>Understanding why proper disposal of electronic waste is crucial for our planet.</p>
+                        <div class="blog-details" style="display:none;">
+                            <p><strong>Details:</strong> E-waste contains toxic materials that can contaminate soil and water sources when improperly disposed of. Recycling recovers valuable metals and reduces harmful emissions.</p>
+                        </div>
+                    </div>
+                    <div class="blog-card" onclick="toggleBlog(this)">
+                        <h3>Corporate Sustainability Success Stories</h3>
+                        <p>How businesses are partnering with ShunnoWaste to achieve their environmental goals.</p>
+                        <div class="blog-details" style="display:none;">
+                            <p><strong>Details:</strong> Featured case studies show how local businesses reduced their waste footprint by 40% and engaged employees in recycling initiatives.</p>
                         </div>
                     </div>
                 </div>

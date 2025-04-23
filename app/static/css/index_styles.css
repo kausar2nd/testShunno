@@ -278,9 +278,8 @@ nav ul li a:hover {
 }
 
 .blog-details {
-    /* Style the blog details to not affect surrounding cards */
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.5s ease-in-out;
     margin-top: 10px;
 }
 
@@ -299,6 +298,7 @@ nav ul li a:hover {
     flex-direction: column;
     width: 50vw;
     gap: 50px;
+    margin: 0 auto;
 }
 
 .faq-item {
@@ -394,14 +394,14 @@ footer {
 
 @media screen and (max-width: 768px) {
     .logo {
-        margin-left: 0px;
-        font-size: 1em;
+        margin-left: 10px;
+        font-size: 1.3em;
     }
 
     .navbar {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: self-start;
         justify-content: space-between;
         height: fit-content;
     }
@@ -420,6 +420,43 @@ footer {
     }
 
     .login {
+        margin: 0 auto;
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        border-radius: 5px;
+    }
+
+    .login:hover {
+        box-shadow: 2px 2px 1px #141619;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .cta-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .about-section {
+        flex-direction: column-reverse;
+    }
+
+    .about-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .about-text {
+        width: 90%;
+        margin-left: auto;
+    }
+
+    .about-text h2 {
         font-size: 0.8rem;
         padding: 6px 14px;
     }
@@ -454,7 +491,7 @@ footer {
         width: 100%;
         height: 300px;
         margin: 20px 0;
-        background-size: contain; /* Ensure consistent behavior on mobile */
+        background-size: contain;
     }
 
     .about-text {
@@ -496,6 +533,7 @@ footer {
 
     .faq-grid {
         flex-direction: column;
+        width: 90%;
     }
 
     .faq-item {
@@ -503,21 +541,23 @@ footer {
     }
 
     footer {
+        margin-top: 40px;
         padding: 10px 0;
+        padding-top: 40px;
     }
 
     .footer-content {
         flex-direction: column;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .footer-links ul li {
-        font-size: 0.9rem;
-        margin: 5px 0;
+        font-size: 0.8rem;
+        margin: 2px 0;
     }
 
     .footer-bottom {
-        padding-top: 5px;
+        padding-top: 2px;
     }
 
     .footer-bottom p {
