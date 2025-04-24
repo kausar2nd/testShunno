@@ -257,26 +257,6 @@ def update_profile():
     finally:
         conn.close()
 
-    # try:
-    #     conn = get_db_connection()
-    #     cursor = conn.cursor()
-    #     cursor.execute(
-    #         "UPDATE user SET user_name = %s, user_location = %s WHERE user_id = %s",
-    #         (name, location, user_id),
-    #     )
-    #     conn.commit()
-
-    #     # Update session data
-    #     session["username"] = name
-
-    #     return jsonify({"success": True})
-
-    # except Exception as e:
-    #     print(f"Error updating profile: {e}")
-    #     return jsonify({"success": False, "message": "Database error occurred"})
-    # finally:
-    #     conn.close()
-
 
 @user_bp.route("/withdraw", methods=["POST"])
 @login_required("user")
