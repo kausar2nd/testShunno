@@ -223,7 +223,7 @@ h2 {
     justify-content: center;
     align-items: center;
     width: 50%;
-    padding: 10px 40px;
+    padding: 10px;
     background: #E0FBE2DD;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 10px;
@@ -236,13 +236,20 @@ h2 {
     font-size: 22px;
 }
 
+.order-form{
+    width: 50px;
+    background-color: blue;
+
+}
+
 .items-section {
+    width: max-content;
+    /* background-color: red; */
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 80%;
-    min-width: 500px;
-    background: transparent;
+    min-width: 35vw;
+    /* background: transparent; */
 }
 
 #branch {
@@ -518,6 +525,7 @@ h2 {
         width: 100%;
         min-width: 200px;
     }
+
     .item-group {
         display: flex;
         padding: 15px;
