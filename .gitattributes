@@ -1,2 +1,2 @@
-*.html linguist-vendored
-*.css linguist-vendored
+ShunnoWaste/app/templates/*_dashboard.html linguist-vendored
+ShunnoWaste/app/templates/*_dashboard_style.css linguist-vendored
