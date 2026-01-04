@@ -1,104 +1,90 @@
-# ShunnoWaste: An Innovative Recycling Management System
+# ShunnoWaste
 
-### Team Members
-- **Kausar Ahmed** (223014102)
-- **Bibhor Regan Gomes** (223014066)
-- **S.M. Jobair Hossain** (223014154)
-- **Emran Khan Musa** (223014201)
+A smart recycling management system that connects users, businesses, and collection points through a digital platform. ShunnoWaste streamlines the recycling process with automated inventory management, a points-based rewards system, and real-time tracking capabilities.
 
-## Problem Statement
+## Features
 
-The lack of structured and technology-driven recycling systems in Dhaka results in excessive waste mismanagement and inefficiency in material reuse. Households and businesses generate large amounts of recyclable materials, yet no efficient system exists to facilitate their collection, processing, and distribution. Additionally, businesses that use recycled materials struggle to source them reliably.
+### For Users
 
-**ShunnoWaste** is designed as a smart recycling management system that integrates digital tracking, automated inventory management, and a structured rewards mechanism to encourage recycling. By leveraging software-driven automation, this system ensures efficient material flow between users and businesses while promoting sustainable practices.
+- Submit recyclable materials and receive unique codes for booth drop-offs
+- Track submission history and earned reward points
+- Locate nearby collection booths with interactive map
+- View available materials and pricing
 
-## Objectives
-1. Develop a web-based platform for users to submit recyclable materials, track submission history, and earn rewards through a points-based system.
-2. Provide businesses with a streamlined platform to browse available recycled materials, place orders, and track purchase history.
-3. Create a robust admin interface to manage user accounts, oversee stock levels, and generate performance reports.
-4. Implement a feature to help users locate nearby collection booths.
+### For Businesses
 
-## Proposed Solution
+- Browse and purchase available recycled materials
+- Place orders and track order history
+- Manage company profile and contact information
 
-#### Technology Stack
-<table border="1" cellspacing="0" cellpadding="5">
-  <tr>
-    <th>Component</th>
-    <th>Technology</th>
-  </tr>
-  <tr>
-    <td>Backend</td>
-    <td>Flask (Python)</td>
-  </tr>
-  <tr>
-    <td>Frontend</td>
-    <td>HTML, CSS, JavaScript</td>
-  </tr>
-  <tr>
-    <td>Database</td>
-    <td>MySQL</td>
-  </tr>
-  <tr>
-    <td>Hosting</td>
-    <td>cPanel (Personal Domain)</td>
-  </tr>
-</table>
+### For Administrators
 
+- Manage registered users and companies
+- Oversee inventory levels and stock management
+- Process submissions and orders
+- Generate performance reports and analytics
 
-#### Core Features
+## Technology Stack
 
-1. **For General Users:**
-  - Submit recyclable materials and receive unique codes for booth drop-offs.
-  - Track submission history and earned points.
-  - Locate nearby collection booths.
+- **Backend:** Flask (Python)
+- **Frontend:** HTML, CSS, JavaScript
+- **Database:** MySQL
+- **Deployment:** Vercel
+- **Authentication:** Session-based authentication with secure password hashing
 
-2. **For Businesses:**
-  - Browse available recycled materials and place orders.
-  - View and manage order history.
+## Installation
 
-3. **For Admins:**
-  - Manage registered users, companies, submissions, and orders.
-  - Oversee inventory levels and generate performance reports.
+1. Clone the repository:
 
-#### Innovative Aspects
-- A points-based reward system incentivizes user participation, ensuring a continuous flow of recyclable materials.
-- Inventory is updated dynamically based on user submissions and business orders.
-- Facilities for both general users and companies, ensuring secure interactions.
-  
-## Methodology
+```bash
+git clone https://github.com/kausar2nd/ShunnoWaste.git
+cd ShunnoWaste
+```
 
-#### Software Development Methodology
-- **Agile:** An iterative approach will be adopted to enable continuous improvement and adaptation during development.
+2. Install dependencies:
 
-#### System Architecture
-1. **Frontend Layer:** Built using HTML, CSS, and JavaScript to facilitate user interaction.
-2. **Backend Layer:** Developed using Flask (Python) to manage computational logic, handle user authentication, and integrate with the frontend.
-3. **Database Layer:** MySQL will store user data, submission histories, order logs, and inventory levels.
+```bash
+pip install -r requirements.txt
+```
 
-#### Expected Challenges & Risks
-- Ensuring data security and privacy for both users and companies.
-- Maintaining smooth performance as user traffic increases.
+3. Set up the database:
+   - Import `shunnowaste_db.sql` into your MySQL database
+   - Update database credentials in `app/utils/db_utils.py`
 
-## Expected Outcomes
-The final product will be a fully functional hosted web application that will enable:
-- **Users:** To submit recyclable materials and earn rewards.
-- **Businesses:** To efficiently purchase recycled materials.
-- **Admins:** To seamlessly manage the system.
+4. Run the application:
 
-**Impact:**
-- **Environmental:** Increased participation in recycling efforts, leading to a reduction in environmental degradation.
-- **Economic:** Revenue generation through transaction margins, supporting long-term sustainability.
+```bash
+python run.py
+```
 
-## Tools & Resources Needed
-- **Visual Studio Code:** Code development.
-- **XAMPP:** For setting up MySQL database.
-- **Git & GitHub:** Version control.
-- **Draw.io:** Creating UML diagrams.
-- **MySQL Workbench:** Designing database diagrams.
-- **cPanel:** Hosting the application and database.
- 
+5. Access the application at `http://localhost:5000`
 
+## Deployment
+
+The application is configured for deployment on Vercel. The `vercel.json` configuration file handles routing and build settings.
+
+To deploy:
+
+1. Install Vercel CLI: `npm i -g vercel`
+2. Run: `vercel`
+3. Follow the deployment prompts
+
+## Project Structure
+
+```bash
+ShunnoWaste/
+├── app/
+│   ├── routes/          # API routes
+│   ├── static/          
+│   ├── templates/       # UI
+│   └── utils/         
+├── run.py              # entry point
+├── requirements.txt
+└── vercel.json
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-
